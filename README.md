@@ -15,6 +15,7 @@ ___
 * Give me the current condition of all the books.
 ___
 ### ERD
+[![erd_library][1]][1]
 ```py
 # append image here...
 ```
@@ -33,3 +34,5 @@ ___
 ```py
 # append images here...
 ```
+
+[1]: https://raw.githubusercontent.com/blaterwolf/lmspy/main/img/erd_library.png
