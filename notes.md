@@ -3,31 +3,26 @@
 pyuic6 -x login.ui -o login.py
 ```
 ### WindowFlags (Borderless)
-```py
-Login.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
 ```
-### Close Button
-```py
-self.pushButton_3.clicked.connect(sys.exit)
+<Object>.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
+```
+### EXIT COMMAND
+In PyQt6, the `sys.exit` command terminates the whole program.
+```
+self.<Object>.clicked.connect(sys.exit)
+```
+### CLOSE COMMAND
+In PyQt6, the `<Object>.close` command closes the window only, leaving any potential open windows.
+```
+self.pushButton.clicked.connect(<Object>.close)
 ```
 ### Colors
 ```
 #CBB1A0 - Background
 #842a2d - Main Color
 ```
-### For Login Buttons
-```
-QLineEdit {\n      color: rgb(231, 231, 231);\n      font: 15pt "Verdana";\n      border: None;\n      border-bottom-color: white;\n      border-radius: 10px;\n      padding: 0 8px;\n      background: #CBB1A0;\n      selection-background-color: darkgray;\n}
-```
-### Sign In Buttons
-```cs
-color: #842a2d;\nfont: 17pt "Franklin Gothic Book";\nborder: 2px solid #842a2d;\npadding: 2px;\nborder-radius: 10px;\nopacity: 100;\n
-```
-### CLOSE COMMAND
-```
-self.pushButton.clicked.connect(sys.exit)
-```
-### code for readable base32
+### readable_base32()
+This function is used to convert unspaced base32s to 4 digits. (example: `5SVUG6NV2W2KQMUKK2OXOMDVSVZNDWA6` to `5SVU G6NV 2W2K QMUK K2OX OMDV SVZN DWA6`)
 ```python
 def readable_base32(self, base32):
     str = ""
@@ -40,21 +35,50 @@ def readable_base32(self, base32):
         counter += 1
     return " ".join(str.split(" ")[1:])
 ```
+To print it out in the GUI, use a label.
 ```py
-self.lineEdit_2.setText(_translate(
+self.<label>.setText(_translate(
             "Validation", f"{self.readable_base32(self.current_base32)}"))
 ```
-### Buttons(?)
-```
-QLineEdit {\n      color: rgb(231, 231, 231);\n      font: 12pt "Verdana" bold;\n      border: None;\n      border-bottom-color: white;\n      border-radius: 10px;\n      padding: 0 8px;\n      background: #CBB1A0;\n      selection-background-color: darkgray;\n}
-```
 ### Instructions
+Instructions for the OTP Validation using Google Authenticator.
 ```
 <Logo> Simple OTP Validation using Google Authenticator
-
 1. Download the Google Authenticator App
 2. Your Randomly Generated Base32 is presented below. Press the + button on Google Authenticator then click Enter Setup Key.
 3. Type anything on the Account Name. Input all 32 digits in the "Your Key" field WITHOUT spaces. 
 4. Set it to time-based as default. Click Add.
 5. Enter the current OTP on your phone to the input field below.
+```
+### Loading Data
+To load data from the TableWidget in PyQt6... (reference only, query might change depending on the problem).
+```py
+def load_data(self):
+    con = sqlite3.connect('./db/test.db')
+    query = "SELECT Book_Title, Book_Author, Book_Condition FROM BOOK WHERE Book_Status = \"Available\";"
+    result = con.execute(query)
+    self.tableWidget.setRowCount(0)
+    for row, form in enumerate(result):
+        self.tableWidget.insertRow(row)
+        for column, item in enumerate(form):
+            print(str(item))
+            self.tableWidget.setItem(
+                row, column, QtWidgets.QTableWidgetItem(str(item)))
+```
+### Parameters for Condition and Status
+```md
+Book_Condition
+New
+Fine
+Good
+Fair
+Poor
+
+Book_Status
+Available
+Borrowed
+
+Borrow_Status
+Borrowed
+Returned
 ```

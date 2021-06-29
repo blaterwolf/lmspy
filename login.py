@@ -8,77 +8,68 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from look_password import PasswordEdit
-
+from validation import Ui_Validation
 
 class Ui_Login(object):
     def setupUi(self, Login):
         Login.setObjectName("Login")
-        Login.resize(480, 480)
+        Login.resize(480, 490)
         Login.setMaximumSize(QtCore.QSize(480, 528))
         Login.setMouseTracking(False)
+        Login.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         Login.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
-        Login.setStyleSheet(
-            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Login)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.widget = QtWidgets.QWidget(Login)
         self.widget.setObjectName("widget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_3.setEnabled(True)
-        self.pushButton_3.setMinimumSize(QtCore.QSize(35, 25))
-        self.pushButton_3.setMaximumSize(QtCore.QSize(35, 25))
-        self.pushButton_3.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton_3.clicked.connect(sys.exit)
-        self.pushButton_3.setStyleSheet("color: white;\n"
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        spacerItem = QtWidgets.QSpacerItem(398, 22, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_3.addItem(spacerItem, 0, 0, 1, 1)
+        self.close_button = QtWidgets.QPushButton(self.widget)
+        self.close_button.setEnabled(True)
+        self.close_button.setMinimumSize(QtCore.QSize(35, 25))
+        self.close_button.setMaximumSize(QtCore.QSize(35, 25))
+        self.close_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.close_button.setStyleSheet("color: white;\n"
                                         "background-color: #82262C;\n"
                                         "font: 12pt \"Arial\" bold;\n"
                                         "border-radius: 5px;\n"
                                         "")
-        self.pushButton_3.setFlat(True)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout_2.addWidget(self.pushButton_3, 0, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(
-            439, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_2.addItem(spacerItem, 0, 0, 1, 1)
-        self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.close_button.setFlat(True)
+        self.close_button.setObjectName("close_button")
+        self.close_button.clicked.connect(sys.exit)
+        self.gridLayout_3.addWidget(self.close_button, 0, 1, 1, 1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.label = QtWidgets.QLabel(self.widget)
+        self.book_image = QtWidgets.QLabel(self.widget)
+        self.book_image.setStyleSheet("")
+        self.book_image.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.book_image.setObjectName("book_image")
+        self.gridLayout.addWidget(self.book_image, 2, 0, 1, 1)
+        self.title_name = QtWidgets.QLabel(self.widget)
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        self.label.setFont(font)
-        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 3, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.widget)
-        self.label_2.setStyleSheet("")
-        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
-        self.verticalLayout.addLayout(self.gridLayout)
-        self.gridLayout_3 = QtWidgets.QGridLayout()
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.line = QtWidgets.QFrame(self.widget)
-        self.line.setStyleSheet("border: 2px solid #842a2d;")
-        self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line.setObjectName("line")
-        self.gridLayout_3.addWidget(self.line, 1, 0, 1, 2)
-        self.label_4 = QtWidgets.QLabel(self.widget)
-        self.label_4.setStyleSheet("")
-        self.label_4.setObjectName("label_4")
-        self.gridLayout_3.addWidget(self.label_4, 2, 0, 1, 1)
-        self.lineEdit = QtWidgets.QLineEdit(self.widget)
-        self.lineEdit.setMinimumSize(QtCore.QSize(0, 40))
-        self.lineEdit.setStyleSheet("QLineEdit {\n"
-                                    "      color: #000000;\n"
+        self.title_name.setFont(font)
+        self.title_name.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.title_name.setObjectName("title_name")
+        self.gridLayout.addWidget(self.title_name, 3, 0, 1, 1)
+        self.gridLayout_3.addLayout(self.gridLayout, 1, 0, 1, 2)
+        self.gridLayout_2 = QtWidgets.QGridLayout()
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.line_2 = QtWidgets.QFrame(self.widget)
+        self.line_2.setStyleSheet("border: 2px solid #842a2d;")
+        self.line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.gridLayout_2.addWidget(self.line_2, 3, 0, 1, 2)
+        self.lineEdit_3 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit_3.setMinimumSize(QtCore.QSize(0, 40))
+        self.lineEdit_3.setStyleSheet("QLineEdit {\n"
+                                    "      color: rgb(231, 231, 231);\n"
                                     "      font: 15pt \"Verdana\";\n"
                                     "      border: None;\n"
                                     "      border-bottom-color: white;\n"
@@ -87,118 +78,168 @@ class Ui_Login(object):
                                     "      background: #CBB1A0;\n"
                                     "      selection-background-color: darkgray;\n"
                                     "}")
-        self.lineEdit.setObjectName("lineEdit")
-        self.gridLayout_3.addWidget(self.lineEdit, 0, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_3.addItem(spacerItem1, 4, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.widget)
-        self.pushButton.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy)
-        self.pushButton.setMinimumSize(QtCore.QSize(0, 60))
-        font = QtGui.QFont()
-        font.setPointSize(17)
-        font.setBold(False)
-        font.setItalic(False)
-        self.pushButton.setFont(font)
-        self.pushButton.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton.setAutoFillBackground(False)
-        self.pushButton.setStyleSheet("color: #842a2d;\n"
-                                      "font: 17pt \"Franklin Gothic Book\";\n"
-                                      "border: 2px solid #842a2d;\n"
-                                      "padding: 2px;\n"
-                                      "border-radius: 10px;\n"
-                                      "opacity: 100;\n"
-                                      "")
-        self.pushButton.setAutoDefault(False)
-        self.pushButton.setDefault(False)
-        self.pushButton.setFlat(False)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout_3.addWidget(self.pushButton, 5, 0, 1, 2)
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_2.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(0, 60))
-        font = QtGui.QFont()
-        font.setPointSize(17)
-        font.setBold(False)
-        font.setItalic(False)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton_2.setAutoFillBackground(False)
-        self.pushButton_2.setStyleSheet("color: #842a2d;\n"
-                                        "font: 17pt \"Franklin Gothic Book\";\n"
-                                        "border: 2px solid #842a2d;\n"
-                                        "padding: 2px;\n"
-                                        "border-radius: 10px;\n"
-                                        "opacity: 100;\n"
-                                        "")
-        self.pushButton_2.setAutoDefault(False)
-        self.pushButton_2.setDefault(False)
-        self.pushButton_2.setFlat(False)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout_3.addWidget(self.pushButton_2, 6, 0, 1, 2)
-        self.line_2 = QtWidgets.QFrame(self.widget)
-        self.line_2.setStyleSheet("border: 2px solid #842a2d;")
-        self.line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_2.setObjectName("line_2")
-        self.gridLayout_3.addWidget(self.line_2, 3, 0, 1, 2)
-        self.label_3 = QtWidgets.QLabel(self.widget)
-        self.label_3.setStyleSheet("")
-        self.label_3.setObjectName("label_3")
-        self.gridLayout_3.addWidget(self.label_3, 0, 0, 1, 1)
-        self.lineEdit_3 = PasswordEdit(self.widget)
-        self.lineEdit_3.setMinimumSize(QtCore.QSize(0, 40))
-        self.lineEdit_3.setStyleSheet("QLineEdit {\n"
-                                      "      color: #000000;\n"
-                                      "      font: 15pt \"Verdana\";\n"
-                                      "      border: None;\n"
-                                      "      border-bottom-color: white;\n"
-                                      "      border-radius: 10px;\n"
-                                      "      padding: 0 8px;\n"
-                                      "      background: #CBB1A0;\n"
-                                      "      selection-background-color: darkgray;\n"
-                                      "}")
         self.lineEdit_3.setObjectName("lineEdit_3")
-        self.lineEdit_3.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
-        self.gridLayout_3.addWidget(self.lineEdit_3, 2, 1, 1, 1)
-        self.verticalLayout.addLayout(self.gridLayout_3)
-        self.gridLayout_2.addLayout(self.verticalLayout, 1, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.lineEdit_3, 2, 1, 1, 1)
+        self.password_image = QtWidgets.QLabel(self.widget)
+        self.password_image.setStyleSheet("")
+        self.password_image.setObjectName("password_image")
+        self.gridLayout_2.addWidget(self.password_image, 2, 0, 1, 1)
+        self.line = QtWidgets.QFrame(self.widget)
+        self.line.setStyleSheet("border: 2px solid #842a2d;")
+        self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line.setObjectName("line")
+        self.gridLayout_2.addWidget(self.line, 1, 0, 1, 2)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_2.addItem(spacerItem1, 4, 0, 1, 1)
+        self.username_lineEdit = QtWidgets.QLineEdit(self.widget)
+        self.username_lineEdit.setMinimumSize(QtCore.QSize(0, 40))
+        self.username_lineEdit.setStyleSheet("QLineEdit {\n"
+                                            "      color: #000000;\n"
+                                            "      font: 15pt \"Verdana\";\n"
+                                            "      border: None;\n"
+                                            "      border-bottom-color: white;\n"
+                                            "      border-radius: 10px;\n"
+                                            "      padding: 0 8px;\n"
+                                            "      background: #CBB1A0;\n"
+                                            "      selection-background-color: darkgray;\n"
+                                            "}")
+        self.username_lineEdit.setObjectName("username_lineEdit")
+        self.gridLayout_2.addWidget(self.username_lineEdit, 0, 1, 1, 1)
+        self.username_image = QtWidgets.QLabel(self.widget)
+        self.username_image.setStyleSheet("")
+        self.username_image.setObjectName("username_image")
+        self.gridLayout_2.addWidget(self.username_image, 0, 0, 1, 1)
+        self.login_button = QtWidgets.QPushButton(self.widget)
+        self.login_button.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.login_button.sizePolicy().hasHeightForWidth())
+        self.login_button.setSizePolicy(sizePolicy)
+        self.login_button.setMinimumSize(QtCore.QSize(0, 60))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        font.setBold(False)
+        font.setItalic(False)
+        self.login_button.setFont(font)
+        self.login_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.login_button.setAutoFillBackground(False)
+        self.login_button.setStyleSheet("QPushButton{\n"
+                                        "    color: #842a2d;\n"
+                                        "    font: 17pt \"Franklin Gothic Book\";\n"
+                                        "    border: 2px solid #842a2d;\n"
+                                        "    padding: 2px;\n"
+                                        "    border-radius: 10px;\n"
+                                        "    opacity: 100;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover{\n"
+                                        "    background-color: #842a2d;\n"
+                                        "    color: #CBB1A0;\n"
+                                        "}")
+        self.login_button.setAutoDefault(False)
+        self.login_button.setDefault(False)
+        self.login_button.setFlat(False)
+        self.login_button.setObjectName("login_button")
+        self.gridLayout_2.addWidget(self.login_button, 5, 0, 1, 2)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.signup_button = QtWidgets.QPushButton(self.widget)
+        self.signup_button.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.signup_button.sizePolicy().hasHeightForWidth())
+        self.signup_button.setSizePolicy(sizePolicy)
+        self.signup_button.setMinimumSize(QtCore.QSize(0, 60))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        font.setBold(False)
+        font.setItalic(False)
+        self.signup_button.setFont(font)
+        self.signup_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.signup_button.setAutoFillBackground(False)
+        self.signup_button.setStyleSheet("QPushButton{\n"
+                                        "    color: #842a2d;\n"
+                                        "    font: 17pt \"Franklin Gothic Book\";\n"
+                                        "    border: 2px solid #842a2d;\n"
+                                        "    padding: 2px;\n"
+                                        "    border-radius: 10px;\n"
+                                        "    opacity: 100;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover{\n"
+                                        "    background-color: #842a2d;\n"
+                                        "    color: #CBB1A0;\n"
+                                        "}")
+        self.signup_button.setAutoDefault(False)
+        self.signup_button.setDefault(False)
+        self.signup_button.setFlat(False)
+        self.signup_button.setObjectName("signup_button")
+        self.signup_button.clicked.connect(self.run_validation)
+        self.horizontalLayout.addWidget(self.signup_button)
+        self.forgot_password = QtWidgets.QPushButton(self.widget)
+        self.forgot_password.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.forgot_password.sizePolicy().hasHeightForWidth())
+        self.forgot_password.setSizePolicy(sizePolicy)
+        self.forgot_password.setMinimumSize(QtCore.QSize(0, 60))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        font.setBold(False)
+        font.setItalic(False)
+        self.forgot_password.setFont(font)
+        self.forgot_password.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.forgot_password.setAutoFillBackground(False)
+        self.forgot_password.setStyleSheet("QPushButton{\n"
+                                        "    color: #842a2d;\n"
+                                        "    font: 17pt \"Franklin Gothic Book\";\n"
+                                        "    border: 2px solid #842a2d;\n"
+                                        "    padding: 2px;\n"
+                                        "    border-radius: 10px;\n"
+                                        "    opacity: 100;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover{\n"
+                                        "    background-color: #842a2d;\n"
+                                        "    color: #CBB1A0;\n"
+                                        "}")
+        self.forgot_password.setAutoDefault(False)
+        self.forgot_password.setDefault(False)
+        self.forgot_password.setFlat(False)
+        self.forgot_password.setObjectName("forgot_password")
+        self.horizontalLayout.addWidget(self.forgot_password)
+        self.gridLayout_2.addLayout(self.horizontalLayout, 6, 0, 1, 2)
+        self.gridLayout_3.addLayout(self.gridLayout_2, 2, 0, 1, 2)
         self.horizontalLayout_3.addWidget(self.widget)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
+
         self.retranslateUi(Login)
         QtCore.QMetaObject.connectSlotsByName(Login)
+
+    def run_validation(self):
+        self.Validation = QtWidgets.QWidget()
+        self.ui_validate = Ui_Validation()
+        self.ui_validate.setupUi(self.Validation, Login)
+        self.Validation.show()
+
+    def attempt_login(self):
+        pass
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
         Login.setWindowTitle(_translate("Login", "Login"))
-        self.pushButton_3.setText(_translate("Login", "✖"))
-        self.label.setText(_translate(
-            "Login", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
-        self.label_2.setText(_translate(
-            "Login", "<html><head/><body><p><img src=\"./icons/library_100x100.png\"/></p></body></html>"))
-        self.label_4.setText(_translate(
-            "Login", "<html><head/><body><p><img src=\"./icons/lock_32x32.png\"/></p></body></html>"))
-        self.pushButton.setText(_translate("Login", "Sign In"))
-        self.pushButton_2.setText(_translate(
-            "Login", "Register New Librarian"))
-        self.label_3.setText(_translate(
-            "Login", "<html><head/><body><p><img src=\"./icons/user_32x32.png\"/></p></body></html>"))
+        self.close_button.setText(_translate("Login", "✖"))
+        self.book_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/library_100x100.png\"/></p></body></html>"))
+        self.title_name.setText(_translate("Login", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
+        self.password_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/lock_32x32.png\"/></p></body></html>"))
+        self.username_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/user_32x32.png\"/></p></body></html>"))
+        self.login_button.setText(_translate("Login", "LOG IN"))
+        self.signup_button.setText(_translate("Login", "SIGN UP"))
+        self.forgot_password.setText(_translate("Login", "FORGOT PASSWORD"))
 
 
 if __name__ == "__main__":

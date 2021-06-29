@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>480</height>
+    <height>490</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -30,9 +30,22 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QWidget" name="widget" native="true">
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>398</width>
+            <height>22</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="close_button">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -66,86 +79,61 @@ border-radius: 5px;
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>439</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="1" column="0" colspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="3" column="0">
-             <widget class="QLabel" name="label">
-              <property name="font">
-               <font>
-                <pointsize>14</pointsize>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>SCHOOL LIBRARY MANAGEMENT SYSTEM</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/library_100x100.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="2" column="0">
+           <widget class="QLabel" name="book_image">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/library_100x100.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="1" column="0" colspan="2">
-             <widget class="Line" name="line">
-              <property name="styleSheet">
-               <string notr="true">border: 2px solid #842a2d;</string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/lock_32x32.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="lineEdit">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLineEdit {
+          <item row="3" column="0">
+           <widget class="QLabel" name="title_name">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>SCHOOL LIBRARY MANAGEMENT SYSTEM</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="3" column="0" colspan="2">
+           <widget class="Line" name="line_2">
+            <property name="styleSheet">
+             <string notr="true">border: 2px solid #842a2d;</string>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
       color: rgb(231, 231, 231);
       font: 15pt &quot;Verdana&quot;;
       border: None;
@@ -155,24 +143,137 @@ border-radius: 5px;
       background: #CBB1A0;
       selection-background-color: darkgray;
 }</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QPushButton" name="pushButton">
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="password_image">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/lock_32x32.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="Line" name="line">
+            <property name="styleSheet">
+             <string notr="true">border: 2px solid #842a2d;</string>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="username_lineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+      color: #000000;
+      font: 15pt &quot;Verdana&quot;;
+      border: None;
+      border-bottom-color: white;
+      border-radius: 10px;
+      padding: 0 8px;
+      background: #CBB1A0;
+      selection-background-color: darkgray;
+}</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="username_image">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/user_32x32.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QPushButton" name="login_button">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	color: #842a2d;
+	font: 17pt &quot;Franklin Gothic Book&quot;;
+	border: 2px solid #842a2d;
+	padding: 2px;
+	border-radius: 10px;
+	opacity: 100;
+}
+
+QPushButton:hover{
+    background-color: #842a2d;
+	color: #CBB1A0;
+}</string>
+            </property>
+            <property name="text">
+             <string>LOG IN</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QPushButton" name="signup_button">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -202,16 +303,22 @@ border-radius: 5px;
                <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: #842a2d;
-font: 17pt &quot;Franklin Gothic Book&quot;;
-border: 2px solid #842a2d;
-padding: 2px;
-border-radius: 10px;
-opacity: 100;
-</string>
+               <string notr="true">QPushButton{
+	color: #842a2d;
+	font: 17pt &quot;Franklin Gothic Book&quot;;
+	border: 2px solid #842a2d;
+	padding: 2px;
+	border-radius: 10px;
+	opacity: 100;
+}
+
+QPushButton:hover{
+    background-color: #842a2d;
+	color: #CBB1A0;
+}</string>
               </property>
               <property name="text">
-               <string>Sign In</string>
+               <string>SIGN UP</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -224,8 +331,8 @@ opacity: 100;
               </property>
              </widget>
             </item>
-            <item row="6" column="0" colspan="2">
-             <widget class="QPushButton" name="pushButton_2">
+            <item>
+             <widget class="QPushButton" name="forgot_password">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -255,16 +362,22 @@ opacity: 100;
                <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: #842a2d;
-font: 17pt &quot;Franklin Gothic Book&quot;;
-border: 2px solid #842a2d;
-padding: 2px;
-border-radius: 10px;
-opacity: 100;
-</string>
+               <string notr="true">QPushButton{
+	color: #842a2d;
+	font: 17pt &quot;Franklin Gothic Book&quot;;
+	border: 2px solid #842a2d;
+	padding: 2px;
+	border-radius: 10px;
+	opacity: 100;
+}
+
+QPushButton:hover{
+    background-color: #842a2d;
+	color: #CBB1A0;
+}</string>
               </property>
               <property name="text">
-               <string>Register New Librarian</string>
+               <string>FORGOT PASSWORD</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -274,58 +387,6 @@ opacity: 100;
               </property>
               <property name="flat">
                <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="Line" name="line_2">
-              <property name="styleSheet">
-               <string notr="true">border: 2px solid #842a2d;</string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/user_32x32.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="lineEdit_3">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLineEdit {
-      color: rgb(231, 231, 231);
-      font: 15pt &quot;Verdana&quot;;
-      border: None;
-      border-bottom-color: white;
-      border-radius: 10px;
-      padding: 0 8px;
-      background: #CBB1A0;
-      selection-background-color: darkgray;
-}</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="password_look">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string/>
               </property>
              </widget>
             </item>

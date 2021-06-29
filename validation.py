@@ -7,17 +7,40 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from add_librarian import Ui_AddLibrarian
 import pyotp
 
 
 class Ui_Validation(object):
-    def setupUi(self, Validation):
+    def setupUi(self, Validation, Login):
         self.current_base32 = pyotp.random_base32()
         Validation.setObjectName("Validation")
-        Validation.resize(419, 354)
-        Validation.setStyleSheet(
-            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(Validation)
+        Validation.resize(431, 406)
+        Validation.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
+        Validation.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(Validation)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_4 = QtWidgets.QLabel(Validation)
+        self.label_4.setTextFormat(QtCore.Qt.TextFormat.AutoText)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout.addWidget(self.label_4)
+        self.label_5 = QtWidgets.QLabel(Validation)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout.addWidget(self.label_5)
+        self.verticalLayout_4.addLayout(self.horizontalLayout)
+        self.label_3 = QtWidgets.QLabel(Validation)
+        font = QtGui.QFont()
+        font.setBold(False)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_4.addWidget(self.label_3)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -26,22 +49,21 @@ class Ui_Validation(object):
         font.setPointSize(16)
         font.setItalic(True)
         self.label_2.setFont(font)
-        self.label_2.setAlignment(
-            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2)
         self.lineEdit_2 = QtWidgets.QLineEdit(Validation)
         self.lineEdit_2.setEnabled(False)
         self.lineEdit_2.setStyleSheet("QLineEdit {\n"
-                                      "      color: rgb(231, 231, 231);\n"
-                                      "      font: 12pt \"Verdana\" bold;\n"
-                                      "      border: None;\n"
-                                      "      border-bottom-color: white;\n"
-                                      "      border-radius: 10px;\n"
-                                      "      padding: 0 8px;\n"
-                                      "      background: #CBB1A0;\n"
-                                      "      selection-background-color: darkgray;\n"
-                                      "}")
+                                    "      color: #000000;\n"
+                                    "      font: 12pt \"Verdana\" bold;\n"
+                                    "      border: None;\n"
+                                    "      border-bottom-color: white;\n"
+                                    "      border-radius: 10px;\n"
+                                    "      padding: 0 8px;\n"
+                                    "      background: #CBB1A0;\n"
+                                    "      selection-background-color: darkgray;\n"
+                                    "}")
         self.lineEdit_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.verticalLayout_2.addWidget(self.lineEdit_2)
@@ -57,48 +79,57 @@ class Ui_Validation(object):
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.lineEdit = QtWidgets.QLineEdit(Validation)
-        self.lineEdit.setMinimumSize(QtCore.QSize(0, 30))
-        self.lineEdit.setStyleSheet("QLineEdit {\n"
-                                    "      color: rgb(231, 231, 231);\n"
-                                    "      font: 15pt \"Verdana\";\n"
-                                    "      border: None;\n"
-                                    "      border-bottom-color: white;\n"
-                                    "      border-radius: 10px;\n"
+        self.input_otp = QtWidgets.QLineEdit(Validation)
+        self.input_otp.setMinimumSize(QtCore.QSize(0, 30))
+        self.input_otp.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.input_otp.setStyleSheet("QLineEdit {\n"
+                                    "      color: #000000;\n"
+                                    "      font: 15pt \"Courier New\";\n"
+                                    "      border: 1px;\n"
                                     "      padding: 0 8px;\n"
                                     "      background: #CBB1A0;\n"
-                                    "      selection-background-color: darkgray;\n"
                                     "}")
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout.addWidget(self.lineEdit)
-        self.pushButton = QtWidgets.QPushButton(Validation)
-        self.pushButton.setEnabled(True)
-        self.pushButton.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton.setStyleSheet("color: #842a2d;\n"
-                                      "font: 17pt \"Franklin Gothic Book\";\n"
-                                      "border: 2px solid #842a2d;\n"
-                                      "padding: 2px;\n"
-                                      "border-radius: 10px;\n"
-                                      "opacity: 100;\n"
-                                      "")
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(Validation)
-        self.pushButton_2.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton_2.clicked.connect(Validation.close)
-        self.pushButton_2.setStyleSheet("color: #842a2d;\n"
-                                        "font: 17pt \"Franklin Gothic Book\";\n"
-                                        "border: 2px solid #842a2d;\n"
-                                        "padding: 2px;\n"
-                                        "border-radius: 10px;\n"
-                                        "opacity: 100;\n"
-                                        "")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout.addWidget(self.pushButton_2)
+        self.input_otp.setObjectName("input_otp")
+        self.verticalLayout.addWidget(self.input_otp)
+        self.validate_button = QtWidgets.QPushButton(Validation)
+        self.validate_button.setEnabled(True)
+        self.validate_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.validate_button.setStyleSheet("QPushButton{\n"
+                                        "    color: #842a2d;\n"
+                                        "    font: 17pt \"Franklin Gothic Book\";\n"
+                                        "    border: 2px solid #842a2d;\n"
+                                        "    padding: 2px;\n"
+                                        "    border-radius: 10px;\n"
+                                        "    opacity: 100;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover{\n"
+                                        "    background-color: #842a2d;\n"
+                                        "    color: #CBB1A0;\n"
+                                        "}")
+        self.validate_button.setObjectName("validate_button")
+        self.validate_button.clicked.connect(lambda: self.validate_otp(Validation))
+        self.verticalLayout.addWidget(self.validate_button)
+        self.cancel_button = QtWidgets.QPushButton(Validation)
+        self.cancel_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.cancel_button.setStyleSheet("QPushButton{\n"
+                                        "    color: #842a2d;\n"
+                                        "    font: 17pt \"Franklin Gothic Book\";\n"
+                                        "    border: 2px solid #842a2d;\n"
+                                        "    padding: 2px;\n"
+                                        "    border-radius: 10px;\n"
+                                        "    opacity: 100;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover{\n"
+                                        "    background-color: #842a2d;\n"
+                                        "    color: #CBB1A0;\n"
+                                        "}")
+        self.cancel_button.setObjectName("cancel_button")
+        self.cancel_button.clicked.connect(Validation.close)
+        self.verticalLayout.addWidget(self.cancel_button)
         self.verticalLayout_3.addLayout(self.verticalLayout)
-
+        self.verticalLayout_4.addLayout(self.verticalLayout_3)
         self.retranslateUi(Validation)
         QtCore.QMetaObject.connectSlotsByName(Validation)
 
@@ -113,15 +144,53 @@ class Ui_Validation(object):
             counter += 1
         return " ".join(str.split(" ")[1:])
 
+    def validate_otp(self, Validation):
+        answer = self.input_otp.text()
+        totp = pyotp.TOTP(self.current_base32)
+        print("Current OTP:", totp.now())
+        msg = QtWidgets.QMessageBox()
+        if answer == totp.now():
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+            msg.setText("That is the correct OTP!")
+            msg.setInformativeText(
+                "You'll be redirected now to the Add Librarian Window...")
+            msg.setWindowTitle("Validated Successfully!")
+            msg.exec()
+            self.run_add_librarian(Validation, Login)
+        else:
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)
+            msg.setText("The OTP is incorrect.")
+            msg.setInformativeText(
+                "You may have also typed the incorrect Base32 command and if this problem kept happening, press cancel button and open the sign up page again.")
+            msg.setWindowTitle("Incorrect Validation!")
+            msg.exec()
+
+    def run_add_librarian(self, Validation):
+        self.AddLibrarian = QtWidgets.QWidget()
+        self.ui_addlibrarian = Ui_AddLibrarian()
+        self.ui_addlibrarian.setupUi(self.AddLibrarian)
+        self.AddLibrarian.show()
+        Validation.close()
+        
+
     def retranslateUi(self, Validation):
         _translate = QtCore.QCoreApplication.translate
         Validation.setWindowTitle(_translate("Validation", "Validation OTP"))
+        self.label_4.setText(_translate("Validation", "<html><head/><body><p><img src=\"./icons/googleauth_100x100.png\"/></p></body></html>"))
+        self.label_5.setText(_translate("Validation", "GOOGLE AUTHENTICATOR VALIDATION"))
+        self.label_3.setText(_translate("Validation", "1. Download the Google Authenticator App\n"
+                                        "2. Your Randomly Generated Base32 is presented below.\n"
+                                        "    Press the + button on Google Authenticator then click Enter Setup Key.\n"
+                                        "3. Type anything on the Account Name.\n"
+                                        "    Input all 32 digits in the \"Your Key\" field WITHOUT spaces. \n"
+                                        "4. Set it to time-based as default. Click Add.\n"
+                                        "5. Enter the current OTP on your phone to the input field below."))
         self.label_2.setText(_translate("Validation", "Generated Base32:"))
         self.lineEdit_2.setText(_translate(
             "Validation", f"{self.readable_base32(self.current_base32)}"))
         self.label.setText(_translate("Validation", "Enter Current OTP:"))
-        self.pushButton.setText(_translate("Validation", "Validate"))
-        self.pushButton_2.setText(_translate("Validation", "Cancel"))
+        self.validate_button.setText(_translate("Validation", "Validate"))
+        self.cancel_button.setText(_translate("Validation", "Cancel"))
 
 
 if __name__ == "__main__":
