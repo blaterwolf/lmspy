@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddLibrarian</class>
- <widget class="QWidget" name="AddLibrarian">
+ <class>EditLibrarian</class>
+ <widget class="QWidget" name="EditLibrarian">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>406</height>
+    <width>518</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,17 +33,17 @@
      <property name="midLineWidth">
       <number>5</number>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <widget class="QLabel" name="label_title">
         <property name="font">
          <font>
-          <pointsize>24</pointsize>
+          <pointsize>20</pointsize>
           <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>Sign Up New Librarian</string>
+         <string>Change Librarian Information</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -59,6 +59,116 @@
          <size>
           <width>20</width>
           <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="Line" name="line_8">
+          <property name="styleSheet">
+           <string notr="true">border: 2px solid #842a2d;</string>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_name_2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Search Username:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="input_search_username">
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+      color: #000000;
+      font: 15pt &quot;Verdana&quot;;
+      border: None;
+      border-bottom-color: white;
+      border-radius: 10px;
+      padding: 0 8px;
+      background: #CBB1A0;
+      selection-background-color: darkgray;
+}</string>
+            </property>
+            <property name="maxLength">
+             <number>50</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="search_username_button">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	color: #842a2d;
+	font: 17pt &quot;Franklin Gothic Book&quot;;
+	border: 2px solid #842a2d;
+	padding: 2px;
+	border-radius: 10px;
+	opacity: 100;
+}
+
+QPushButton:hover{
+    background-color: #842a2d;
+	color: #CBB1A0;
+}</string>
+            </property>
+            <property name="text">
+             <string>SEARCH</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_9">
+          <property name="styleSheet">
+           <string notr="true">border: 2px solid #842a2d;</string>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="spacer_titleToForm_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>17</width>
+          <height>19</height>
          </size>
         </property>
        </spacer>
@@ -346,7 +456,7 @@ QPushButton:hover{
 }</string>
           </property>
           <property name="text">
-           <string>Add Librarian</string>
+           <string>Edit Librarian</string>
           </property>
          </widget>
         </item>

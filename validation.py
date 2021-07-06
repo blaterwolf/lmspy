@@ -8,33 +8,45 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from add_librarian import Ui_AddLibrarian
+from edit_librarian import Ui_EditLibrarian
 import pyotp
 
 
 class Ui_Validation(object):
-    def setupUi(self, Validation, Login):
+    def setupUi(self, Validation, Login, use_form):
+        Login.close()
         self.current_base32 = pyotp.random_base32()
         Validation.setObjectName("Validation")
-        Validation.resize(431, 406)
+        Validation.resize(468, 432)
         Validation.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         Validation.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(Validation)
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(Validation)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.border = QtWidgets.QFrame(Validation)
+        self.border.setStyleSheet("#border{\n"
+                                "    color: #842a2d;\n"
+                                "}")
+        self.border.setFrameShape(QtWidgets.QFrame.Shape.Box)
+        self.border.setLineWidth(5)
+        self.border.setMidLineWidth(5)
+        self.border.setObjectName("border")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.border)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label_4 = QtWidgets.QLabel(Validation)
+        self.label_4 = QtWidgets.QLabel(self.border)
         self.label_4.setTextFormat(QtCore.Qt.TextFormat.AutoText)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout.addWidget(self.label_4)
-        self.label_5 = QtWidgets.QLabel(Validation)
+        self.label_5 = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(12)
         font.setBold(True)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout.addWidget(self.label_5)
         self.verticalLayout_4.addLayout(self.horizontalLayout)
-        self.label_3 = QtWidgets.QLabel(Validation)
+        self.label_3 = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
         font.setBold(False)
         self.label_3.setFont(font)
@@ -44,7 +56,7 @@ class Ui_Validation(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_2 = QtWidgets.QLabel(Validation)
+        self.label_2 = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setItalic(True)
@@ -52,7 +64,7 @@ class Ui_Validation(object):
         self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2)
-        self.lineEdit_2 = QtWidgets.QLineEdit(Validation)
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.border)
         self.lineEdit_2.setEnabled(False)
         self.lineEdit_2.setStyleSheet("QLineEdit {\n"
                                     "      color: #000000;\n"
@@ -70,28 +82,27 @@ class Ui_Validation(object):
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(Validation)
+        self.label = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
-        font.setFamily("Franklin Gothic Book")
         font.setPointSize(16)
         font.setItalic(True)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.input_otp = QtWidgets.QLineEdit(Validation)
+        self.input_otp = QtWidgets.QLineEdit(self.border)
         self.input_otp.setMinimumSize(QtCore.QSize(0, 30))
-        self.input_otp.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.input_otp.setStyleSheet("QLineEdit {\n"
                                     "      color: #000000;\n"
-                                    "      font: 15pt \"Courier New\";\n"
+                                    "      font: 15pt \"Verdana\";\n"
                                     "      border: 1px;\n"
                                     "      padding: 0 8px;\n"
                                     "      background: #CBB1A0;\n"
                                     "}")
+        self.input_otp.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.input_otp.setObjectName("input_otp")
         self.verticalLayout.addWidget(self.input_otp)
-        self.validate_button = QtWidgets.QPushButton(Validation)
+        self.validate_button = QtWidgets.QPushButton(self.border)
         self.validate_button.setEnabled(True)
         self.validate_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.validate_button.setStyleSheet("QPushButton{\n"
@@ -108,9 +119,9 @@ class Ui_Validation(object):
                                         "    color: #CBB1A0;\n"
                                         "}")
         self.validate_button.setObjectName("validate_button")
-        self.validate_button.clicked.connect(lambda: self.validate_otp(Validation))
+        self.validate_button.clicked.connect(lambda: self.validate_otp(Validation, Login, form_to_run=use_form))
         self.verticalLayout.addWidget(self.validate_button)
-        self.cancel_button = QtWidgets.QPushButton(Validation)
+        self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.cancel_button.setStyleSheet("QPushButton{\n"
                                         "    color: #842a2d;\n"
@@ -130,8 +141,11 @@ class Ui_Validation(object):
         self.verticalLayout.addWidget(self.cancel_button)
         self.verticalLayout_3.addLayout(self.verticalLayout)
         self.verticalLayout_4.addLayout(self.verticalLayout_3)
+        self.verticalLayout_5.addWidget(self.border)
+
         self.retranslateUi(Validation)
         QtCore.QMetaObject.connectSlotsByName(Validation)
+
 
     def readable_base32(self, base32):
         str = ""
@@ -144,34 +158,52 @@ class Ui_Validation(object):
             counter += 1
         return " ".join(str.split(" ")[1:])
 
-    def validate_otp(self, Validation):
+    def validate_otp(self, Validation, Login, form_to_run):
         answer = self.input_otp.text()
         totp = pyotp.TOTP(self.current_base32)
         print("Current OTP:", totp.now())
         msg = QtWidgets.QMessageBox()
         if answer == totp.now():
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-            msg.setText("That is the correct OTP!")
-            msg.setInformativeText(
-                "You'll be redirected now to the Add Librarian Window...")
-            msg.setWindowTitle("Validated Successfully!")
-            msg.exec()
-            self.run_add_librarian(Validation, Login)
+            self.informative_message(
+                text="That is the correct OTP!",
+                subtext="You'll be redirected now to the Add Librarian Window...",
+                window_title="Validated Successfully!",
+                icon_type="information"
+            )
+            if form_to_run == "add":
+                self.run_add_librarian(Validation, Login)
+            elif form_to_run == "edit":
+                self.run_edit_librarian(Validation, Login)
         else:
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)
-            msg.setText("The OTP is incorrect.")
-            msg.setInformativeText(
-                "You may have also typed the incorrect Base32 command and if this problem kept happening, press cancel button and open the sign up page again.")
-            msg.setWindowTitle("Incorrect Validation!")
-            msg.exec()
+            self.informative_message(
+                text="The OTP is incorrect.",
+                subtext="You may have also typed the incorrect Base32 command and if this problem kept happening, press cancel button and open the sign up page again.",
+                window_title="Incorrect Validation!",
+            )
 
-    def run_add_librarian(self, Validation):
+    def informative_message(self, text, subtext, window_title, icon_type="critical"):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)
+        if icon_type == "information":
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+        msg.setText(text)
+        msg.setInformativeText(subtext)
+        msg.setWindowTitle(window_title)
+        msg.exec()
+
+    def run_add_librarian(self, Validation, Login):
         self.AddLibrarian = QtWidgets.QWidget()
         self.ui_addlibrarian = Ui_AddLibrarian()
-        self.ui_addlibrarian.setupUi(self.AddLibrarian)
+        self.ui_addlibrarian.setupUi(self.AddLibrarian, Login)
         self.AddLibrarian.show()
         Validation.close()
-        
+
+    def run_edit_librarian(self, Validation, Login):
+        self.EditLibrarian = QtWidgets.QWidget()
+        self.ui_editlibrarian = Ui_EditLibrarian()
+        self.ui_editlibrarian.setupUi(self.EditLibrarian, Login)
+        self.EditLibrarian.show()
+        Validation.close()
 
     def retranslateUi(self, Validation):
         _translate = QtCore.QCoreApplication.translate
@@ -191,13 +223,3 @@ class Ui_Validation(object):
         self.label.setText(_translate("Validation", "Enter Current OTP:"))
         self.validate_button.setText(_translate("Validation", "Validate"))
         self.cancel_button.setText(_translate("Validation", "Cancel"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Validation = QtWidgets.QWidget()
-    ui = Ui_Validation()
-    ui.setupUi(Validation)
-    Validation.show()
-    sys.exit(app.exec())

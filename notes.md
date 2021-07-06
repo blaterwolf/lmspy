@@ -82,3 +82,10 @@ Borrow_Status
 Borrowed
 Returned
 ```
+### Generate 5 Random Numbers and Letters
+```py
+import random
+import string
+
+random = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
+```
