@@ -12,20 +12,22 @@ from validation import Ui_Validation
 from main_menu import Ui_MainMenu
 import sqlite3
 
+
 class Ui_Login(object):
     def setupUi(self, Login):
         Login.setObjectName("Login")
         Login.resize(480, 507)
         Login.setMaximumSize(QtCore.QSize(480, 528))
         Login.setMouseTracking(False)
-        Login.setStyleSheet(".QWidget{background-color:  #CBB1A0;border-radius: 10px}")
+        Login.setStyleSheet(
+            ".QWidget{background-color:  #CBB1A0;border-radius: 10px}")
         Login.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Login)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.border = QtWidgets.QFrame(Login)
         self.border.setStyleSheet("#border{\n"
-                                "    color: #842a2d;\n"
-                                "}")
+                                  "    color: #842a2d;\n"
+                                  "}")
         self.border.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.border.setLineWidth(5)
         self.border.setMidLineWidth(5)
@@ -36,13 +38,15 @@ class Ui_Login(object):
         self.widget.setObjectName("widget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.widget)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        spacerItem = QtWidgets.QSpacerItem(398, 22, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            398, 22, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_3.addItem(spacerItem, 0, 0, 1, 1)
         self.close_button = QtWidgets.QPushButton(self.widget)
         self.close_button.setEnabled(True)
         self.close_button.setMinimumSize(QtCore.QSize(35, 25))
         self.close_button.setMaximumSize(QtCore.QSize(35, 25))
-        self.close_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.close_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.close_button.setStyleSheet("color: white;\n"
                                         "background-color: #82262C;\n"
                                         "font: 12pt \"Arial\" bold;\n"
@@ -73,23 +77,25 @@ class Ui_Login(object):
         self.input_username = QtWidgets.QLineEdit(self.widget)
         self.input_username.setMinimumSize(QtCore.QSize(0, 40))
         self.input_username.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.input_username.setObjectName("input_username")
         self.gridLayout_2.addWidget(self.input_username, 0, 1, 1, 1)
         self.login_button = QtWidgets.QPushButton(self.widget)
         self.login_button.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.login_button.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.login_button.sizePolicy().hasHeightForWidth())
         self.login_button.setSizePolicy(sizePolicy)
         self.login_button.setMinimumSize(QtCore.QSize(0, 60))
         font = QtGui.QFont()
@@ -97,7 +103,8 @@ class Ui_Login(object):
         font.setBold(False)
         font.setItalic(False)
         self.login_button.setFont(font)
-        self.login_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.login_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.login_button.setAutoFillBackground(False)
         self.login_button.setStyleSheet("QPushButton{\n"
                                         "    color: #842a2d;\n"
@@ -134,10 +141,12 @@ class Ui_Login(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.signup_button = QtWidgets.QPushButton(self.widget)
         self.signup_button.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.signup_button.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.signup_button.sizePolicy().hasHeightForWidth())
         self.signup_button.setSizePolicy(sizePolicy)
         self.signup_button.setMinimumSize(QtCore.QSize(0, 60))
         font = QtGui.QFont()
@@ -145,21 +154,22 @@ class Ui_Login(object):
         font.setBold(False)
         font.setItalic(False)
         self.signup_button.setFont(font)
-        self.signup_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.signup_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.signup_button.setAutoFillBackground(False)
         self.signup_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.signup_button.setAutoDefault(False)
         self.signup_button.setDefault(False)
         self.signup_button.setFlat(False)
@@ -168,10 +178,12 @@ class Ui_Login(object):
         self.horizontalLayout.addWidget(self.signup_button)
         self.forgot_password = QtWidgets.QPushButton(self.widget)
         self.forgot_password.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.forgot_password.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.forgot_password.sizePolicy().hasHeightForWidth())
         self.forgot_password.setSizePolicy(sizePolicy)
         self.forgot_password.setMinimumSize(QtCore.QSize(0, 60))
         font = QtGui.QFont()
@@ -179,21 +191,22 @@ class Ui_Login(object):
         font.setBold(False)
         font.setItalic(False)
         self.forgot_password.setFont(font)
-        self.forgot_password.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.forgot_password.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.forgot_password.setAutoFillBackground(False)
         self.forgot_password.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                           "    color: #842a2d;\n"
+                                           "    font: 17pt \"Franklin Gothic Book\";\n"
+                                           "    border: 2px solid #842a2d;\n"
+                                           "    padding: 2px;\n"
+                                           "    border-radius: 10px;\n"
+                                           "    opacity: 100;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "    background-color: #842a2d;\n"
+                                           "    color: #CBB1A0;\n"
+                                           "}")
         self.forgot_password.setAutoDefault(False)
         self.forgot_password.setDefault(False)
         self.forgot_password.setFlat(False)
@@ -220,22 +233,23 @@ class Ui_Login(object):
         self.input_password = PasswordEdit(self.widget)
         self.input_password.setMinimumSize(QtCore.QSize(0, 40))
         self.input_password.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.input_password.setObjectName("input_password")
         self.gridLayout_2.addWidget(self.input_password, 2, 1, 1, 1)
         self.username_image = QtWidgets.QLabel(self.widget)
         self.username_image.setStyleSheet("")
         self.username_image.setObjectName("username_image")
         self.gridLayout_2.addWidget(self.username_image, 0, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout_2.addItem(spacerItem1, 5, 0, 1, 2)
         self.gridLayout_3.addLayout(self.gridLayout_2, 2, 0, 1, 2)
         self.horizontalLayout_3.addWidget(self.widget)
@@ -249,7 +263,7 @@ class Ui_Login(object):
         self.ui_validate = Ui_Validation()
         self.ui_validate.setupUi(self.Validation, Login, use_form="add")
         self.Validation.show()
-    
+
     def run_forgot_password(self):
         self.Validation = QtWidgets.QWidget()
         self.ui_validate = Ui_Validation()
@@ -264,12 +278,12 @@ class Ui_Login(object):
         query = "SELECT Librarian_Username, Librarian_Password FROM LIBRARIAN;"
         result = [form[1] for form in list(enumerate(con.execute(query)))]
         if (len(username) == 0 or len(password) == 0):
-                self.status_label.setText("Input field/s are empty!")
+            self.status_label.setText("Input field/s are empty!")
         elif compare_data in result:
             self.run_main_menu(Login, username)
-        else:    
+        else:
             self.status_label.setText("Your username or password is invalid!")
-    
+
     def informative_message(self, text, subtext, window_title):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
@@ -297,10 +311,14 @@ class Ui_Login(object):
         _translate = QtCore.QCoreApplication.translate
         Login.setWindowTitle(_translate("Login", "Login"))
         self.close_button.setText(_translate("Login", "✖"))
-        self.book_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/library_100x100.png\"/></p></body></html>"))
-        self.title_name.setText(_translate("Login", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
-        self.password_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/lock_32x32.png\"/></p></body></html>"))
-        self.username_image.setText(_translate("Login", "<html><head/><body><p><img src=\"./icons/user_32x32.png\"/></p></body></html>"))
+        self.book_image.setText(_translate(
+            "Login", "<html><head/><body><p><img src=\"./icons/library_100x100.png\"/></p></body></html>"))
+        self.title_name.setText(_translate(
+            "Login", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
+        self.password_image.setText(_translate(
+            "Login", "<html><head/><body><p><img src=\"./icons/lock_32x32.png\"/></p></body></html>"))
+        self.username_image.setText(_translate(
+            "Login", "<html><head/><body><p><img src=\"./icons/user_32x32.png\"/></p></body></html>"))
         self.login_button.setText(_translate("Login", "LOG IN"))
         self.signup_button.setText(_translate("Login", "SIGN UP"))
         self.forgot_password.setText(_translate("Login", "FORGOT PASSWORD"))

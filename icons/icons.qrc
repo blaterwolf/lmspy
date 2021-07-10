@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>qr.png</file>
     <file>googleauth_100x100.png</file>
     <file>library.jpg.png</file>
     <file>library_100x100.png</file>

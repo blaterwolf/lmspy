@@ -8,9 +8,11 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from view_book_status import Ui_BookStatus
+from borrow_request import Ui_BorrowRequest
 from quote_machine import quote_data
 import sqlite3
 import random
+
 
 class Ui_MainMenu(object):
     def setupUi(self, MainMenu, Login, username_to_show):
@@ -18,7 +20,8 @@ class Ui_MainMenu(object):
         MainMenu.resize(804, 426)
         font = QtGui.QFont()
         MainMenu.setFont(font)
-        MainMenu.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
+        MainMenu.setStyleSheet(
+            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         MainMenu.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(MainMenu)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -38,10 +41,12 @@ class Ui_MainMenu(object):
         font.setPointSize(16)
         font.setBold(False)
         self.title_name.setFont(font)
-        self.title_name.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.title_name.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
+                                     QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.title_name.setObjectName("title_name")
         self.horizontalLayout_2.addWidget(self.title_name)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -56,15 +61,15 @@ class Ui_MainMenu(object):
         self.call_username_to_input = QtWidgets.QLineEdit(self.border)
         self.call_username_to_input.setEnabled(False)
         self.call_username_to_input.setStyleSheet("QLineEdit {\n"
-                                                "      color: #000000;\n"
-                                                "      font: 11pt \"Verdana\";\n"
-                                                "      border: None;\n"
-                                                "      border-bottom-color: white;\n"
-                                                "      border-radius: 10px;\n"
-                                                "      padding: 0 8px;\n"
-                                                "      background: #CBB1A0;\n"
-                                                "      selection-background-color: darkgray;\n"
-                                                "}")
+                                                  "      color: #000000;\n"
+                                                  "      font: 11pt \"Verdana\";\n"
+                                                  "      border: None;\n"
+                                                  "      border-bottom-color: white;\n"
+                                                  "      border-radius: 10px;\n"
+                                                  "      padding: 0 8px;\n"
+                                                  "      background: #CBB1A0;\n"
+                                                  "      selection-background-color: darkgray;\n"
+                                                  "}")
         self.call_username_to_input.setObjectName("call_username_to_input")
         current_user = self.get_name(username_to_show)
         self.call_username_to_input.setText(current_user)
@@ -78,7 +83,8 @@ class Ui_MainMenu(object):
         self.verticalLayout.addWidget(self.line_2)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem1)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
@@ -86,181 +92,191 @@ class Ui_MainMenu(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.book_image = QtWidgets.QLabel(self.border)
         self.book_image.setEnabled(False)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(2)
-        sizePolicy.setHeightForWidth(self.book_image.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.book_image.sizePolicy().hasHeightForWidth())
         self.book_image.setSizePolicy(sizePolicy)
         self.book_image.setMinimumSize(QtCore.QSize(0, 0))
         self.book_image.setMaximumSize(QtCore.QSize(386, 270))
         self.book_image.setObjectName("book_image")
         self.verticalLayout_2.addWidget(self.book_image)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem2)
         self.random_quotes_generator = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setItalic(True)
         self.random_quotes_generator.setFont(font)
-        self.random_quotes_generator.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.random_quotes_generator.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignCenter)
         self.random_quotes_generator.setObjectName("random_quotes_generator")
         self.verticalLayout_2.addWidget(self.random_quotes_generator)
         self.horizontalLayout_4.addLayout(self.verticalLayout_2)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout.addItem(spacerItem3, 7, 0, 1, 1)
         self.overdue_button = QtWidgets.QPushButton(self.border)
         self.overdue_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                          "    color: #842a2d;\n"
+                                          "    font: 17pt \"Franklin Gothic Book\";\n"
+                                          "    border: 2px solid #842a2d;\n"
+                                          "    padding: 2px;\n"
+                                          "    border-radius: 10px;\n"
+                                          "    opacity: 100;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QPushButton:hover{\n"
+                                          "    background-color: #842a2d;\n"
+                                          "    color: #CBB1A0;\n"
+                                          "}")
         self.overdue_button.setObjectName("overdue_button")
         self.gridLayout.addWidget(self.overdue_button, 5, 0, 1, 2)
         self.book_button = QtWidgets.QPushButton(self.border)
         self.book_button.setStyleSheet("QPushButton{\n"
-                                    "    color: #842a2d;\n"
-                                    "    font: 17pt \"Franklin Gothic Book\";\n"
-                                    "    border: 2px solid #842a2d;\n"
-                                    "    padding: 2px;\n"
-                                    "    border-radius: 10px;\n"
-                                    "    opacity: 100;\n"
-                                    "}\n"
-                                    "\n"
-                                    "QPushButton:hover{\n"
-                                    "    background-color: #842a2d;\n"
-                                    "    color: #CBB1A0;\n"
-                                    "}")
+                                       "    color: #842a2d;\n"
+                                       "    font: 17pt \"Franklin Gothic Book\";\n"
+                                       "    border: 2px solid #842a2d;\n"
+                                       "    padding: 2px;\n"
+                                       "    border-radius: 10px;\n"
+                                       "    opacity: 100;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:hover{\n"
+                                       "    background-color: #842a2d;\n"
+                                       "    color: #CBB1A0;\n"
+                                       "}")
         self.book_button.setObjectName("book_button")
         self.gridLayout.addWidget(self.book_button, 0, 0, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout.addItem(spacerItem4, 2, 0, 1, 1)
         self.history_button = QtWidgets.QPushButton(self.border)
         self.history_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                          "    color: #842a2d;\n"
+                                          "    font: 17pt \"Franklin Gothic Book\";\n"
+                                          "    border: 2px solid #842a2d;\n"
+                                          "    padding: 2px;\n"
+                                          "    border-radius: 10px;\n"
+                                          "    opacity: 100;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QPushButton:hover{\n"
+                                          "    background-color: #842a2d;\n"
+                                          "    color: #CBB1A0;\n"
+                                          "}")
         self.history_button.setObjectName("history_button")
         self.gridLayout.addWidget(self.history_button, 6, 0, 1, 2)
         self.borrow_button = QtWidgets.QPushButton(self.border)
         self.borrow_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.borrow_button.setObjectName("borrow_button")
+        self.borrow_button.clicked.connect(
+            lambda: self.run_borrow_request(MainMenu))
         self.gridLayout.addWidget(self.borrow_button, 1, 0, 1, 1)
         self.return_button = QtWidgets.QPushButton(self.border)
         self.return_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.return_button.setObjectName("return_button")
         self.gridLayout.addWidget(self.return_button, 1, 1, 1, 1)
         self.book_status_button = QtWidgets.QPushButton(self.border)
         self.book_status_button.setStyleSheet("QPushButton{\n"
-                                            "    color: #842a2d;\n"
-                                            "    font: 17pt \"Franklin Gothic Book\";\n"
-                                            "    border: 2px solid #842a2d;\n"
-                                            "    padding: 2px;\n"
-                                            "    border-radius: 10px;\n"
-                                            "    opacity: 100;\n"
-                                            "}\n"
-                                            "\n"
-                                            "QPushButton:hover{\n"
-                                            "    background-color: #842a2d;\n"
-                                            "    color: #CBB1A0;\n"
-                                            "}")
+                                              "    color: #842a2d;\n"
+                                              "    font: 17pt \"Franklin Gothic Book\";\n"
+                                              "    border: 2px solid #842a2d;\n"
+                                              "    padding: 2px;\n"
+                                              "    border-radius: 10px;\n"
+                                              "    opacity: 100;\n"
+                                              "}\n"
+                                              "\n"
+                                              "QPushButton:hover{\n"
+                                              "    background-color: #842a2d;\n"
+                                              "    color: #CBB1A0;\n"
+                                              "}")
         self.book_status_button.setObjectName("book_status_button")
         self.book_status_button.clicked.connect(self.run_book_status)
         self.gridLayout.addWidget(self.book_status_button, 3, 0, 1, 2)
         self.borrowed_books_button = QtWidgets.QPushButton(self.border)
         self.borrowed_books_button.setStyleSheet("QPushButton{\n"
-                                                "    color: #842a2d;\n"
-                                                "    font: 17pt \"Franklin Gothic Book\";\n"
-                                                "    border: 2px solid #842a2d;\n"
-                                                "    padding: 2px;\n"
-                                                "    border-radius: 10px;\n"
-                                                "    opacity: 100;\n"
-                                                "}\n"
-                                                "\n"
-                                                "QPushButton:hover{\n"
-                                                "    background-color: #842a2d;\n"
-                                                "    color: #CBB1A0;\n"
-                                                "}")
+                                                 "    color: #842a2d;\n"
+                                                 "    font: 17pt \"Franklin Gothic Book\";\n"
+                                                 "    border: 2px solid #842a2d;\n"
+                                                 "    padding: 2px;\n"
+                                                 "    border-radius: 10px;\n"
+                                                 "    opacity: 100;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "    background-color: #842a2d;\n"
+                                                 "    color: #CBB1A0;\n"
+                                                 "}")
         self.borrowed_books_button.setObjectName("borrowed_books_button")
         self.gridLayout.addWidget(self.borrowed_books_button, 4, 0, 1, 2)
         self.student_button = QtWidgets.QPushButton(self.border)
         self.student_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                          "    color: #842a2d;\n"
+                                          "    font: 17pt \"Franklin Gothic Book\";\n"
+                                          "    border: 2px solid #842a2d;\n"
+                                          "    padding: 2px;\n"
+                                          "    border-radius: 10px;\n"
+                                          "    opacity: 100;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QPushButton:hover{\n"
+                                          "    background-color: #842a2d;\n"
+                                          "    color: #CBB1A0;\n"
+                                          "}")
         self.student_button.setObjectName("student_button")
         self.gridLayout.addWidget(self.student_button, 0, 1, 1, 1)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem5)
         self.logout_button = QtWidgets.QPushButton(self.border)
         self.logout_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px 53px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px 53px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.logout_button.setObjectName("logout_button")
-        self.logout_button.clicked.connect(lambda: self.logout_user(Login, MainMenu))
+        self.logout_button.clicked.connect(
+            lambda: self.logout_user(Login, MainMenu))
         self.horizontalLayout_3.addWidget(self.logout_button)
         self.gridLayout.addLayout(self.horizontalLayout_3, 8, 0, 1, 2)
         self.horizontalLayout_4.addLayout(self.gridLayout)
@@ -271,8 +287,8 @@ class Ui_MainMenu(object):
         self.get_random_quote(quote_data)
 
     def logout_user(self, Login, MainMenu):
-            MainMenu.close()
-            Login.show()
+        MainMenu.close()
+        Login.show()
 
     def get_name(self, username):
         con = sqlite3.connect('./db/test.db')
@@ -286,7 +302,14 @@ class Ui_MainMenu(object):
         quote = random_quote_data["quote"]
         author = random_quote_data["author"]
         book = random_quote_data["book"]
-        self.random_quotes_generator.setText(f"\"{quote}\"\n- {author} ({book})")
+        self.random_quotes_generator.setText(
+            f"\"{quote}\"\n- {author} ({book})")
+
+    def run_borrow_request(self, MainMenu):
+        self.BorrowRequest = QtWidgets.QWidget()
+        self.ui_borrow_request = Ui_BorrowRequest()
+        self.ui_borrow_request.setupUi(self.BorrowRequest, MainMenu)
+        self.BorrowRequest.show()
 
     def run_book_status(self):
         self.BookStatus = QtWidgets.QWidget()
@@ -297,16 +320,22 @@ class Ui_MainMenu(object):
     def retranslateUi(self, MainMenu):
         _translate = QtCore.QCoreApplication.translate
         MainMenu.setWindowTitle(_translate("MainMenu", "LMSPY: Main Menu"))
-        self.title_name.setText(_translate("MainMenu", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
-        self.userloggedin_label.setText(_translate("MainMenu", "USER LOGGED IN:"))
-        self.book_image.setText(_translate("MainMenu", "<html><head/><body><p><img src=\"./icons/library.jpg\"/></p></body></html>"))
-        self.random_quotes_generator.setText(_translate("MainMenu", "\"Quote here\" - Author"))
+        self.title_name.setText(_translate(
+            "MainMenu", "SCHOOL LIBRARY MANAGEMENT SYSTEM"))
+        self.userloggedin_label.setText(
+            _translate("MainMenu", "USER LOGGED IN:"))
+        self.book_image.setText(_translate(
+            "MainMenu", "<html><head/><body><p><img src=\"./icons/library.jpg\"/></p></body></html>"))
+        self.random_quotes_generator.setText(
+            _translate("MainMenu", "\"Quote here\" - Author"))
         self.overdue_button.setText(_translate("MainMenu", "OVERDUE BOOKS"))
         self.book_button.setText(_translate("MainMenu", "BOOK"))
         self.history_button.setText(_translate("MainMenu", "HISTORY"))
         self.borrow_button.setText(_translate("MainMenu", "BORROW"))
         self.return_button.setText(_translate("MainMenu", "RETURN"))
-        self.book_status_button.setText(_translate("MainMenu", "VIEW BOOK STATUS"))
-        self.borrowed_books_button.setText(_translate("MainMenu", "BORROWED BOOKS"))
+        self.book_status_button.setText(
+            _translate("MainMenu", "VIEW BOOK STATUS"))
+        self.borrowed_books_button.setText(
+            _translate("MainMenu", "BORROWED BOOKS"))
         self.student_button.setText(_translate("MainMenu", "STUDENT"))
         self.logout_button.setText(_translate("MainMenu", "LOGOUT"))

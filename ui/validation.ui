@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>468</width>
-    <height>432</height>
+    <width>459</width>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,12 +73,9 @@
         </property>
         <property name="text">
          <string>1. Download the Google Authenticator App
-2. Your Randomly Generated Base32 is presented below.
-    Press the + button on Google Authenticator then click Enter Setup Key.
-3. Type anything on the Account Name.
-    Input all 32 digits in the &quot;Your Key&quot; field WITHOUT spaces. 
-4. Set it to time-based as default. Click Add.
-5. Enter the current OTP on your phone to the input field below.</string>
+2. Press the + button on Google Authenticator then click &quot;Scan QRCode&quot;
+3. Follow the instructions for taking picture of the Randomly Generated QrCode.
+4. Enter the current OTP on your phone to the input field below.</string>
         </property>
        </widget>
       </item>
@@ -95,39 +92,24 @@
              </font>
             </property>
             <property name="text">
-             <string>Generated Base32:</string>
+             <string>QR Code:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_2">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLineEdit {
-      color: #000000;
-      font: 12pt &quot;Verdana&quot; bold;
-      border: None;
-      border-bottom-color: white;
-      border-radius: 10px;
-      padding: 0 8px;
-      background: #CBB1A0;
-      selection-background-color: darkgray;
-}</string>
-            </property>
-            <property name="text">
-             <string>BASE 32 HERE</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/qr.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -232,7 +214,7 @@ QPushButton:hover{
   </layout>
  </widget>
  <resources>
-  <include location="icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
