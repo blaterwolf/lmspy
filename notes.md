@@ -81,6 +81,10 @@ Borrowed
 Borrow_Status
 Borrowed
 Returned
+
+Payment_Status
+Pending
+Paid
 ```
 ### Generate 5 Random Numbers and Letters
 ```py

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'borrow_request.ui'
+# Form implementation generated from reading ui file 'return_request.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -7,24 +7,21 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-import random
-import string
-import uuid
 import datetime
 import sqlite3
 
 
-class Ui_BorrowRequest(object):
-    def setupUi(self, BorrowRequest, MainMenu, Ui_BookStatus, current_username):
+class Ui_ReturnRequest(object):
+    def setupUi(self, ReturnRequest, MainMenu, Ui_BookStatus, current_username):
         MainMenu.close()
-        BorrowRequest.setObjectName("BorrowRequest")
-        BorrowRequest.resize(526, 356)
-        BorrowRequest.setStyleSheet(
+        ReturnRequest.setObjectName("ReturnRequest")
+        ReturnRequest.resize(529, 331)
+        ReturnRequest.setStyleSheet(
             ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
-        BorrowRequest.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(BorrowRequest)
+        ReturnRequest.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(ReturnRequest)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.border = QtWidgets.QFrame(BorrowRequest)
+        self.border = QtWidgets.QFrame(ReturnRequest)
         self.border.setStyleSheet("#border{\n"
                                   "    color: #842a2d;\n"
                                   "}")
@@ -58,67 +55,38 @@ class Ui_BorrowRequest(object):
         self.verticalLayout_2.addWidget(self.line_1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.label_StudID = QtWidgets.QLabel(self.border)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        self.label_StudID.setFont(font)
-        self.label_StudID.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
-                                       QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.label_StudID.setObjectName("label_StudID")
-        self.gridLayout.addWidget(self.label_StudID, 0, 0, 1, 1)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.input_StudId = QtWidgets.QLineEdit(self.border)
-        self.input_StudId.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
-        self.input_StudId.setObjectName("input_StudId")
-        self.input_StudId.setMaxLength(12)
-        self.verticalLayout.addWidget(self.input_StudId)
+        self.input_borrow_id = QtWidgets.QLineEdit(self.border)
+        self.input_borrow_id.setStyleSheet("QLineEdit {\n"
+                                           "      color: #000000;\n"
+                                           "      font: 15pt \"Verdana\";\n"
+                                           "      border: None;\n"
+                                           "      border-bottom-color: white;\n"
+                                           "      border-radius: 10px;\n"
+                                           "      padding: 0 8px;\n"
+                                           "      background: #CBB1A0;\n"
+                                           "      selection-background-color: darkgray;\n"
+                                           "}")
+        self.input_borrow_id.setObjectName("input_borrow_id")
+        self.input_borrow_id.setText("BORROW-")
+        self.verticalLayout.addWidget(self.input_borrow_id)
         self.line_3 = QtWidgets.QFrame(self.border)
         self.line_3.setStyleSheet("border: 2px solid #842a2d;")
         self.line_3.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_3.setObjectName("line_3")
         self.verticalLayout.addWidget(self.line_3)
-        self.input_BookId = QtWidgets.QLineEdit(self.border)
-        self.input_BookId.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
-        self.input_BookId.setObjectName("input_BookId")
-        self.input_BookId.setMaxLength(10)
-        self.verticalLayout.addWidget(self.input_BookId)
-        self.line_4 = QtWidgets.QFrame(self.border)
-        self.line_4.setStyleSheet("border: 2px solid #842a2d;")
-        self.line_4.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_4.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_4.setObjectName("line_4")
-        self.verticalLayout.addWidget(self.line_4)
         self.gridLayout.addLayout(self.verticalLayout, 0, 1, 2, 1)
-        self.label_BookId = QtWidgets.QLabel(self.border)
+        self.borrow_id_label = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
-        self.label_BookId.setFont(font)
-        self.label_BookId.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
-                                       QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
-        self.label_BookId.setObjectName("label_BookId")
-        self.gridLayout.addWidget(self.label_BookId, 1, 0, 1, 1)
+        self.borrow_id_label.setFont(font)
+        self.borrow_id_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
+                                          QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.borrow_id_label.setObjectName("borrow_id_label")
+        self.gridLayout.addWidget(self.borrow_id_label, 0, 0, 2, 1)
         self.verticalLayout_2.addLayout(self.gridLayout)
         self.line_2 = QtWidgets.QFrame(self.border)
         self.line_2.setStyleSheet("border: 2px solid #842a2d;")
@@ -143,10 +111,10 @@ class Ui_BorrowRequest(object):
         spacerItem1 = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem1)
-        self.borrow_button = QtWidgets.QPushButton(self.border)
-        self.borrow_button.setCursor(QtGui.QCursor(
+        self.return_button = QtWidgets.QPushButton(self.border)
+        self.return_button.setCursor(QtGui.QCursor(
             QtCore.Qt.CursorShape.PointingHandCursor))
-        self.borrow_button.setStyleSheet("QPushButton{\n"
+        self.return_button.setStyleSheet("QPushButton{\n"
                                          "    color: #842a2d;\n"
                                          "    font: 17pt \"Franklin Gothic Book\";\n"
                                          "    border: 2px solid #842a2d;\n"
@@ -159,10 +127,10 @@ class Ui_BorrowRequest(object):
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
                                          "}")
-        self.borrow_button.setObjectName("borrow_button")
-        self.borrow_button.clicked.connect(
-            lambda: self.validate_borrowing_books(BorrowRequest, current_username))
-        self.verticalLayout_3.addWidget(self.borrow_button)
+        self.return_button.setObjectName("return_button")
+        self.return_button.clicked.connect(
+            lambda: self.validate_return_books(ReturnRequest, current_username))
+        self.verticalLayout_3.addWidget(self.return_button)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.view_borrowed_books_button = QtWidgets.QPushButton(self.border)
@@ -184,7 +152,7 @@ class Ui_BorrowRequest(object):
         self.view_borrowed_books_button.setObjectName(
             "view_borrowed_books_button")
         self.view_borrowed_books_button.clicked.connect(
-            lambda: self.run_book_status(Ui_BookStatus, BorrowRequest))
+            lambda: self.run_book_status(Ui_BookStatus, ReturnRequest))
         self.horizontalLayout_3.addWidget(self.view_borrowed_books_button)
         self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(
@@ -204,108 +172,112 @@ class Ui_BorrowRequest(object):
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
-            lambda: self.return_action(BorrowRequest, MainMenu))
+            lambda: self.return_action(ReturnRequest, MainMenu))
         self.horizontalLayout_3.addWidget(self.cancel_button)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.verticalLayout_4.addLayout(self.verticalLayout_3)
         self.verticalLayout_5.addWidget(self.border)
 
-        self.retranslateUi(BorrowRequest)
-        QtCore.QMetaObject.connectSlotsByName(BorrowRequest)
+        self.retranslateUi(ReturnRequest)
+        QtCore.QMetaObject.connectSlotsByName(ReturnRequest)
 
-    def return_action(self, BorrowRequest, MainMenu):
-        BorrowRequest.close()
+    def return_action(self, ReturnRequest, MainMenu):
+        ReturnRequest.close()
         MainMenu.show()
 
-    def run_book_status(self, Ui_BookStatus, BorrowRequest):
-        BorrowRequest.close()
+    def run_book_status(self, Ui_BookStatus, ReturnRequest):
+        ReturnRequest.close()
         self.BookStatus = QtWidgets.QWidget()
         self.ui_book_status = Ui_BookStatus()
         self.ui_book_status.setupUi(
-            self.BookStatus, current_class=BorrowRequest)
+            self.BookStatus, current_class=ReturnRequest)
         self.BookStatus.show()
 
-    def validate_borrowing_books(self, BorrowRequest, current_username):
-        student_id = self.input_StudId.text()
-        book_id = self.input_BookId.text()
-        # * verify if book and student IDs exist in the database.
+    def validate_return_books(self, ReturnRequest, current_username):
+        borrow_id = self.input_borrow_id.text()
+        # * initialize sqlite
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
-        query_student = "SELECT Student_ID FROM STUDENT;"
-        query_book = "SELECT Book_ID FROM BOOK;"
-        result_student = [form[1][0] for form in list(
-            enumerate(con.execute(query_student)))]
-        result_book = [form[1][0] for form in list(
-            enumerate(con.execute(query_book)))]
-        if (student_id in result_student and book_id in result_book):
-            # * verify if this book is available!
-            query_book_availability = "SELECT Book_Status FROM BOOK WHERE Book_ID = ?;"
-            interpolate_data = [book_id]
-            result = cur.execute(query_book_availability, interpolate_data)
-            book_availability = [form[1][0]
-                                 for form in list(enumerate(result))][0]
-            if book_availability == 'Borrowed':
-                self.status_label.setText("This book is currently borrowed.")
-            else:
-                self.status_label.setText("")
-                self.execute_borrow_book(
-                    borrow_issuer=current_username,
-                    student_id=student_id,
-                    book_id=book_id
-                )
+        # * check if borrow_id exists
+        check_id_query = "SELECT Borrow_ID FROM BORROW;"
+        result_borrow = [form[1][0] for form in list(
+            enumerate(con.execute(check_id_query)))]
+        if borrow_id in result_borrow:
+            # * query the payment_id and book_id
+            self.status_label.setText("")
+            borrow_query = "SELECT Borrow_Date, Payment_ID, Book_ID FROM BORROW WHERE Borrow_ID = ?;"
+            interpolate_data = [borrow_id]
+            result = cur.execute(borrow_query, interpolate_data)
+            borrow_data = [form[1] for form in list(enumerate(result))][0]
+            self.execute_returning_books(
+                borrow_date=borrow_data[0],
+                payment_id=borrow_data[1],
+                book_id=borrow_data[2],
+                borrow_id=borrow_id,
+                current_username=current_username
+            )
+            self.input_borrow_id.setText("BORROW-")
         else:
-            self.status_label.setText("Student ID or Book ID is invalid!")
+            self.status_label.setText("Borrow ID is invalid!")
 
-    def execute_borrow_book(self, borrow_issuer, student_id, book_id):
-        # * Step 1: Initialize Values
-        borrow_id = self.generate_borrow_id()
-        borrow_date = datetime.datetime.now()
-        borrow_status = 'Borrowed'
-        payment_id = self.generate_payment_id()
-        payment_amount = 0.0
-        payment_status = "Pending"
-        book_status = "Borrowed"
+    def execute_returning_books(self, borrow_date, payment_id, book_id, borrow_id, current_username):
+        # * Step 1: Initialize Database
+        borrow_date = datetime.datetime.strptime(
+            borrow_date, '%Y-%m-%d %H:%M:%S.%f')
+        borrow_return_date = datetime.datetime.now()
+        borrow_status = "Returned"
+        penalty_amount = self.compute_amount(borrow_date, borrow_return_date)
+        book_status = 'Available'
+        payment_status = 'Paid'
+        payment_issuer = current_username
 
         # * Step 1.5: Initialize Database
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
 
-        # * Step 2: Insert a Payment Rowdata to PAYMENT
-        payment_query = "INSERT INTO PAYMENT VALUES (?,?,?, NULL);"
-        interpolate_data = [payment_id,
-                            payment_amount, payment_status]
+        # * Step 2: UPDATE PAYMENT data: Compute Amount, Status, and Issuer
+        payment_query = """UPDATE PAYMENT
+                        SET Payment_Amount = ?, Payment_Status = ?, Payment_Issuer = ?
+                        WHERE Payment_ID = ?;
+        """
+        interpolate_data = [penalty_amount,
+                            payment_status, payment_issuer, payment_id]
         cur.execute(payment_query, interpolate_data)
-        # * Step 3: Change the Status of the Book from Available to Borrowed
+        # * Step 3: UPDATE BOOK Book_Status to Available
         book_query = """UPDATE BOOK
                         SET Book_Status = ?
                         WHERE Book_ID = ?;
         """
         interpolate_data = [book_status, book_id]
         cur.execute(book_query, interpolate_data)
-        # * Step 4: Insert the Borrow Data to BORROW
-        borrow_query = "INSERT INTO BORROW VALUES (?,?,NULL,?,?,?,?,?);"
-        interpolate_data = [borrow_id, borrow_date, borrow_status,
-                            borrow_issuer, student_id, payment_id, book_id]
+        # * Step 4: UPDATE BORROW Borrow_Return_Date to datetime.now()
+        borrow_query = """UPDATE BORROW
+                        SET Borrow_Return_Date = ?, Borrow_Status = ?
+                        WHERE Borrow_ID = ?;
+        """
+        interpolate_data = [borrow_return_date, borrow_status, borrow_id]
         cur.execute(borrow_query, interpolate_data)
         con.commit()
         con.close()
-        # ! query the book name!
+        # ! query the updated borrow id here
         self.informative_message(
-            text="You Borrowed Successfully!",
-            subtext=f"You successfully borrowed {book_id}",
-            window_title="Borrowed Successfully",
+            text="You Returned Successfully!",
+            subtext=f"You successfully returned {borrow_id}",
+            window_title="Returned Successfully",
             icon_type="information"
         )
-        self.input_StudId.setText("")
-        self.input_BookId.setText("")
 
-    def generate_borrow_id(self):
-        random_five = ''.join(random.SystemRandom().choice(
-            string.ascii_uppercase + string.digits) for _ in range(5))
-        return f"BORROW-{random_five}"
-
-    def generate_payment_id(self):
-        return uuid.uuid4().hex
+    def compute_amount(self, borrow_date, borrow_return_date):
+        penalty = 0.0
+        days_passed = (borrow_return_date-borrow_date).days
+        while days_passed >= 7:
+            if days_passed == 7:
+                penalty += 100.00
+                days_passed = 0
+            else:
+                penalty += (0.05 * 100.00)
+                days_passed -= 1
+        return penalty
 
     def informative_message(self, text, subtext, window_title, icon_type="critical"):
         msg = QtWidgets.QMessageBox()
@@ -317,15 +289,13 @@ class Ui_BorrowRequest(object):
         msg.setWindowTitle(window_title)
         msg.exec()
 
-    def retranslateUi(self, BorrowRequest):
+    def retranslateUi(self, ReturnRequest):
         _translate = QtCore.QCoreApplication.translate
-        BorrowRequest.setWindowTitle(
-            _translate("BorrowRequest", "Borrow a Book"))
+        ReturnRequest.setWindowTitle(_translate("ReturnRequest", "Form"))
         self.borrow_book_label.setText(
-            _translate("BorrowRequest", "BORROW A BOOK"))
-        self.label_StudID.setText(_translate("BorrowRequest", "Student ID:"))
-        self.label_BookId.setText(_translate("BorrowRequest", "Book ID:"))
-        self.borrow_button.setText(_translate("BorrowRequest", "BORROW"))
+            _translate("ReturnRequest", "RETURN A BOOK"))
+        self.borrow_id_label.setText(_translate("ReturnRequest", "Borrow ID:"))
+        self.return_button.setText(_translate("ReturnRequest", "RETURN"))
         self.view_borrowed_books_button.setText(
-            _translate("BorrowRequest", "  VIEW BORROWED BOOKS  "))
-        self.cancel_button.setText(_translate("BorrowRequest", "CANCEL"))
+            _translate("ReturnRequest", "  VIEW BORROWED BOOKS  "))
+        self.cancel_button.setText(_translate("ReturnRequest", "CANCEL"))

@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from view_book_status import Ui_BookStatus
+from return_request import Ui_ReturnRequest
 from borrow_request import Ui_BorrowRequest
 from quote_machine import quote_data
 import sqlite3
@@ -188,7 +189,7 @@ class Ui_MainMenu(object):
                                          "}")
         self.borrow_button.setObjectName("borrow_button")
         self.borrow_button.clicked.connect(
-            lambda: self.run_borrow_request(MainMenu))
+            lambda: self.run_borrow_request(MainMenu, username_to_show))
         self.gridLayout.addWidget(self.borrow_button, 1, 0, 1, 1)
         self.return_button = QtWidgets.QPushButton(self.border)
         self.return_button.setStyleSheet("QPushButton{\n"
@@ -205,6 +206,8 @@ class Ui_MainMenu(object):
                                          "    color: #CBB1A0;\n"
                                          "}")
         self.return_button.setObjectName("return_button")
+        self.return_button.clicked.connect(
+            lambda: self.run_return_request(MainMenu, username_to_show))
         self.gridLayout.addWidget(self.return_button, 1, 1, 1, 1)
         self.book_status_button = QtWidgets.QPushButton(self.border)
         self.book_status_button.setStyleSheet("QPushButton{\n"
@@ -306,11 +309,18 @@ class Ui_MainMenu(object):
         self.random_quotes_generator.setText(
             f"\"{quote}\"\n- {author} ({book})")
 
-    def run_borrow_request(self, MainMenu):
+    def run_return_request(self, MainMenu, current_username):
+        self.ReturnRequest = QtWidgets.QWidget()
+        self.ui_return_request = Ui_ReturnRequest()
+        self.ui_return_request.setupUi(
+            self.ReturnRequest, MainMenu, Ui_BookStatus, current_username)
+        self.ReturnRequest.show()
+
+    def run_borrow_request(self, MainMenu, current_username):
         self.BorrowRequest = QtWidgets.QWidget()
         self.ui_borrow_request = Ui_BorrowRequest()
         self.ui_borrow_request.setupUi(
-            self.BorrowRequest, MainMenu, Ui_BookStatus)
+            self.BorrowRequest, MainMenu, Ui_BookStatus, current_username)
         self.BorrowRequest.show()
 
     def run_book_status(self, MainMenu):
@@ -318,7 +328,7 @@ class Ui_MainMenu(object):
         self.BookStatus = QtWidgets.QWidget()
         self.ui_book_status = Ui_BookStatus()
         self.ui_book_status.setupUi(
-            self.BookStatus, determine_return="from_main_menu", current_class=MainMenu)
+            self.BookStatus, current_class=MainMenu)
         self.BookStatus.show()
 
     def retranslateUi(self, MainMenu):

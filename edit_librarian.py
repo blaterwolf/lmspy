@@ -336,7 +336,6 @@ class Ui_EditLibrarian(object):
                 text="Username was not found in the database!",
                 subtext="Check for typographical errors or data doesn't exist in the database at all.",
                 window_title="Username Not Found"
-
             )
 
     def validate_names(self, EditLibrarian, Login):
@@ -372,11 +371,10 @@ class Ui_EditLibrarian(object):
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
             con = sqlite3.connect('./db/test.db')
-            # ! UPDATE SQL
             query = """UPDATE LIBRARIAN
                         SET Librarian_Username = ?, Librarian_Name = ?, Librarian_Password = ?
                         WHERE Librarian_Username = ?;
-                    """
+            """
             cur = con.cursor()
             interpolate_data = [username, fullname, password, username_search]
             cur.execute(query, interpolate_data)

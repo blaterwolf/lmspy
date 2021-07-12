@@ -11,8 +11,7 @@ import sqlite3
 
 
 class Ui_BookStatus(object):
-    def setupUi(self, BookStatus, determine_return, current_class):
-        print(current_class)
+    def setupUi(self, BookStatus, current_class):
         BookStatus.setObjectName("BookStatus")
         BookStatus.resize(742, 669)
         BookStatus.setStyleSheet(
