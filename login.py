@@ -75,6 +75,7 @@ class Ui_Login(object):
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.input_username = QtWidgets.QLineEdit(self.widget)
+        self.input_username.setMaxLength(15)
         self.input_username.setMinimumSize(QtCore.QSize(0, 40))
         self.input_username.setStyleSheet("QLineEdit {\n"
                                           "      color: #000000;\n"
@@ -232,6 +233,7 @@ class Ui_Login(object):
         self.gridLayout_2.addWidget(self.password_image, 2, 0, 1, 1)
         self.input_password = PasswordEdit(self.widget)
         self.input_password.setMinimumSize(QtCore.QSize(0, 40))
+        self.input_password.setMaxLength(15)
         self.input_password.setStyleSheet("QLineEdit {\n"
                                           "      color: #000000;\n"
                                           "      font: 15pt \"Verdana\";\n"
@@ -271,9 +273,9 @@ class Ui_Login(object):
         self.Validation.show()
 
     def attempt_login(self):
-        username = self.input_username.text()
-        password = self.input_password.text()
-        compare_data = (username, password)
+        username = self.input_username.text()  # * admin
+        password = self.input_password.text()  # * admintest
+        compare_data = (username, password)  # * ('admin', 'admintest')
         con = sqlite3.connect('./db/test.db')
         query = "SELECT Librarian_Username, Librarian_Password FROM LIBRARIAN;"
         result = [form[1] for form in list(enumerate(con.execute(query)))]

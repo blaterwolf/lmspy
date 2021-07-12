@@ -10,7 +10,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_BorrowRequest(object):
-    def setupUi(self, BorrowRequest, MainMenu):
+    def setupUi(self, BorrowRequest, MainMenu, Ui_BookStatus):
         MainMenu.close()
         BorrowRequest.setObjectName("BorrowRequest")
         BorrowRequest.resize(526, 356)
@@ -153,6 +153,8 @@ class Ui_BorrowRequest(object):
                                          "    color: #CBB1A0;\n"
                                          "}")
         self.borrow_button.setObjectName("borrow_button")
+        self.borrow_button.clicked.connect(
+            lambda: self.validate_borrowing_books(BorrowRequest, MainMenu))
         self.verticalLayout_3.addWidget(self.borrow_button)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -174,6 +176,8 @@ class Ui_BorrowRequest(object):
                                                       "}")
         self.view_borrowed_books_button.setObjectName(
             "view_borrowed_books_button")
+        self.view_borrowed_books_button.clicked.connect(
+            lambda: self.run_book_status(Ui_BookStatus, BorrowRequest))
         self.horizontalLayout_3.addWidget(self.view_borrowed_books_button)
         self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(
@@ -205,6 +209,17 @@ class Ui_BorrowRequest(object):
     def return_action(self, BorrowRequest, MainMenu):
         BorrowRequest.close()
         MainMenu.show()
+
+    def run_book_status(self, Ui_BookStatus, BorrowRequest):
+        BorrowRequest.close()
+        self.BookStatus = QtWidgets.QWidget()
+        self.ui_book_status = Ui_BookStatus()
+        self.ui_book_status.setupUi(
+            self.BookStatus, determine_return="from_borrow", current_class=BorrowRequest)
+        self.BookStatus.show()
+
+    def validate_borrowing_books(self, BorrowRequest, MainMenu):
+        pass
 
     def retranslateUi(self, BorrowRequest):
         _translate = QtCore.QCoreApplication.translate

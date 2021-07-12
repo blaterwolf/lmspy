@@ -221,7 +221,8 @@ class Ui_MainMenu(object):
                                               "    color: #CBB1A0;\n"
                                               "}")
         self.book_status_button.setObjectName("book_status_button")
-        self.book_status_button.clicked.connect(self.run_book_status)
+        self.book_status_button.clicked.connect(
+            lambda: self.run_book_status(MainMenu))
         self.gridLayout.addWidget(self.book_status_button, 3, 0, 1, 2)
         self.borrowed_books_button = QtWidgets.QPushButton(self.border)
         self.borrowed_books_button.setStyleSheet("QPushButton{\n"
@@ -308,13 +309,16 @@ class Ui_MainMenu(object):
     def run_borrow_request(self, MainMenu):
         self.BorrowRequest = QtWidgets.QWidget()
         self.ui_borrow_request = Ui_BorrowRequest()
-        self.ui_borrow_request.setupUi(self.BorrowRequest, MainMenu)
+        self.ui_borrow_request.setupUi(
+            self.BorrowRequest, MainMenu, Ui_BookStatus)
         self.BorrowRequest.show()
 
-    def run_book_status(self):
+    def run_book_status(self, MainMenu):
+        MainMenu.close()
         self.BookStatus = QtWidgets.QWidget()
         self.ui_book_status = Ui_BookStatus()
-        self.ui_book_status.setupUi(self.BookStatus)
+        self.ui_book_status.setupUi(
+            self.BookStatus, determine_return="from_main_menu", current_class=MainMenu)
         self.BookStatus.show()
 
     def retranslateUi(self, MainMenu):

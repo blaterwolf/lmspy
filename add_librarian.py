@@ -10,18 +10,20 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from look_password import PasswordEdit
 import sqlite3
 
+
 class Ui_AddLibrarian(object):
     def setupUi(self, AddLibrarian, Login):
         AddLibrarian.setObjectName("AddLibrarian")
         AddLibrarian.resize(480, 406)
-        AddLibrarian.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
+        AddLibrarian.setStyleSheet(
+            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         AddLibrarian.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(AddLibrarian)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.border = QtWidgets.QFrame(AddLibrarian)
         self.border.setStyleSheet("#border{\n"
-                                "    color: #842a2d;\n"
-                                "}")
+                                  "    color: #842a2d;\n"
+                                  "}")
         self.border.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.border.setLineWidth(5)
         self.border.setMidLineWidth(5)
@@ -36,7 +38,8 @@ class Ui_AddLibrarian(object):
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title.setObjectName("label_title")
         self.verticalLayout_3.addWidget(self.label_title)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
@@ -44,7 +47,8 @@ class Ui_AddLibrarian(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_name.setFont(font)
-        self.label_name.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_name.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight |
+                                     QtCore.Qt.AlignmentFlag.AlignTrailing | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_name.setObjectName("label_name")
         self.gridLayout.addWidget(self.label_name, 1, 0, 1, 1)
         self.line_5 = QtWidgets.QFrame(self.border)
@@ -60,15 +64,15 @@ class Ui_AddLibrarian(object):
         font.setItalic(False)
         self.input_password.setFont(font)
         self.input_password.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.input_password.setText("")
         self.input_password.setMaxLength(15)
         self.input_password.setObjectName("input_password")
@@ -80,15 +84,15 @@ class Ui_AddLibrarian(object):
         font.setItalic(False)
         self.input_password_confirm.setFont(font)
         self.input_password_confirm.setStyleSheet("QLineEdit {\n"
-                                                "      color: #000000;\n"
-                                                "      font: 15pt \"Verdana\";\n"
-                                                "      border: None;\n"
-                                                "      border-bottom-color: white;\n"
-                                                "      border-radius: 10px;\n"
-                                                "      padding: 0 8px;\n"
-                                                "      background: #CBB1A0;\n"
-                                                "      selection-background-color: darkgray;\n"
-                                                "}")
+                                                  "      color: #000000;\n"
+                                                  "      font: 15pt \"Verdana\";\n"
+                                                  "      border: None;\n"
+                                                  "      border-bottom-color: white;\n"
+                                                  "      border-radius: 10px;\n"
+                                                  "      padding: 0 8px;\n"
+                                                  "      background: #CBB1A0;\n"
+                                                  "      selection-background-color: darkgray;\n"
+                                                  "}")
         self.input_password_confirm.setText("")
         self.input_password_confirm.setMaxLength(15)
         self.input_password_confirm.setObjectName("input_password_confirm")
@@ -103,7 +107,8 @@ class Ui_AddLibrarian(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_username.setFont(font)
-        self.label_username.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_username.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight |
+                                         QtCore.Qt.AlignmentFlag.AlignTrailing | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_username.setObjectName("label_username")
         self.gridLayout.addWidget(self.label_username, 3, 0, 1, 1)
         self.input_username = QtWidgets.QLineEdit(self.border)
@@ -113,15 +118,15 @@ class Ui_AddLibrarian(object):
         font.setItalic(False)
         self.input_username.setFont(font)
         self.input_username.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.input_username.setMaxLength(15)
         self.input_username.setObjectName("input_username")
         self.gridLayout.addWidget(self.input_username, 3, 1, 1, 1)
@@ -135,7 +140,8 @@ class Ui_AddLibrarian(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_pass.setFont(font)
-        self.label_pass.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_pass.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight |
+                                     QtCore.Qt.AlignmentFlag.AlignTrailing | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_pass.setObjectName("label_pass")
         self.gridLayout.addWidget(self.label_pass, 5, 0, 1, 1)
         self.input_fullname = QtWidgets.QLineEdit(self.border)
@@ -145,15 +151,15 @@ class Ui_AddLibrarian(object):
         font.setItalic(False)
         self.input_fullname.setFont(font)
         self.input_fullname.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.input_fullname.setMaxLength(50)
         self.input_fullname.setObjectName("input_fullname")
         self.gridLayout.addWidget(self.input_fullname, 1, 1, 1, 1)
@@ -161,7 +167,8 @@ class Ui_AddLibrarian(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_retype_pass.setFont(font)
-        self.label_retype_pass.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_retype_pass.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignRight | QtCore.Qt.AlignmentFlag.AlignTrailing | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_retype_pass.setObjectName("label_retype_pass")
         self.gridLayout.addWidget(self.label_retype_pass, 7, 0, 1, 1)
         self.line_6 = QtWidgets.QFrame(self.border)
@@ -187,46 +194,51 @@ class Ui_AddLibrarian(object):
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout_3.addWidget(self.label)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem1)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.add_librarian = QtWidgets.QPushButton(self.border)
         self.add_librarian.setEnabled(True)
-        self.add_librarian.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.add_librarian.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.add_librarian.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.add_librarian.setObjectName("add_librarian")
-        self.add_librarian.clicked.connect(lambda: self.validate_names(AddLibrarian, Login))
+        self.add_librarian.clicked.connect(
+            lambda: self.validate_names(AddLibrarian, Login))
         self.verticalLayout.addWidget(self.add_librarian)
         self.cancel_button = QtWidgets.QPushButton(self.border)
-        self.cancel_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.cancel_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.cancel_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                         "    color: #842a2d;\n"
+                                         "    font: 17pt \"Franklin Gothic Book\";\n"
+                                         "    border: 2px solid #842a2d;\n"
+                                         "    padding: 2px;\n"
+                                         "    border-radius: 10px;\n"
+                                         "    opacity: 100;\n"
+                                         "}\n"
+                                         "\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: #842a2d;\n"
+                                         "    color: #CBB1A0;\n"
+                                         "}")
         self.cancel_button.setObjectName("cancel_button")
-        self.cancel_button.clicked.connect(lambda: self.close_actions(AddLibrarian, Login))
+        self.cancel_button.clicked.connect(
+            lambda: self.close_actions(AddLibrarian, Login))
         self.verticalLayout.addWidget(self.cancel_button)
         self.verticalLayout_3.addLayout(self.verticalLayout)
         self.verticalLayout_2.addWidget(self.border)
@@ -251,28 +263,38 @@ class Ui_AddLibrarian(object):
         elif (len(init_password) < 8 or len(chck_password) < 8):
             self.label.setText("Passwords must be at least 8 characters!")
         else:
-            self.label.setText("")
-            self.insert_data(fullname, username, init_password, AddLibrarian, Login)
+            con = sqlite3.connect('./db/test.db')
+            query = "SELECT Librarian_Username FROM LIBRARIAN;"
+            result = [form[1][0]
+                      for form in list(enumerate(con.execute(query)))]
+            if username in result:
+                self.label.setText("This username already exists!")
+            else:
+                self.insert_data(fullname, username,
+                                 init_password, AddLibrarian, Login)
 
     def insert_data(self, fullname, username, password, AddLibrarian, Login):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-        msg.setText("You'll be inserting the following information in the database: ")
-        msg.setInformativeText(f"Name:\t\t{fullname}\nUsername:\t{username}\nPassword:\t{password}\n\nAre you sure?")
-        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+        msg.setText(
+            "You'll be inserting the following information in the database: ")
+        msg.setInformativeText(
+            f"Name:\t\t{fullname}\nUsername:\t{username}\nPassword:\t{password}\n\nAre you sure?")
+        msg.setStandardButtons(
+            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
         msg.setWindowTitle("Confirmation Check")
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
-            query = "INSERT INTO LIBRARIAN VALUES (?,?,?);"
-            cur = con.cursor()
+            con = sqlite3.connect('./db/test.db')  # * connect to db
+            query = "INSERT INTO LIBRARIAN VALUES (?,?,?);"  # * what to query
+            cur = con.cursor()  # *
             interpolate_data = [username, fullname, password]
             cur.execute(query, interpolate_data)
             con.commit()
             con.close()
             self.informative_message(
-                text="Data Added Successfully!", 
-                subtext="You'll be redirected now to the Login Window...", 
+                text="Data Added Successfully!",
+                subtext="You'll be redirected now to the Login Window...",
                 window_title="Added Successfully"
             )
             self.close_actions(AddLibrarian, Login)
@@ -289,12 +311,16 @@ class Ui_AddLibrarian(object):
 
     def retranslateUi(self, AddLibrarian):
         _translate = QtCore.QCoreApplication.translate
-        AddLibrarian.setWindowTitle(_translate("AddLibrarian", "Sign Up Librarian"))
-        self.label_title.setText(_translate("AddLibrarian", "Sign Up New Librarian"))
+        AddLibrarian.setWindowTitle(_translate(
+            "AddLibrarian", "Sign Up Librarian"))
+        self.label_title.setText(_translate(
+            "AddLibrarian", "Sign Up New Librarian"))
         self.label_name.setText(_translate("AddLibrarian", "Full Name:"))
         self.label_username.setText(_translate("AddLibrarian", "Username:"))
-        self.label_pass.setText(_translate("AddLibrarian", "Preferred Password:"))
-        self.label_retype_pass.setText(_translate("AddLibrarian", "Retype Password:"))
+        self.label_pass.setText(_translate(
+            "AddLibrarian", "Preferred Password:"))
+        self.label_retype_pass.setText(
+            _translate("AddLibrarian", "Retype Password:"))
         self.label.setText(_translate("AddLibrarian", ""))
         self.add_librarian.setText(_translate("AddLibrarian", "Add Librarian"))
         self.cancel_button.setText(_translate("AddLibrarian", "Cancel"))

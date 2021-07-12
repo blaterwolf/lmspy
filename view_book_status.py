@@ -9,18 +9,21 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 import sqlite3
 
+
 class Ui_BookStatus(object):
-    def setupUi(self, BookStatus):
+    def setupUi(self, BookStatus, determine_return, current_class):
+        print(current_class)
         BookStatus.setObjectName("BookStatus")
         BookStatus.resize(742, 669)
-        BookStatus.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
+        BookStatus.setStyleSheet(
+            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         BookStatus.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(BookStatus)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.border = QtWidgets.QFrame(BookStatus)
         self.border.setStyleSheet("#border{\n"
-                                "    color: #842a2d;\n"
-                                "}")
+                                  "    color: #842a2d;\n"
+                                  "}")
         self.border.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.border.setLineWidth(5)
         self.border.setMidLineWidth(5)
@@ -34,11 +37,13 @@ class Ui_BookStatus(object):
         font.setPointSize(20)
         font.setBold(True)
         self.label_title.setFont(font)
-        self.label_title.setStyleSheet(".QWidget{background-color: #CBB1A0;border-radius: 10px}")
+        self.label_title.setStyleSheet(
+            ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         self.label_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_title.setObjectName("label_title")
         self.horizontalLayout_3.addWidget(self.label_title)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -51,15 +56,15 @@ class Ui_BookStatus(object):
         self.viewing_status = QtWidgets.QLineEdit(self.border)
         self.viewing_status.setEnabled(False)
         self.viewing_status.setStyleSheet("QLineEdit {\n"
-                                        "      color: #000000;\n"
-                                        "      font: 15pt \"Verdana\";\n"
-                                        "      border: None;\n"
-                                        "      border-bottom-color: white;\n"
-                                        "      border-radius: 10px;\n"
-                                        "      padding: 0 8px;\n"
-                                        "      background: #CBB1A0;\n"
-                                        "      selection-background-color: darkgray;\n"
-                                        "}")
+                                          "      color: #000000;\n"
+                                          "      font: 15pt \"Verdana\";\n"
+                                          "      border: None;\n"
+                                          "      border-bottom-color: white;\n"
+                                          "      border-radius: 10px;\n"
+                                          "      padding: 0 8px;\n"
+                                          "      background: #CBB1A0;\n"
+                                          "      selection-background-color: darkgray;\n"
+                                          "}")
         self.viewing_status.setObjectName("viewing_status")
         self.horizontalLayout_2.addWidget(self.viewing_status)
         self.horizontalLayout_3.addLayout(self.horizontalLayout_2)
@@ -81,7 +86,8 @@ class Ui_BookStatus(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.available_button = QtWidgets.QPushButton(self.border)
-        self.available_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.available_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.available_button.setStyleSheet("QPushButton{\n"
                                             "    color: #842a2d;\n"
                                             "    font: 17pt \"Franklin Gothic Book\";\n"
@@ -99,46 +105,54 @@ class Ui_BookStatus(object):
         self.available_button.clicked.connect(self.load_available_books_data)
         self.horizontalLayout.addWidget(self.available_button)
         self.borrowed_button = QtWidgets.QPushButton(self.border)
-        self.borrowed_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.borrowed_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.borrowed_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                           "    color: #842a2d;\n"
+                                           "    font: 17pt \"Franklin Gothic Book\";\n"
+                                           "    border: 2px solid #842a2d;\n"
+                                           "    padding: 2px;\n"
+                                           "    border-radius: 10px;\n"
+                                           "    opacity: 100;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "    background-color: #842a2d;\n"
+                                           "    color: #CBB1A0;\n"
+                                           "}")
         self.borrowed_button.setObjectName("borrowed_button")
         self.borrowed_button.clicked.connect(self.load_borrowed_books_data)
         self.horizontalLayout.addWidget(self.borrowed_button)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.back_button = QtWidgets.QPushButton(self.border)
-        self.back_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.back_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.back_button.setStyleSheet("QPushButton{\n"
-                                        "    color: #842a2d;\n"
-                                        "    font: 17pt \"Franklin Gothic Book\";\n"
-                                        "    border: 2px solid #842a2d;\n"
-                                        "    padding: 2px;\n"
-                                        "    border-radius: 10px;\n"
-                                        "    opacity: 100;\n"
-                                        "}\n"
-                                        "\n"
-                                        "QPushButton:hover{\n"
-                                        "    background-color: #842a2d;\n"
-                                        "    color: #CBB1A0;\n"
-                                        "}")
+                                       "    color: #842a2d;\n"
+                                       "    font: 17pt \"Franklin Gothic Book\";\n"
+                                       "    border: 2px solid #842a2d;\n"
+                                       "    padding: 2px;\n"
+                                       "    border-radius: 10px;\n"
+                                       "    opacity: 100;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:hover{\n"
+                                       "    background-color: #842a2d;\n"
+                                       "    color: #CBB1A0;\n"
+                                       "}")
         self.back_button.setObjectName("back_button")
-        self.back_button.clicked.connect(BookStatus.close)
+        self.back_button.clicked.connect(
+            lambda: self.return_action(BookStatus, current_class))
         self.verticalLayout.addWidget(self.back_button)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_3.addWidget(self.border)
         self.retranslateUi(BookStatus)
         QtCore.QMetaObject.connectSlotsByName(BookStatus)
+
+    def return_action(self, BookStatus, current_class):
+        BookStatus.close()
+        current_class.show()
+        pass
 
     def load_available_books_data(self):
         self.viewing_status.setText("AVAILABLE BOOKS")
@@ -168,13 +182,16 @@ class Ui_BookStatus(object):
         _translate = QtCore.QCoreApplication.translate
         BookStatus.setWindowTitle(_translate("BookStatus", "Form"))
         self.label_title.setText(_translate("BookStatus", "VIEW BOOK STATUS"))
-        self.label_currently_viewing.setText(_translate("BookStatus", "CURRENTLY VIEWING:"))
+        self.label_currently_viewing.setText(
+            _translate("BookStatus", "CURRENTLY VIEWING:"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("BookStatus", "Title"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("BookStatus", "Author"))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("BookStatus", "Condition"))
-        self.available_button.setText(_translate("BookStatus", "AVAILABLE BOOKS"))
-        self.borrowed_button.setText(_translate("BookStatus", "BORROWED BOOKS"))
+        self.available_button.setText(
+            _translate("BookStatus", "AVAILABLE BOOKS"))
+        self.borrowed_button.setText(
+            _translate("BookStatus", "BORROWED BOOKS"))
         self.back_button.setText(_translate("BookStatus", "BACK"))
