@@ -176,11 +176,6 @@ quote_data = [
         "book": "Divergent"
     },
     {
-        "quote": "You must suffer me to go my own dark way.",
-        "author": "Robert Louis Stevenson",
-        "book": "The Strange Case of Dr. Jekyll and Mr. Hyde"
-    },
-    {
         "quote": "Cruelty isn't a personality trait. Cruelty is a habit.",
         "author": "Rick Yancey",
         "book": "The 5th Wave"

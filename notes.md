@@ -82,6 +82,10 @@ Borrow_Status
 Borrowed
 Returned
 
+Overdue_Status
+0 - False
+1 - True
+
 Payment_Status
 Pending
 Paid
