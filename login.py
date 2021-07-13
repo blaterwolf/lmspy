@@ -80,6 +80,7 @@ class Ui_Login(object):
                                           "      selection-background-color: darkgray;\n"
                                           "}")
         self.input_username.setObjectName("input_username")
+        self.input_username.setClearButtonEnabled(True)
         self.gridLayout_2.addWidget(self.input_username, 0, 1, 1, 1)
         self.login_button = QtWidgets.QPushButton(self.widget)
         self.login_button.setEnabled(True)
@@ -237,6 +238,7 @@ class Ui_Login(object):
                                           "      selection-background-color: darkgray;\n"
                                           "}")
         self.input_password.setObjectName("input_password")
+        self.input_password.setClearButtonEnabled(True)
         self.gridLayout_2.addWidget(self.input_password, 2, 1, 1, 1)
         self.username_image = QtWidgets.QLabel(self.widget)
         self.username_image.setStyleSheet("")

@@ -1,4 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+from student_information import Ui_StudentInformation
 from view_book_status import Ui_BookStatus
 from return_request import Ui_ReturnRequest
 from borrow_request import Ui_BorrowRequest
@@ -259,6 +260,8 @@ class Ui_MainMenu(object):
                                           "    color: #CBB1A0;\n"
                                           "}")
         self.student_button.setObjectName("student_button")
+        self.student_button.clicked.connect(
+            lambda: self.run_student_information(MainMenu))
         self.gridLayout.addWidget(self.student_button, 0, 1, 1, 1)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -309,6 +312,13 @@ class Ui_MainMenu(object):
         book = random_quote_data["book"]
         self.random_quotes_generator.setText(
             f"\"{quote}\"\n- {author} ({book})")
+
+    def run_student_information(self, MainMenu):
+        MainMenu.close()
+        self.StudentInformation = QtWidgets.QWidget()
+        self.ui_student_information = Ui_StudentInformation()
+        self.ui_student_information.setupUi(self.StudentInformation, MainMenu)
+        self.StudentInformation.show()
 
     def run_return_request(self, MainMenu, current_username):
         self.ReturnRequest = QtWidgets.QWidget()

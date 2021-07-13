@@ -62,6 +62,8 @@ class Ui_ReturnRequest(object):
                                            "}")
         self.input_borrow_id.setObjectName("input_borrow_id")
         self.input_borrow_id.setText("BORROW-")
+        self.input_borrow_id.setMaxLength(12)
+        self.input_borrow_id.setClearButtonEnabled(True)
         self.verticalLayout.addWidget(self.input_borrow_id)
         self.line_3 = QtWidgets.QFrame(self.border)
         self.line_3.setStyleSheet("border: 2px solid #842a2d;")

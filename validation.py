@@ -215,13 +215,3 @@ class Ui_Validation(object):
         self.label.setText(_translate("Validation", "Enter Current OTP:"))
         self.validate_button.setText(_translate("Validation", "Validate"))
         self.cancel_button.setText(_translate("Validation", "Cancel"))
-
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Validation = QtWidgets.QWidget()
-#     ui = Ui_Validation()
-#     ui.setupUi(Validation)
-#     Validation.show()
-#     sys.exit(app.exec())

@@ -67,6 +67,7 @@ class Ui_AddLibrarian(object):
                                           "}")
         self.input_password.setText("")
         self.input_password.setMaxLength(15)
+        self.input_password.setClearButtonEnabled(True)
         self.input_password.setObjectName("input_password")
         self.gridLayout.addWidget(self.input_password, 5, 1, 1, 1)
         self.input_password_confirm = PasswordEdit(self.border)
@@ -87,6 +88,7 @@ class Ui_AddLibrarian(object):
                                                   "}")
         self.input_password_confirm.setText("")
         self.input_password_confirm.setMaxLength(15)
+        self.input_password_confirm.setClearButtonEnabled(True)
         self.input_password_confirm.setObjectName("input_password_confirm")
         self.gridLayout.addWidget(self.input_password_confirm, 7, 1, 1, 1)
         self.line_2 = QtWidgets.QFrame(self.border)
@@ -120,6 +122,7 @@ class Ui_AddLibrarian(object):
                                           "      selection-background-color: darkgray;\n"
                                           "}")
         self.input_username.setMaxLength(15)
+        self.input_username.setClearButtonEnabled(True)
         self.input_username.setObjectName("input_username")
         self.gridLayout.addWidget(self.input_username, 3, 1, 1, 1)
         self.line_4 = QtWidgets.QFrame(self.border)
@@ -153,6 +156,7 @@ class Ui_AddLibrarian(object):
                                           "      selection-background-color: darkgray;\n"
                                           "}")
         self.input_fullname.setMaxLength(50)
+        self.input_fullname.setClearButtonEnabled(True)
         self.input_fullname.setObjectName("input_fullname")
         self.gridLayout.addWidget(self.input_fullname, 1, 1, 1, 1)
         self.label_retype_pass = QtWidgets.QLabel(self.border)
