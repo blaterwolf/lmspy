@@ -1,4 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+from book_information import Ui_BookInformation
 from student_information import Ui_StudentInformation
 from view_book_status import Ui_BookStatus
 from return_request import Ui_ReturnRequest
@@ -151,6 +152,8 @@ class Ui_MainMenu(object):
                                        "    color: #CBB1A0;\n"
                                        "}")
         self.book_button.setObjectName("book_button")
+        self.book_button.clicked.connect(
+            lambda: self.run_book_information(MainMenu))
         self.gridLayout.addWidget(self.book_button, 0, 0, 1, 1)
         spacerItem4 = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
@@ -312,6 +315,12 @@ class Ui_MainMenu(object):
         book = random_quote_data["book"]
         self.random_quotes_generator.setText(
             f"\"{quote}\"\n- {author} ({book})")
+
+    def run_book_information(self, MainMenu):
+        self.BookInformation = QtWidgets.QWidget()
+        self.ui_book_information = Ui_BookInformation()
+        self.ui_book_information.setupUi(self.BookInformation, MainMenu)
+        self.BookInformation.show()
 
     def run_student_information(self, MainMenu):
         MainMenu.close()

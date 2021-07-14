@@ -1,8 +1,10 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+import sqlite3
 
 
 class Ui_SearchHistory(object):
     def setupUi(self, SearchHistory, MainMenu):
+        MainMenu.close()
         SearchHistory.setObjectName("SearchHistory")
         SearchHistory.resize(1000, 669)
         SearchHistory.setStyleSheet(
@@ -68,6 +70,7 @@ class Ui_SearchHistory(object):
                                             "      selection-background-color: darkgray;\n"
                                             "}")
         self.input_student_id.setMaxLength(12)
+        self.input_student_id.setClearButtonEnabled(True)
         self.input_student_id.setObjectName("input_student_id")
         self.student_VerticalLayout.addWidget(self.input_student_id)
         self.line = QtWidgets.QFrame(self.border)
@@ -98,6 +101,8 @@ class Ui_SearchHistory(object):
                                                  "    color: #CBB1A0;\n"
                                                  "}")
         self.student_search_button.setObjectName("student_search_button")
+        self.student_search_button.clicked.connect(
+            lambda: self.search_func(what_to_query="Student"))
         self.student_VerticalLayout.addWidget(self.student_search_button)
         self.student_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
@@ -121,6 +126,8 @@ class Ui_SearchHistory(object):
                                                 "    color: #CBB1A0;\n"
                                                 "}")
         self.student_reset_button.setObjectName("student_reset_button")
+        self.student_reset_button.clicked.connect(
+            lambda: self.reset_func("Student"))
         self.student_VerticalLayout.addWidget(self.student_reset_button)
         self.student_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.student_VerticalLayout)
@@ -143,7 +150,7 @@ class Ui_SearchHistory(object):
         self.book_form = QtWidgets.QFormLayout()
         self.book_form.setObjectName("book_form")
         self.book_verticalLayout = QtWidgets.QVBoxLayout()
-        self.book_verticalLayout.setContentsMargins(12, -1, 12, -1)
+        self.book_verticalLayout.setContentsMargins(1, -1, 1, -1)
         self.book_verticalLayout.setObjectName("book_verticalLayout")
         self.book_label = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
@@ -179,6 +186,7 @@ class Ui_SearchHistory(object):
                                          "}")
         self.input_book_id.setInputMask("")
         self.input_book_id.setMaxLength(10)
+        self.input_book_id.setClearButtonEnabled(True)
         self.input_book_id.setObjectName("input_book_id")
         self.book_verticalLayout.addWidget(self.input_book_id)
         self.line_2 = QtWidgets.QFrame(self.border)
@@ -209,6 +217,8 @@ class Ui_SearchHistory(object):
                                               "    color: #CBB1A0;\n"
                                               "}")
         self.book_search_button.setObjectName("book_search_button")
+        self.book_search_button.clicked.connect(
+            lambda: self.search_func(what_to_query="Book"))
         self.book_verticalLayout.addWidget(self.book_search_button)
         self.book_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
@@ -232,6 +242,7 @@ class Ui_SearchHistory(object):
                                              "    color: #CBB1A0;\n"
                                              "}")
         self.book_reset_button.setObjectName("book_reset_button")
+        self.book_reset_button.clicked.connect(lambda: self.reset_func("Book"))
         self.book_verticalLayout.addWidget(self.book_reset_button)
         self.book_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.book_verticalLayout)
@@ -293,6 +304,7 @@ class Ui_SearchHistory(object):
                                            "}")
         self.input_borrow_id.setInputMask("")
         self.input_borrow_id.setMaxLength(12)
+        self.input_borrow_id.setClearButtonEnabled(True)
         self.input_borrow_id.setObjectName("input_borrow_id")
         self.borrow_verticalLayout.addWidget(self.input_borrow_id)
         self.line_3 = QtWidgets.QFrame(self.border)
@@ -323,6 +335,8 @@ class Ui_SearchHistory(object):
                                                 "    color: #CBB1A0;\n"
                                                 "}")
         self.borrow_search_button.setObjectName("borrow_search_button")
+        self.borrow_search_button.clicked.connect(
+            lambda: self.search_func(what_to_query="Borrow"))
         self.borrow_verticalLayout.addWidget(self.borrow_search_button)
         self.borrow_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
@@ -346,12 +360,14 @@ class Ui_SearchHistory(object):
                                                "    color: #CBB1A0;\n"
                                                "}")
         self.borrow_reset_button.setObjectName("borrow_reset_button")
+        self.borrow_reset_button.clicked.connect(
+            lambda: self.reset_func("Borrow"))
         self.borrow_verticalLayout.addWidget(self.borrow_reset_button)
         self.borrow_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.borrow_verticalLayout)
         self.borrow_tableWidget = QtWidgets.QTableWidget(self.border)
         self.borrow_tableWidget.setObjectName("borrow_tableWidget")
-        self.borrow_tableWidget.setColumnCount(8)
+        self.borrow_tableWidget.setColumnCount(9)
         self.borrow_tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.borrow_tableWidget.setHorizontalHeaderItem(0, item)
@@ -369,6 +385,8 @@ class Ui_SearchHistory(object):
         self.borrow_tableWidget.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
         self.borrow_tableWidget.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.borrow_tableWidget.setHorizontalHeaderItem(8, item)
         self.borrow_form.setWidget(
             0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.borrow_tableWidget)
         self.tables.addLayout(self.borrow_form, 2, 0, 1, 1)
@@ -383,6 +401,7 @@ class Ui_SearchHistory(object):
         self.status_label.setFont(font)
         self.status_label.setStyleSheet("padding: 10px 0px;\n"
                                         "color: red;")
+        self.status_label.setText("")
         self.status_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
                                        QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.status_label.setObjectName("status_label")
@@ -414,10 +433,167 @@ class Ui_SearchHistory(object):
         self.verticalLayout_2.addWidget(self.border)
         self.retranslateUi(SearchHistory)
         QtCore.QMetaObject.connectSlotsByName(SearchHistory)
+        self.load_initial_data()
 
     def return_action(self, SearchHistory, MainMenu):
         SearchHistory.close()
         MainMenu.show()
+
+    def load_student_data(self):
+        con = sqlite3.connect('./db/test.db')
+        student_query = """
+        SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
+        FROM STUDENT;
+        """
+        student_result = con.execute(student_query)
+        self.student_tableWidget.setRowCount(0)
+        for row, form in enumerate(student_result):
+            self.student_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.student_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def load_book_data(self):
+        con = sqlite3.connect('./db/test.db')
+        book_query = """
+        SELECT * FROM BOOK;
+        """
+        book_result = con.execute(book_query)
+        self.book_tableWidget.setRowCount(0)
+        for row, form in enumerate(book_result):
+            self.book_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.book_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def load_borrow_data(self):
+        con = sqlite3.connect('./db/test.db')
+        borrow_query = """
+        SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
+        FROM BORROW
+        LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
+        LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
+        LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer 
+        LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID
+        """
+        borrow_result = con.execute(borrow_query)
+        self.borrow_tableWidget.setRowCount(0)
+        for row, form in enumerate(borrow_result):
+            self.borrow_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.borrow_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def load_initial_data(self):
+        self.load_student_data()
+        self.load_book_data()
+        self.load_borrow_data()
+
+    def reset_func(self, action_to_do):
+        if (action_to_do == "Student"):
+            self.load_student_data()
+            self.input_student_id.clear()
+        if (action_to_do == "Book"):
+            self.load_book_data()
+            self.input_book_id.setText("BOOK-")
+        if (action_to_do == "Borrow"):
+            self.load_borrow_data()
+            self.input_borrow_id.setText("BORROW-")
+        self.status_label.clear()
+
+    def search_func(self, what_to_query):
+        if (what_to_query == "Student"):
+            search_value = self.input_student_id.text()
+        if (what_to_query == "Book"):
+            search_value = self.input_book_id.text()
+        if (what_to_query == "Borrow"):
+            search_value = self.input_borrow_id.text()
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        query = self.evaluate_query(what_to_query)
+        interpolate_data = [search_value]
+        result = cur.execute(query, interpolate_data)
+        data = [form[1] for form in list(enumerate(result))]
+        if data:
+            data = data[0]
+            self.status_label.setText("")
+            if (what_to_query == "Student"):
+                self.load_specific_student_data(search_value)
+            if (what_to_query == "Book"):
+                self.load_specific_book_data(search_value)
+            if (what_to_query == "Borrow"):
+                self.load_specific_borrow_data(search_value)
+        else:
+            self.status_label.setText("This data does not exist!")
+            if (what_to_query == "Student"):
+                self.student_tableWidget.setRowCount(0)
+            if (what_to_query == "Book"):
+                self.book_tableWidget.setRowCount(0)
+            if (what_to_query == "Borrow"):
+                self.borrow_tableWidget.setRowCount(0)
+
+    def load_specific_student_data(self, student_id):
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        student_query = self.evaluate_query("Student")
+        interpolate_data = [student_id]
+        student_result = cur.execute(student_query, interpolate_data)
+        self.student_tableWidget.setRowCount(0)
+        for row, form in enumerate(student_result):
+            self.student_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.student_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def load_specific_book_data(self, book_id):
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        book_query = self.evaluate_query("Book")
+        interpolate_data = [book_id]
+        book_result = cur.execute(book_query, interpolate_data)
+        self.book_tableWidget.setRowCount(0)
+        for row, form in enumerate(book_result):
+            self.book_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.book_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def load_specific_borrow_data(self, borrow_id):
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        borrow_query = self.evaluate_query("Borrow")
+        interpolate_data = [borrow_id]
+        borrow_result = cur.execute(borrow_query, interpolate_data)
+        self.borrow_tableWidget.setRowCount(0)
+        for row, form in enumerate(borrow_result):
+            self.borrow_tableWidget.insertRow(row)
+            for column, item in enumerate(form):
+                self.borrow_tableWidget.setItem(
+                    row, column, QtWidgets.QTableWidgetItem(str(item)))
+
+    def evaluate_query(self, query):
+        if (query == "Student"):
+            return """
+                    SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
+                    FROM STUDENT
+                    WHERE Student_ID = ?;
+                    """
+        if (query == "Book"):
+            return """
+                    SELECT *
+                    FROM BOOK
+                    WHERE Book_ID = ?;
+                    """
+        if (query == "Borrow"):
+            return """
+                    SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
+                    FROM BORROW
+                    LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
+                    LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
+                    LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer 
+                    LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID
+                    WHERE Borrow_ID = ?;
+                    """
 
     def retranslateUi(self, SearchHistory):
         _translate = QtCore.QCoreApplication.translate
@@ -466,28 +642,19 @@ class Ui_SearchHistory(object):
         item = self.borrow_tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("SearchHistory", "Borrow ID"))
         item = self.borrow_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("SearchHistory", "Borrow Date"))
+        item.setText(_translate("SearchHistory", "Student Name"))
         item = self.borrow_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("SearchHistory", "Return Date"))
+        item.setText(_translate("SearchHistory", "Book Title"))
         item = self.borrow_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("SearchHistory", "Status"))
+        item.setText(_translate("SearchHistory", "Borrow Date"))
         item = self.borrow_tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("SearchHistory", "Overdue"))
+        item.setText(_translate("SearchHistory", "Return Date"))
         item = self.borrow_tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("SearchHistory", "Issuer"))
+        item.setText(_translate("SearchHistory", "Status"))
         item = self.borrow_tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("SearchHistory", "Payment Amount"))
+        item.setText(_translate("SearchHistory", "Overdue Status"))
         item = self.borrow_tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("SearchHistory", "Payment"))
-        self.status_label.setText(_translate("SearchHistory", "placeholder"))
+        item.setText(_translate("SearchHistory", "Issuer"))
+        item = self.borrow_tableWidget.horizontalHeaderItem(8)
+        item.setText(_translate("SearchHistory", "Payment Amount"))
         self.back_button.setText(_translate("SearchHistory", "BACK"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    SearchHistory = QtWidgets.QWidget()
-    ui = Ui_SearchHistory()
-    ui.setupUi(SearchHistory)
-    SearchHistory.show()
-    sys.exit(app.exec())

@@ -208,13 +208,12 @@ class Ui_ReturnRequest(object):
                 payment_id=borrow_data[1],
                 book_id=borrow_data[2],
                 borrow_id=borrow_id,
-                current_username=current_username
             )
             self.input_borrow_id.setText("BORROW-")
         else:
             self.status_label.setText("Borrow ID is invalid!")
 
-    def execute_returning_books(self, borrow_date, payment_id, book_id, borrow_id, current_username):
+    def execute_returning_books(self, borrow_date, payment_id, book_id, borrow_id):
         # * Step 1: Initialize Database
         borrow_date = datetime.datetime.strptime(
             borrow_date, '%Y-%m-%d %H:%M:%S.%f')
@@ -223,7 +222,6 @@ class Ui_ReturnRequest(object):
         penalty_amount = self.compute_amount(borrow_date, borrow_return_date)
         book_status = 'Available'
         payment_status = 'Paid'
-        payment_issuer = current_username
 
         # * Step 1.5: Initialize Database
         con = sqlite3.connect('./db/test.db')
@@ -231,11 +229,11 @@ class Ui_ReturnRequest(object):
 
         # * Step 2: UPDATE PAYMENT data: Compute Amount, Status, and Issuer
         payment_query = """UPDATE PAYMENT
-                        SET Payment_Amount = ?, Payment_Status = ?, Payment_Issuer = ?
+                        SET Payment_Amount = ?, Payment_Status = ?
                         WHERE Payment_ID = ?;
         """
         interpolate_data = [penalty_amount,
-                            payment_status, payment_issuer, payment_id]
+                            payment_status, payment_id]
         cur.execute(payment_query, interpolate_data)
         # * Step 3: UPDATE BOOK Book_Status to Available
         book_query = """UPDATE BOOK

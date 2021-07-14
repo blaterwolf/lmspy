@@ -266,7 +266,7 @@ class Ui_BorrowRequest(object):
         cur = con.cursor()
 
         # * Step 2: Insert a Payment Rowdata to PAYMENT
-        payment_query = "INSERT INTO PAYMENT VALUES (?,?,?, NULL);"
+        payment_query = "INSERT INTO PAYMENT VALUES (?,?,?);"
         interpolate_data = [payment_id,
                             payment_amount, payment_status]
         cur.execute(payment_query, interpolate_data)

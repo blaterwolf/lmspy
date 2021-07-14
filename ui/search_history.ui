@@ -117,6 +117,9 @@
               <property name="maxLength">
                <number>12</number>
               </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -229,10 +232,10 @@ QPushButton:hover{
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="book_verticalLayout">
             <property name="leftMargin">
-             <number>12</number>
+             <number>1</number>
             </property>
             <property name="rightMargin">
-             <number>12</number>
+             <number>1</number>
             </property>
             <item>
              <widget class="QLabel" name="book_label">
@@ -294,6 +297,9 @@ QPushButton:hover{
               </property>
               <property name="maxLength">
                <number>10</number>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -477,6 +483,9 @@ QPushButton:hover{
               <property name="maxLength">
                <number>12</number>
               </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -564,6 +573,16 @@ QPushButton:hover{
             </column>
             <column>
              <property name="text">
+              <string>Student Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Book Title</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
               <string>Borrow Date</string>
              </property>
             </column>
@@ -579,7 +598,7 @@ QPushButton:hover{
             </column>
             <column>
              <property name="text">
-              <string>Overdue</string>
+              <string>Overdue Status</string>
              </property>
             </column>
             <column>
@@ -590,11 +609,6 @@ QPushButton:hover{
             <column>
              <property name="text">
               <string>Payment Amount</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Payment </string>
              </property>
             </column>
            </widget>
@@ -619,7 +633,7 @@ QPushButton:hover{
 color: red;</string>
           </property>
           <property name="text">
-           <string>placeholder</string>
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
