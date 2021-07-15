@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>form_bookInfo</class>
- <widget class="QWidget" name="form_bookInfo">
+ <class>BookInformation</class>
+ <widget class="QWidget" name="BookInformation">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>670</width>
-    <height>425</height>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -523,6 +523,26 @@ QPushButton:hover{
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="status_label">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer_3">

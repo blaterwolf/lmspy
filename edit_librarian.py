@@ -87,6 +87,10 @@ class Ui_EditLibrarian(object):
                                                   "QPushButton:hover{\n"
                                                   "    background-color: #842a2d;\n"
                                                   "    color: #CBB1A0;\n"
+                                                  "}\n"
+                                                  "QPushButton:pressed{\n"
+                                                  "    background-color: #b34044;\n"
+                                                  "    border: 5px solid #b34044;\n"
                                                   "}")
         self.search_username_button.setObjectName("search_username_button")
         self.search_username_button.clicked.connect(self.search_for_username)
@@ -280,6 +284,10 @@ class Ui_EditLibrarian(object):
                                           "QPushButton:hover{\n"
                                           "    background-color: #842a2d;\n"
                                           "    color: #CBB1A0;\n"
+                                          "}\n"
+                                          "QPushButton:pressed{\n"
+                                          "    background-color: #b34044;\n"
+                                          "    border: 5px solid #b34044;\n"
                                           "}")
         self.edit_librarian.setObjectName("edit_librarian")
         self.edit_librarian.clicked.connect(
@@ -300,6 +308,10 @@ class Ui_EditLibrarian(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
@@ -367,14 +379,18 @@ class Ui_EditLibrarian(object):
         msg.setWindowTitle("Confirmation Check")
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
+            # * Step 1: Connect to the database.
             con = sqlite3.connect('./db/test.db')
+            cur = con.cursor()
+            # * Step 2: Put the query inside the string.
             query = """
                 UPDATE LIBRARIAN
                 SET Librarian_Username = ?, Librarian_Name = ?, Librarian_Password = ?
                 WHERE Librarian_Username = ?;
             """
-            cur = con.cursor()
+            # * Step 3: Put all the data to be interpolated inside a list.
             interpolate_data = [username, fullname, password, username_search]
+            # * Step 4: Execute, Commit, Close
             cur.execute(query, interpolate_data)
             con.commit()
             con.close()

@@ -1,4 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+from view_student_and_books import Ui_ViewStudentAndBooks
 import random
 import string
 import uuid
@@ -7,7 +8,7 @@ import sqlite3
 
 
 class Ui_BorrowRequest(object):
-    def setupUi(self, BorrowRequest, MainMenu, Ui_BookStatus, current_username):
+    def setupUi(self, BorrowRequest, MainMenu, current_username):
         MainMenu.close()
         BorrowRequest.setObjectName("BorrowRequest")
         BorrowRequest.resize(526, 356)
@@ -178,7 +179,7 @@ class Ui_BorrowRequest(object):
         self.view_borrowed_books_button.setObjectName(
             "view_borrowed_books_button")
         self.view_borrowed_books_button.clicked.connect(
-            lambda: self.run_book_status(Ui_BookStatus, BorrowRequest))
+            lambda: self.run_book_status(BorrowRequest))
         self.horizontalLayout_3.addWidget(self.view_borrowed_books_button)
         self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(
@@ -210,34 +211,42 @@ class Ui_BorrowRequest(object):
         BorrowRequest.close()
         MainMenu.show()
 
-    def run_book_status(self, Ui_BookStatus, BorrowRequest):
+    def run_book_status(self, BorrowRequest):
         BorrowRequest.close()
-        self.BookStatus = QtWidgets.QWidget()
-        self.ui_book_status = Ui_BookStatus()
-        self.ui_book_status.setupUi(
-            self.BookStatus, current_class=BorrowRequest)
-        self.BookStatus.show()
+        self.ViewStudentAndBooks = QtWidgets.QWidget()
+        self.ui_view_student_and_books = Ui_ViewStudentAndBooks()
+        self.ui_view_student_and_books.setupUi(
+            self.ViewStudentAndBooks, BorrowRequest)
+        self.ViewStudentAndBooks.show()
 
     def validate_borrowing_books(self, BorrowRequest, current_username):
         student_id = self.input_StudId.text()
         book_id = self.input_BookId.text()
 
         # * verify if book and student IDs exist in the database.
+        # * Step 1: Connect to the database.
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
+        # * Step 2: Query Student/Book ID on the database.
         query_student = "SELECT Student_ID FROM STUDENT;"
         query_book = "SELECT Book_ID FROM BOOK;"
+        # * Step 3: Store the results in a variable.
         result_student = [form[1][0] for form in list(
             enumerate(con.execute(query_student)))]
         result_book = [form[1][0] for form in list(
             enumerate(con.execute(query_book)))]
+        # * Step 4: Check whether Student/Book ID exists in the results.
         if (student_id in result_student and book_id in result_book):
             # * verify if this book is available!
+            # * Step 5: Query Book_Status sa may BOOK Table.
             query_book_availability = "SELECT Book_Status FROM BOOK WHERE Book_ID = ?;"
+            # * interpolate data to query the database
             interpolate_data = [book_id]
             result = cur.execute(query_book_availability, interpolate_data)
+            # * Store the results in a list
             book_availability = [form[1][0]
                                  for form in list(enumerate(result))][0]
+            # * Step 6: Check whether the book is borrowed.
             if book_availability == 'Borrowed':
                 self.status_label.setText("This book is currently borrowed.")
             else:
@@ -251,7 +260,7 @@ class Ui_BorrowRequest(object):
             self.status_label.setText("Student ID or Book ID is invalid!")
 
     def execute_borrow_book(self, borrow_issuer, student_id, book_id):
-        # * Step 1: Initialize Values
+        # * STEP 1: Initialize Values
         borrow_id = self.generate_borrow_id()
         borrow_date = datetime.datetime.now()
         borrow_status = 'Borrowed'
@@ -261,45 +270,86 @@ class Ui_BorrowRequest(object):
         payment_status = "Pending"
         book_status = "Borrowed"
 
-        # * Step 1.5: Initialize Database
+        # * STEP 2: Initialize Database
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
 
-        # * Step 2: Insert a Payment Rowdata to PAYMENT
-        payment_query = "INSERT INTO PAYMENT VALUES (?,?,?);"
-        interpolate_data = [payment_id,
-                            payment_amount, payment_status]
-        cur.execute(payment_query, interpolate_data)
-        # * Step 3: Change the Status of the Book from Available to Borrowed
-        book_query = """UPDATE BOOK
-                        SET Book_Status = ?
-                        WHERE Book_ID = ?;
+        # * STEP 3: QUERY Book Title to borrow.
+        book_query = """
+        SELECT Book_Title FROM BOOK
+        WHERE Book_ID = ?;
         """
-        interpolate_data = [book_status, book_id]
-        cur.execute(book_query, interpolate_data)
-        # * Step 4: Insert the Borrow Data to BORROW
-        borrow_query = "INSERT INTO BORROW VALUES (?,?,NULL,?,?,?,?,?,?);"
-        interpolate_data = [borrow_id, borrow_date, borrow_status, borrow_overdue_status,
-                            borrow_issuer, student_id, payment_id, book_id]
-        cur.execute(borrow_query, interpolate_data)
-        con.commit()
-        con.close()
-        # ! query the book name!
-        self.informative_message(
-            text="You Borrowed Successfully!",
-            subtext=f"You successfully borrowed {book_id}",
-            window_title="Borrowed Successfully",
-            icon_type="information"
-        )
-        self.input_StudId.setText("")
-        self.input_BookId.setText("")
+        interpolate_data = [book_id]
+        result = cur.execute(book_query, interpolate_data)
+        book_title = [form[1][0] for form in list(enumerate(result))][0]
+
+        # * STEP 4: QUERY Student who would borrow the book.
+        student_query = """
+        SELECT Student_FirstName, Student_LastName FROM STUDENT
+        WHERE Student_ID = ?;
+        """
+        interpolate_data = [student_id]
+        result = cur.execute(student_query, interpolate_data)
+        student_name = [form[1] for form in list(enumerate(result))][0]
+        student_name = f"{student_name[0][0]}. {student_name[1]}".upper()
+        # ! -----------
+        # * STEP 5: Ask the user whether you would sure return the book.
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+        msg.setText(
+            "You'll be borrowing this book and this is the information below: ")
+        msg.setInformativeText(
+            f"Student_ID:\t\t{student_id}\nStudent Name:\t\t{student_name}\nBook Title:\t\t{book_title}\n\nAre you sure of this action?")
+        msg.setStandardButtons(
+            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+        msg.setWindowTitle("Borrow Verfication")
+        result = msg.exec()
+        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
+            # * STEP 2: Insert a Payment Rowdata to PAYMENT
+            payment_query = "INSERT INTO PAYMENT VALUES (?,?,?);"
+            interpolate_data = [payment_id,
+                                payment_amount, payment_status]
+            cur.execute(payment_query, interpolate_data)
+            # * STEP 3: Change the Status of the Book from Available to Borrowed
+            book_query = """UPDATE BOOK
+                            SET Book_Status = ?
+                            WHERE Book_ID = ?;
+            """
+            interpolate_data = [book_status, book_id]
+            cur.execute(book_query, interpolate_data)
+            # * STEP 4: Insert the Borrow Data to BORROW
+            borrow_query = "INSERT INTO BORROW VALUES (?,?,NULL,?,?,?,?,?,?);"
+            interpolate_data = [borrow_id, borrow_date, borrow_status, borrow_overdue_status,
+                                borrow_issuer, student_id, payment_id, book_id]
+            cur.execute(borrow_query, interpolate_data)
+            con.commit()
+            con.close()
+            # ! query the book name!
+            self.informative_message(
+                text="You Borrowed Successfully!",
+                subtext=f"You successfully borrowed {book_title}",
+                window_title="Borrowed Successfully",
+                icon_type="information"
+            )
+            self.input_StudId.setText("")
+            self.input_BookId.setText("")
 
     def generate_borrow_id(self):
+        """ 
+        This function generates a random ID for the BORROW.
+
+        str: This is the borrow_id generated. (e.g. BORROW-XXXXX)
+        """
         random_five = ''.join(random.SystemRandom().choice(
             string.ascii_uppercase + string.digits) for _ in range(5))
         return f"BORROW-{random_five}"
 
     def generate_payment_id(self):
+        """
+        This function generates a random Payment ID.
+
+        str: A random uui4() in hex (base32). (e.g. 0b8d2a04493a4aa4afb71171a3f4fee0)
+        """
         return uuid.uuid4().hex
 
     def informative_message(self, text, subtext, window_title, icon_type="critical"):
@@ -322,5 +372,5 @@ class Ui_BorrowRequest(object):
         self.label_BookId.setText(_translate("BorrowRequest", "Book ID:"))
         self.borrow_button.setText(_translate("BorrowRequest", "BORROW"))
         self.view_borrowed_books_button.setText(
-            _translate("BorrowRequest", "  VIEW BORROWED BOOKS  "))
+            _translate("BorrowRequest", "VIEW BOOKS AND STUDENTS"))
         self.cancel_button.setText(_translate("BorrowRequest", "CANCEL"))

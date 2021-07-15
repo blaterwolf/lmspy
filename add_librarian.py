@@ -211,6 +211,10 @@ class Ui_AddLibrarian(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.add_librarian.setObjectName("add_librarian")
         self.add_librarian.clicked.connect(
@@ -231,6 +235,10 @@ class Ui_AddLibrarian(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
@@ -260,6 +268,7 @@ class Ui_AddLibrarian(object):
             self.label.setText("Passwords must be at least 8 characters!")
         else:
             con = sqlite3.connect('./db/test.db')
+            # * check if the username exists already in the database.
             query = "SELECT Librarian_Username FROM LIBRARIAN;"
             result = [form[1][0]
                       for form in list(enumerate(con.execute(query)))]
@@ -281,10 +290,14 @@ class Ui_AddLibrarian(object):
         msg.setWindowTitle("Confirmation Check")
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')  # * connect to db
+            # * Step 1: Connect to the database.
+            con = sqlite3.connect('./db/test.db')
+            cur = con.cursor()
+            # * Step 2: Put the query inside the string.
             query = "INSERT INTO LIBRARIAN VALUES (?,?,?);"  # * what to query
-            cur = con.cursor()  # *
+            # * Step 3: Put all the data to be interpolated inside a list.
             interpolate_data = [username, fullname, password]
+            # * Step 4: Execute, Commit, Close
             cur.execute(query, interpolate_data)
             con.commit()
             con.close()

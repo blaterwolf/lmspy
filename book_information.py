@@ -8,7 +8,7 @@ class Ui_BookInformation(object):
     def setupUi(self, BookInformation, MainMenu):
         MainMenu.close()
         BookInformation.setObjectName("BookInformation")
-        BookInformation.resize(670, 425)
+        BookInformation.resize(670, 440)
         BookInformation.setStyleSheet(
             ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         BookInformation.setWindowFlags(
@@ -51,7 +51,8 @@ class Ui_BookInformation(object):
         font.setBold(True)
         self.rb_addbook.setFont(font)
         self.rb_addbook.setObjectName("rb_addbook")
-        self.rb_addbook.toggled.connect(self.rb_addbook_toggled)
+        self.rb_addbook.toggled.connect(
+            lambda: self.change_radio_button_state(button_to_change=self.rb_addbook))
         self.horizontalLayout.addWidget(self.rb_addbook)
         spacerItem1 = QtWidgets.QSpacerItem(
             13, 40, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -62,7 +63,8 @@ class Ui_BookInformation(object):
         font.setBold(True)
         self.rb_editbook.setFont(font)
         self.rb_editbook.setObjectName("rb_editbook")
-        self.rb_editbook.toggled.connect(self.rb_editbook_toggled)
+        self.rb_editbook.toggled.connect(
+            lambda: self.change_radio_button_state(button_to_change=self.rb_editbook))
         self.horizontalLayout.addWidget(self.rb_editbook)
         spacerItem2 = QtWidgets.QSpacerItem(
             13, 40, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -73,7 +75,8 @@ class Ui_BookInformation(object):
         font.setBold(True)
         self.rb_deletebook.setFont(font)
         self.rb_deletebook.setObjectName("rb_deletebook")
-        self.rb_deletebook.toggled.connect(self.rb_deletebook_toggled)
+        self.rb_deletebook.toggled.connect(
+            lambda: self.change_radio_button_state(button_to_change=self.rb_deletebook))
         self.horizontalLayout.addWidget(self.rb_deletebook)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
@@ -108,6 +111,7 @@ class Ui_BookInformation(object):
                                         "      selection-background-color: darkgray;\n"
                                         "}")
         self.input_search.setObjectName("input_search")
+        self.input_search.setMaxLength(10)
         self.gridLayout_2.addWidget(self.input_search, 0, 1, 1, 1)
         self.search_label = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
@@ -180,12 +184,8 @@ class Ui_BookInformation(object):
         self.input_condition.setInsertPolicy(
             QtWidgets.QComboBox.InsertPolicy.InsertAfterCurrent)
         self.input_condition.setObjectName("input_condition")
-        self.input_condition.addItem("<choose condition>")
-        self.input_condition.addItem("New")
-        self.input_condition.addItem("Fine")
-        self.input_condition.addItem("Good")
-        self.input_condition.addItem("Fair")
-        self.input_condition.addItem("Poor")
+        self.input_condition.addItems(
+            ["<choose condition>", "New", "Fine", "Good", "Fair", "Poor"])
         self.gridLayout.addWidget(self.input_condition, 8, 1, 1, 1)
         self.line_9 = QtWidgets.QFrame(self.border)
         self.line_9.setStyleSheet("border: 2px solid #842a2d;")
@@ -240,6 +240,8 @@ class Ui_BookInformation(object):
                                         "      selection-background-color: darkgray;\n"
                                         "}")
         self.input_author.setObjectName("input_author")
+        self.input_author.setMaxLength(30)
+        self.input_author.setClearButtonEnabled(True)
         self.gridLayout.addWidget(self.input_author, 6, 1, 1, 1)
         self.input_ISBN = QtWidgets.QLineEdit(self.border)
         font = QtGui.QFont()
@@ -258,6 +260,8 @@ class Ui_BookInformation(object):
                                       "      selection-background-color: darkgray;\n"
                                       "}")
         self.input_ISBN.setObjectName("input_ISBN")
+        self.input_ISBN.setMaxLength(13)
+        self.input_ISBN.setClearButtonEnabled(True)
         self.gridLayout.addWidget(self.input_ISBN, 2, 1, 1, 1)
         self.line_6 = QtWidgets.QFrame(self.border)
         self.line_6.setStyleSheet("border: 2px solid #842a2d;")
@@ -291,6 +295,8 @@ class Ui_BookInformation(object):
                                        "      selection-background-color: darkgray;\n"
                                        "}")
         self.input_title.setObjectName("input_title")
+        self.input_title.setMaxLength(100)
+        self.input_title.setClearButtonEnabled(True)
         self.gridLayout.addWidget(self.input_title, 4, 1, 1, 1)
         self.input_bookid = QtWidgets.QLineEdit(self.border)
         self.input_bookid.setEnabled(False)
@@ -311,7 +317,8 @@ class Ui_BookInformation(object):
         self.input_bookid.setInputMask("")
         self.input_bookid.setText("")
         self.input_bookid.setObjectName("input_bookid")
-        self.input_bookid.clear()
+        self.input_bookid.setMaxLength(10)
+        self.input_bookid.setClearButtonEnabled(True)
         self.gridLayout.addWidget(self.input_bookid, 0, 1, 1, 1)
         self.label_condition = QtWidgets.QLabel(self.border)
         font = QtGui.QFont()
@@ -323,6 +330,17 @@ class Ui_BookInformation(object):
         self.label_condition.setObjectName("label_condition")
         self.gridLayout.addWidget(self.label_condition, 8, 0, 1, 1)
         self.verticalLayout_3.addLayout(self.gridLayout)
+        self.status_label = QtWidgets.QLabel(self.border)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(True)
+        self.status_label.setFont(font)
+        self.status_label.setStyleSheet("color: rgb(255, 0, 0);")
+        self.status_label.setText("")
+        self.status_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.status_label.setObjectName("status_label")
+        self.verticalLayout_3.addWidget(self.status_label)
         spacerItem5 = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem5)
@@ -345,7 +363,16 @@ class Ui_BookInformation(object):
                                           "    color: #CBB1A0;\n"
                                           "}")
         self.confirm_button.setObjectName("confirm_button")
-        self.confirm_button.clicked.connect(self.confirm_btn_clicked)
+        self.confirm_button.clicked.connect(lambda: self.validate_rb_state(
+            add_button=self.rb_addbook,
+            edit_button=self.rb_editbook,
+            delete_button=self.rb_deletebook,
+            book_id=self.input_bookid.text(),
+            isbn=self.input_ISBN.text(),
+            title=self.input_title.text(),
+            author=self.input_author.text(),
+            condition=self.input_condition.currentText(),
+        ))
         self.horizontalLayout_3.addWidget(self.confirm_button)
         self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(
@@ -365,202 +392,215 @@ class Ui_BookInformation(object):
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
-            lambda: self.cancel_btn_clicked(BookInformation, MainMenu))
+            lambda: self.return_action(BookInformation, MainMenu))
         self.horizontalLayout_3.addWidget(self.cancel_button)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.verticalLayout_5.addLayout(self.verticalLayout_3)
         self.verticalLayout_4.addWidget(self.border)
+        self.retranslateUi(BookInformation)
+        QtCore.QMetaObject.connectSlotsByName(BookInformation)
         # * defaults to add
         self.rb_addbook.setChecked(True)
 
-        self.retranslateUi(BookInformation)
-        QtCore.QMetaObject.connectSlotsByName(BookInformation)
-
-    def cancel_btn_clicked(self, BookInformation, MainMenu):
+    def return_action(self, BookInformation, MainMenu):
         BookInformation.close()
         MainMenu.show()
 
-    def rb_addbook_toggled(self):
-        self.search_button.setDisabled(True)
-        self.input_bookid.setText(
-            "BOOK-" + ''.join(random.choices(string.ascii_uppercase + string.digits, k=5)))
-        self.input_search.clear()
-        self.input_search.setReadOnly(True)
+    def change_radio_button_state(self, button_to_change):
+        if (button_to_change.text() == "Add"):
+            self.input_search.setDisabled(True)
+            self.search_button.setDisabled(True)
+            self.enable_inputs()
+            self.clear_data_on_inputs()
+            self.input_bookid.setEnabled(False)
+            self.confirm_button.setText("Add Book")
+            self.generate_random_book_id()
+        else:
+            self.input_search.setEnabled(True)
+            self.search_button.setEnabled(True)
+            self.disable_inputs()
+            self.clear_data_on_inputs()
+            self.input_bookid.setText("BOOK-XXXXX")
+            if (button_to_change.text() == "Edit"):
+                self.confirm_button.setText("Edit Book")
+                self.input_search.setText("BOOK-")
+            else:
+                self.confirm_button.setText("Delete Book")
+                self.input_search.setText("BOOK-")
+        self.input_condition.setCurrentIndex(0)
+
+    def enable_inputs(self):
+        self.input_bookid.setEnabled(True)
+        self.input_ISBN.setEnabled(True)
+        self.input_title.setEnabled(True)
+        self.input_author.setEnabled(True)
+        self.input_condition.setEnabled(True)
+
+    def disable_inputs(self):
+        self.input_bookid.setDisabled(True)
+        self.input_ISBN.setDisabled(True)
+        self.input_title.setDisabled(True)
+        self.input_author.setDisabled(True)
+        self.input_condition.setDisabled(True)
+
+    def clear_data_on_inputs(self):
+        self.input_bookid.setText("BOOK-XXXXX")
         self.input_ISBN.clear()
         self.input_title.clear()
         self.input_author.clear()
+        self.input_search.clear()
         self.input_condition.setCurrentIndex(0)
+        self.status_label.clear()
 
-    def rb_editbook_toggled(self):
-        self.clear_inpfields_search()
+    def generate_random_book_id(self):
+        random_book_id = "BOOK-" + \
+            ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        self.input_bookid.setText(random_book_id)
 
-    def rb_deletebook_toggled(self):
-        self.clear_inpfields_search()
-
-    def confirm_btn_clicked(self):
-        book_ID = self.input_bookid.text()
-        ISBN = self.input_ISBN.text()
-        Title = self.input_title.text()
-        Author = self.input_author.text()
-        Book_cond = self.input_condition.itemText(
-            self.input_condition.currentIndex())
-        book_stat = "Available"
-
-        if (len(ISBN) == 0 or len(Title) == 0 or len(Author) == 0):
-            msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            msg.setText("There are remaining empty input field/s!")
-            msg.setWindowTitle("Incomplete information")
-            msg.exec()
-        elif (Book_cond == "<choose condition>"):
-            msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            msg.setText("Choose a book condition!")
-            msg.setWindowTitle("Incomplete information")
-            msg.exec()
+    def search_button_clicked(self):
+        search_value = self.input_search.text()
+        # * initialize sqlite
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        # * check if book_id exists
+        check_id_query = "SELECT * FROM BOOK WHERE Book_ID = ?;"
+        interpolate_data = [search_value]
+        result = cur.execute(check_id_query, interpolate_data)
+        book_data = [form[1] for form in list(enumerate(result))]
+        if book_data:
+            self.status_label.setText("")
+            book_data = book_data[0]
+            self.populate_data(book_data)
+            self.enable_inputs()
+            self.input_bookid.setEnabled(False)
+            if (self.rb_deletebook.isChecked()):
+                self.disable_inputs()
+                self.status_label.setText(
+                    "NOTE: Clicking the Delete Student button deletes the data immediately.")
         else:
-            self.manipulate_the_data(
-                book_ID, ISBN, Title, Author, Book_cond, book_stat)
+            self.clear_data_on_inputs()
+            self.status_label.setText(
+                "This student does not exist in the database!")
+            self.disable_inputs()
+            self.input_search.setText("BOOK-")
 
-    def manipulate_the_data(self, book_ID, ISBN, Title, Author, Book_cond, book_stat):
-        if (self.rb_addbook.isChecked() == True):
+    def populate_data(self, data):
+        book_id = data[0]
+        isbn = data[1]
+        title = data[2]
+        author = data[3]
+        condition = data[4]
+        self.input_bookid.setText(book_id)
+        self.input_ISBN.setText(isbn)
+        self.input_title.setText(title)
+        self.input_author.setText(author)
+        self.input_condition.setCurrentText(condition)
+
+    def validate_rb_state(self, add_button, edit_button, delete_button, book_id, isbn, title, author, condition):
+        if (add_button.isChecked()):
+            self.validate_data_to_add(
+                book_id, isbn, title, author, condition)
+        if (edit_button.isChecked()):
+            self.update_data_values(
+                book_id, isbn, title, author, condition)
+        if (delete_button.isChecked()):
+            self.delete_data_values(book_id)
+
+    def validate_data_to_add(self, book_id, isbn, title, author, condition):
+        if (len(book_id) == 0 or len(isbn) == 0 or len(title) == 0 or len(author) == 0):
+            self.status_label.setText("Invalid field/s are empty! ")
+        else:
+            # * check if this book ID already exists in the database.
+            con = sqlite3.connect('./db/test.db')
+            query = "SELECT Book_ID FROM BOOK;"
+            result = [form[1][0]
+                      for form in list(enumerate(con.execute(query)))]
+            if book_id in result:
+                self.status_label.setText("This book already exists!")
+            else:
+                self.status_label.setText("")
+                self.insert_book_data(book_id, isbn, title, author, condition)
+
+    def insert_book_data(self, book_id, isbn, title, author, condition):
+        book_status = "Available"
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+        msg.setText(
+            "You'll be inserting the following information in the database: ")
+        msg.setInformativeText(
+            f"Book ID:\t{book_id}\nISBN:\t\t{isbn}\nTitle:\t{title}\nAuthor:\t\t{author}\nCondition:\t\t{condition}\n\nThe Book ID will be permanent and cannot be changed.\nAre you sure?")
+        msg.setStandardButtons(
+            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+        msg.setWindowTitle("Confirmation Check")
+        result = msg.exec()
+        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
+            con = sqlite3.connect('./db/test.db')
+            query = "INSERT INTO BOOK VALUES (?,?,?,?,?,?);"
+            cur = con.cursor()
+            interpolate_data = [book_id, isbn,
+                                title, author, condition, book_status]
+            cur.execute(query, interpolate_data)
+            con.commit()
+            con.close()
+            self.informative_message(
+                text="Data Added Successfully!",
+                subtext=f"Successfully added the book {title}.\n\nThank you for adding books in the library!",
+                window_title="Added Successfully"
+            )
+            self.clear_data_on_inputs()
+            self.generate_random_book_id()
+        elif (result == QtWidgets.QMessageBox.StandardButton.No):
+            pass
+
+    def update_data_values(self, book_id, isbn, title, author, condition):
+        if (len(isbn) == 0 or len(title) == 0 or len(author) == 0):
+            self.status_label.setText(
+                "There are remaining empty input field/s!")
+        else:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-            msg.setText("Are you sure to save current Book Information?")
+            msg.setText(f"Are you sure to save changes to {book_id}?")
             msg.setInformativeText(
-                f"Issued ID:  {book_ID}\nISBN:  {ISBN}\nTitle:  {Title}\nAuthor:  {Author}\nBook Condition:  {Book_cond}")
-            msg.setWindowTitle("Book Information Confirmation")
+                f"ISBN:\t{isbn}\nTitle:\t{title}\nAuthor:\t{author}\nBook Condition:\t{condition}")
+            msg.setWindowTitle("Edited Book Information Confirmation")
             msg.setStandardButtons(
                 QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
             result = msg.exec()
-
             if (result == QtWidgets.QMessageBox.StandardButton.Yes):
                 con = sqlite3.connect('./db/test.db')
-                query = "INSERT INTO BOOK VALUES (?,?,?,?,?,?);"
+                query = """
+                    UPDATE BOOK
+                    SET Book_ISBN = ?, Book_Title = ?, Book_Author = ?, Book_Condition = ?
+                    WHERE Book_ID = ?;
+                        """
                 cur = con.cursor()
-                interpolate_data = [book_ID, ISBN,
-                                    Title, Author, Book_cond, book_stat]
+                interpolate_data = [isbn, title, author, condition, book_id]
                 cur.execute(query, interpolate_data)
                 con.commit()
                 con.close()
                 self.informative_message(
-                    text="Data Added Successfully!",
-                    subtext="Thank You for adding books to our Library!",
-                    window_title="Added Successfully"
+                    text="Data Updated Successfully!",
+                    subtext='"Everyone makes mistakes. Everyone deserves a second chance.” - Mo’ne Davis',
+                    window_title="Update Successful"
                 )
-                self.rb_addbook_toggled()
+                self.disable_inputs()
+                self.clear_data_on_inputs()
 
-            elif (result == QtWidgets.QMessageBox.StandardButton.No):
-                pass
-        elif (self.rb_editbook.isChecked() == True):
-            self.update_data_values(
-                book_ID=book_ID, ISBN=ISBN, Title=Title, Author=Author, Book_cond=Book_cond)
-        elif (self.rb_deletebook.isChecked() == True):
-            self.delete_data_values(
-                book_ID=book_ID, ISBN=ISBN, Title=Title, Author=Author, Book_cond=Book_cond)
-
-    def search_button_clicked(self):
-        searched_book_id = self.input_search.text()
+    def delete_data_values(self, book_ID):
         con = sqlite3.connect('./db/test.db')
-        query = "SELECT Book_ID, Book_ISBN, Book_Title, Book_Author, Book_Condition FROM BOOK;"
-        result = [form[1] for form in list(enumerate(con.execute(query)))]
-        book_ids = [each_data[0] for each_data in result]
-        if searched_book_id in book_ids:
-            data_to_populate = [
-                each_data for each_data in result if each_data[0] == searched_book_id][0]
-            self.populate_data(book_ID=data_to_populate[0], ISBN=data_to_populate[1], Title=data_to_populate[2],
-                               Author=data_to_populate[3], Book_cond=data_to_populate[4])
-        else:
-            self.informative_message(
-                text="Entered ID was not found in the database!",
-                subtext="Check for typographical errors or else, data doesn't exist in the database at all.",
-                window_title="Book ID Not Found"
-            )
-
-    def update_data_values(self, book_ID, ISBN, Title, Author, Book_cond):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText(f"Are you sure to save changes to {book_ID}?")
-        msg.setInformativeText(
-            f"ISBN:  {ISBN}\nTitle:  {Title}\nAuthor:  {Author}\nBook Condition:  {Book_cond}")
-        msg.setWindowTitle("Edited Book Information Confirmation")
-        msg.setStandardButtons(
-            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
-        result = msg.exec()
-        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
-            query = """
-                UPDATE BOOK
-                SET Book_ISBN = ?, Book_Title = ?, Book_Author = ?, Book_Condition = ?
-                WHERE Book_ID = ?;
-                    """
-            cur = con.cursor()
-            interpolate_data = [ISBN, Title, Author, Book_cond, book_ID]
-            cur.execute(query, interpolate_data)
-            con.commit()
-            con.close()
-            self.informative_message(
-                text="Data Updated Successfully!",
-                subtext='"Everyone makes mistakes. Everyone deserves a second chance.” - Mo’ne Davis',
-                window_title="Update Successful"
-            )
-            self.clear_inpfields_search()
-        elif (result == QtWidgets.QMessageBox.StandardButton.No):
-            pass
-
-    def delete_data_values(self, book_ID, ISBN, Title, Author, Book_cond):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText(
-            f"Are you sure to delete {book_ID}? It will be gone forever...")
-        msg.setInformativeText(
-            f"ISBN:\t{ISBN}\nTitle:\t{Title}\nAuthor:\t{Author}\nBook Condition:\t{Book_cond}")
-        msg.setWindowTitle("DELETE Book Information Confirmation")
-        msg.setStandardButtons(
-            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
-        result = msg.exec()
-        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
-            query = "DELETE FROM BOOK WHERE Book_ID = ?;"
-            cur = con.cursor()
-            interpolate_data = [book_ID]
-            cur.execute(query, interpolate_data)
-            con.commit()
-            con.close()
-            self.informative_message(
-                text="Information has been deleted.",
-                subtext=""""Be wise today so you don't cry tomorrow”  - E.A. Bucchianeri""",
-                window_title="Deletion Completed"
-            )
-            self.clear_inpfields_search()
-        elif (result == QtWidgets.QMessageBox.StandardButton.No):
-            pass
-
-    def clear_inpfields_search(self):
-        self.search_button.setEnabled(True)
-        self.input_search.setReadOnly(False)
-        self.input_bookid.clear()
-        self.input_ISBN.clear()
-        self.input_title.clear()
-        self.input_author.clear()
-        self.input_condition.setCurrentIndex(0)
-
-    def populate_data(self, book_ID, ISBN, Title, Author, Book_cond):
-        self.input_bookid.setText(book_ID)
-        self.input_ISBN.setText(ISBN)
-        self.input_title.setText(Title)
-        self.input_author.setText(Author)
-        if (Book_cond == "New"):
-            Book_cond = 1
-        elif (Book_cond == "Fine"):
-            Book_cond = 2
-        elif (Book_cond == "Good"):
-            Book_cond = 3
-        elif (Book_cond == "Fair"):
-            Book_cond = 4
-        elif (Book_cond == "Poor"):
-            Book_cond = 5
-        self.input_condition.setCurrentIndex(Book_cond)
+        query = "DELETE FROM BOOK WHERE Book_ID = ?;"
+        cur = con.cursor()
+        interpolate_data = [book_ID]
+        cur.execute(query, interpolate_data)
+        con.commit()
+        con.close()
+        self.informative_message(
+            text="Information has been deleted.",
+            subtext="""Be wise today so you don't cry tomorrow”  - E.A. Bucchianeri""",
+            window_title="Deletion Completed"
+        )
+        self.disable_inputs()
+        self.clear_data_on_inputs()
 
     def informative_message(self, text, subtext, window_title):
         msg = QtWidgets.QMessageBox()
@@ -589,7 +629,7 @@ class Ui_BookInformation(object):
         self.label_Title.setText(_translate("BookInformation", "Title:"))
         self.label_bookid.setText(_translate("BookInformation", "ID Issued:"))
         self.input_bookid.setPlaceholderText(
-            _translate("BookInformation", "BOOK-XXXXX"))
+            _translate("BookInformation", "BOOK-ABC12"))
         self.label_condition.setText(
             _translate("BookInformation", "Condition:"))
         self.confirm_button.setText(_translate("BookInformation", "Confirm"))

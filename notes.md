@@ -97,3 +97,13 @@ import string
 
 random = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
 ```
+# Testing for Main Menu Checking for Overdue Books
+```py
+# * pip install tabulate (simple and cool table print)
+from tabulate import tabulate
+collect_data = [] # * outside for loop
+collect_data.append(
+                [borrow_id, payment_id, penalty_amount, days_passed])
+print(tabulate(collect_data, headers=[
+              'Borrow_ID', 'Payment_ID', 'Payment_Evaluation', 'Days Passed']))
+```

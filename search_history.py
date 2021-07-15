@@ -6,7 +6,7 @@ class Ui_SearchHistory(object):
     def setupUi(self, SearchHistory, MainMenu):
         MainMenu.close()
         SearchHistory.setObjectName("SearchHistory")
-        SearchHistory.resize(1000, 669)
+        SearchHistory.resize(1200, 700)
         SearchHistory.setStyleSheet(
             ".QWidget{background-color:  #CBB1A0;border-radius: 10px}")
         SearchHistory.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)

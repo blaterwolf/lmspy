@@ -214,50 +214,80 @@ class Ui_ReturnRequest(object):
             self.status_label.setText("Borrow ID is invalid!")
 
     def execute_returning_books(self, borrow_date, payment_id, book_id, borrow_id):
-        # * Step 1: Initialize Database
+        # * Step 1: Initialize Values
         borrow_date = datetime.datetime.strptime(
             borrow_date, '%Y-%m-%d %H:%M:%S.%f')
         borrow_return_date = datetime.datetime.now()
         borrow_status = "Returned"
-        penalty_amount = self.compute_amount(borrow_date, borrow_return_date)
         book_status = 'Available'
         payment_status = 'Paid'
 
-        # * Step 1.5: Initialize Database
+        # * Step 2: Initialize Database
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
 
-        # * Step 2: UPDATE PAYMENT data: Compute Amount, Status, and Issuer
-        payment_query = """UPDATE PAYMENT
-                        SET Payment_Amount = ?, Payment_Status = ?
-                        WHERE Payment_ID = ?;
+        # * STEP 3: QUERY the PAYMENT table and its Payment_Amount
+        payment_query = """
+        SELECT Payment_Amount FROM PAYMENT
+        WHERE Payment_ID = ?;
         """
-        interpolate_data = [penalty_amount,
-                            payment_status, payment_id]
-        cur.execute(payment_query, interpolate_data)
-        # * Step 3: UPDATE BOOK Book_Status to Available
-        book_query = """UPDATE BOOK
-                        SET Book_Status = ?
-                        WHERE Book_ID = ?;
+        interpolate_data = [payment_id]
+        result = cur.execute(payment_query, interpolate_data)
+        payment_amount = [form[1][0] for form in list(enumerate(result))][0]
+
+        # * STEP 4: QUERY the BOOK to be returned.
+        book_query = """
+        SELECT Book_Title FROM BOOK
+        WHERE Book_ID = ?;
         """
-        interpolate_data = [book_status, book_id]
-        cur.execute(book_query, interpolate_data)
-        # * Step 4: UPDATE BORROW Borrow_Return_Date to datetime.now()
-        borrow_query = """UPDATE BORROW
-                        SET Borrow_Return_Date = ?, Borrow_Status = ?
-                        WHERE Borrow_ID = ?;
-        """
-        interpolate_data = [borrow_return_date, borrow_status, borrow_id]
-        cur.execute(borrow_query, interpolate_data)
-        con.commit()
-        con.close()
-        # ! query the updated borrow id here
-        self.informative_message(
-            text="You Returned Successfully!",
-            subtext=f"You successfully returned {borrow_id}",
-            window_title="Returned Successfully",
-            icon_type="information"
-        )
+        interpolate_data = [book_id]
+        result = cur.execute(book_query, interpolate_data)
+        book_title = [form[1][0] for form in list(enumerate(result))][0]
+
+        # * STEP 5: Ask the user whether you would sure return the book.
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+        msg.setText(
+            "You'll be returning this book and this is the payment amount below: ")
+        msg.setInformativeText(
+            f"Book Title:\t\t{book_title}\nPayment Amount:\tPHP {payment_amount}\n\nDoes the student paid the overdue fee?")
+        msg.setStandardButtons(
+            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+        msg.setWindowTitle("Payment Verfication")
+        result = msg.exec()
+        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
+            # * STEP 6: UPDATE PAYMENT data: Change Status to Paid
+            payment_query = """
+            UPDATE PAYMENT
+            SET Payment_Status = ?
+            WHERE Payment_ID = ?;
+            """
+            interpolate_data = [payment_status, payment_id]
+            cur.execute(payment_query, interpolate_data)
+
+            # * Step 7: UPDATE BOOK Book_Status to Available
+            book_query = """
+            UPDATE BOOK
+            SET Book_Status = ?
+            WHERE Book_ID = ?;
+            """
+            interpolate_data = [book_status, book_id]
+            cur.execute(book_query, interpolate_data)
+            # * Step 8: UPDATE BORROW Borrow_Return_Date to datetime.now()
+            borrow_query = """UPDATE BORROW
+                            SET Borrow_Return_Date = ?, Borrow_Status = ?
+                            WHERE Borrow_ID = ?;
+            """
+            interpolate_data = [borrow_return_date, borrow_status, borrow_id]
+            cur.execute(borrow_query, interpolate_data)
+            con.commit()
+            con.close()
+            self.informative_message(
+                text="You Returned Successfully!",
+                subtext=f"You successfully returned {borrow_id}",
+                window_title="Returned Successfully",
+                icon_type="information"
+            )
 
     def compute_amount(self, borrow_date, borrow_return_date):
         penalty = 0.0

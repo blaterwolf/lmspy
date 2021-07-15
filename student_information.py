@@ -5,7 +5,7 @@ import sqlite3
 class Ui_StudentInformation(object):
     def setupUi(self, StudentInformation, MainMenu):
         StudentInformation.setObjectName("StudentInformation")
-        StudentInformation.resize(670, 425)
+        StudentInformation.resize(670, 440)
         StudentInformation.setStyleSheet(
             ".QWidget{background-color: #CBB1A0;border-radius: 10px}")
         StudentInformation.setWindowFlags(
@@ -179,7 +179,6 @@ class Ui_StudentInformation(object):
             section=self.input_section.text(),
             grade_level=self.input_cb_grade_level.currentText(),
         ))
-
         self.horizontalLayout_3.addWidget(self.confirm_button)
         self.cancel_button = QtWidgets.QPushButton(self.border)
         self.cancel_button.setCursor(QtGui.QCursor(
@@ -501,8 +500,7 @@ class Ui_StudentInformation(object):
             self.update_student_data(
                 student_id, firstname, lastname, section, grade_level)
         if (delete_button.isChecked()):
-            self.delete_student_data(
-                student_id, firstname, lastname, section, grade_level)
+            self.delete_student_data(student_id)
 
     def validate_data_to_add(self, student_id, firstname, lastname, section, grade_level):
         if (len(student_id) == 0 or len(firstname) == 0 or len(lastname) == 0 or len(section) == 0):
@@ -551,73 +549,66 @@ class Ui_StudentInformation(object):
             pass
 
     def update_student_data(self, student_id, firstname, lastname, section, grade_level):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-        msg.setText(
-            "You'll be updating with these following information in the database: ")
-        msg.setInformativeText(
-            f"Student ID:\t{student_id}\nFirstname:\t{firstname}\nLastname:\t{lastname}\nSection:\t\t{section}\nGrade Level:\t{grade_level}\n\nAre you sure?")
-        msg.setStandardButtons(
-            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
-        msg.setWindowTitle("Confirmation Check")
-        result = msg.exec()
-        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
-            query_update = """
-            UPDATE STUDENT 
-            SET Student_ID = ?, Student_LastName = ?, Student_FirstName = ?, Student_Section = ?, Student_YearLevel = ?
-            WHERE Student_ID  = ?;
-            """
-            cur = con.cursor()
-            interpolate_data = [
-                student_id, lastname, firstname, section, grade_level, student_id]
-            cur.execute(query_update, interpolate_data)
-            con.commit()
-            con.close()
-            self.informative_message(
-                text="Data Updated Successfully!",
-                subtext="You can still update data after this message.",
-                window_title="Updated Successfully",
-                icon_type="information"
-            )
-            self.clear_data_on_inputs()
-        elif (result == QtWidgets.QMessageBox.StandardButton.No):
-            pass
+        if (len(firstname) == 0 or len(lastname) == 0 or len(section) == 0):
+            self.status_label.setText(
+                "There are remaining empty input field/s!")
+        else:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+            msg.setText(
+                f"Are you sure to save changes to {student_id}?")
+            msg.setInformativeText(
+                f"Firstname:\t{firstname}\nLastname:\t{lastname}\nSection:\t\t{section}\nGrade Level:\t{grade_level}\n\nAre you sure?")
+            msg.setStandardButtons(
+                QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+            msg.setWindowTitle("Edited Student Information Confirmation")
+            result = msg.exec()
+            if (result == QtWidgets.QMessageBox.StandardButton.Yes):
+                con = sqlite3.connect('./db/test.db')
+                query_update = """
+                UPDATE STUDENT 
+                SET Student_LastName = ?, Student_FirstName = ?, Student_Section = ?, Student_YearLevel = ?
+                WHERE Student_ID  = ?;
+                """
+                cur = con.cursor()
+                interpolate_data = [lastname, firstname,
+                                    section, grade_level, student_id]
+                cur.execute(query_update, interpolate_data)
+                con.commit()
+                con.close()
+                self.informative_message(
+                    text="Data Updated Successfully!",
+                    subtext='"Everyone makes mistakes. Everyone deserves a second chance.” - Mo’ne Davis',
+                    window_title="Updated Successfully",
+                    icon_type="information"
+                )
+                self.disable_inputs()
+                self.clear_data_on_inputs()
+            elif (result == QtWidgets.QMessageBox.StandardButton.No):
+                pass
 
-    def delete_student_data(self, student_id, firstname, lastname, section, grade_level):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText(
-            f"Are you sure to delete {student_id}? It will be gone forever...")
-        msg.setInformativeText(
-            f"Student ID:\t{student_id}\nFirstname:\t{firstname}\nLastname:\t{lastname}\nSection:\t\t{section}\nGrade Level:\t{grade_level}\n\nAre you sure?")
-        msg.setWindowTitle("DELETE Book Information Confirmation")
-        msg.setStandardButtons(
-            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
-        result = msg.exec()
-        if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            # * Step 1: Initialize Database
-            con = sqlite3.connect('./db/test.db')
-            cur = con.cursor()
-            # * Step 2: Query the data to be deleted
-            query_delete = """
-            DELETE FROM STUDENT
-            WHERE Student_ID = ?;
-            """
-            interpolate_data = [student_id]
-            # * Step 3: Execute, Commit, Close
-            cur.execute(query_delete, interpolate_data)
-            con.commit()
-            con.close()
-            self.informative_message(
-                text="Data Deleted Successfully!",
-                subtext="You can still delete data after this message.",
-                window_title="Deleted Successfully",
-                icon_type="information"
-            )
-            self.clear_data_on_inputs()
-        elif (result == QtWidgets.QMessageBox.StandardButton.No):
-            pass
+    def delete_student_data(self, student_id):
+        # * Step 1: Initialize Database
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        # * Step 2: Query the data to be deleted
+        query_delete = """
+        DELETE FROM STUDENT
+        WHERE Student_ID = ?;
+        """
+        interpolate_data = [student_id]
+        # * Step 3: Execute, Commit, Close
+        cur.execute(query_delete, interpolate_data)
+        con.commit()
+        con.close()
+        self.informative_message(
+            text="Data Deleted Successfully!",
+            subtext="You can still delete data after this message.",
+            window_title="Deleted Successfully",
+            icon_type="information"
+        )
+        self.disable_inputs()
+        self.clear_data_on_inputs()
 
     def informative_message(self, text, subtext, window_title, icon_type="critical"):
         msg = QtWidgets.QMessageBox()

@@ -10,6 +10,7 @@ from search_history import Ui_SearchHistory
 from quote_machine import quote_data
 import sqlite3
 import random
+import datetime
 
 
 class Ui_MainMenu(object):
@@ -132,6 +133,10 @@ class Ui_MainMenu(object):
                                           "QPushButton:hover{\n"
                                           "    background-color: #842a2d;\n"
                                           "    color: #CBB1A0;\n"
+                                          "}\n"
+                                          "QPushButton:pressed{\n"
+                                          "    background-color: #b34044;\n"
+                                          "    border: 5px solid #b34044;\n"
                                           "}")
         self.overdue_button.setObjectName("overdue_button")
         self.overdue_button.clicked.connect(
@@ -150,6 +155,10 @@ class Ui_MainMenu(object):
                                        "QPushButton:hover{\n"
                                        "    background-color: #842a2d;\n"
                                        "    color: #CBB1A0;\n"
+                                       "}\n"
+                                       "QPushButton:pressed{\n"
+                                       "    background-color: #b34044;\n"
+                                       "    border: 5px solid #b34044;\n"
                                        "}")
         self.book_button.setObjectName("book_button")
         self.book_button.clicked.connect(
@@ -171,6 +180,10 @@ class Ui_MainMenu(object):
                                                  "QPushButton:hover{\n"
                                                  "    background-color: #842a2d;\n"
                                                  "    color: #CBB1A0;\n"
+                                                 "}\n"
+                                                 "QPushButton:pressed{\n"
+                                                 "    background-color: #b34044;\n"
+                                                 "    border: 5px solid #b34044;\n"
                                                  "}")
         self.search_history_button.setObjectName("search_history_button")
         self.search_history_button.clicked.connect(
@@ -189,6 +202,10 @@ class Ui_MainMenu(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.borrow_button.setObjectName("borrow_button")
         self.borrow_button.clicked.connect(
@@ -207,6 +224,10 @@ class Ui_MainMenu(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.return_button.setObjectName("return_button")
         self.return_button.clicked.connect(
@@ -225,6 +246,10 @@ class Ui_MainMenu(object):
                                               "QPushButton:hover{\n"
                                               "    background-color: #842a2d;\n"
                                               "    color: #CBB1A0;\n"
+                                              "}\n"
+                                              "QPushButton:pressed{\n"
+                                              "    background-color: #b34044;\n"
+                                              "    border: 5px solid #b34044;\n"
                                               "}")
         self.book_status_button.setObjectName("book_status_button")
         self.book_status_button.clicked.connect(
@@ -243,6 +268,10 @@ class Ui_MainMenu(object):
                                                  "QPushButton:hover{\n"
                                                  "    background-color: #842a2d;\n"
                                                  "    color: #CBB1A0;\n"
+                                                 "}\n"
+                                                 "QPushButton:pressed{\n"
+                                                 "    background-color: #b34044;\n"
+                                                 "    border: 5px solid #b34044;\n"
                                                  "}")
         self.borrowed_books_button.setObjectName("borrowed_books_button")
         self.borrowed_books_button.clicked.connect(
@@ -261,6 +290,10 @@ class Ui_MainMenu(object):
                                           "QPushButton:hover{\n"
                                           "    background-color: #842a2d;\n"
                                           "    color: #CBB1A0;\n"
+                                          "}\n"
+                                          "QPushButton:pressed{\n"
+                                          "    background-color: #b34044;\n"
+                                          "    border: 5px solid #b34044;\n"
                                           "}")
         self.student_button.setObjectName("student_button")
         self.student_button.clicked.connect(
@@ -284,6 +317,10 @@ class Ui_MainMenu(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.logout_button.setObjectName("logout_button")
         self.logout_button.clicked.connect(
@@ -295,7 +332,28 @@ class Ui_MainMenu(object):
         self.verticalLayout_4.addWidget(self.border)
         self.retranslateUi(MainMenu)
         QtCore.QMetaObject.connectSlotsByName(MainMenu)
+        # * Pointing Hand Cursor for Buttons (Late Update)
+        self.book_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.student_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.borrow_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.return_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.book_status_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.borrowed_books_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.overdue_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.search_history_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        self.logout_button.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
+        # * Initialization
         self.get_random_quote(quote_data)
+        self.evaluate_overdue_books()
 
     def logout_user(self, Login, MainMenu):
         MainMenu.close()
@@ -340,7 +398,7 @@ class Ui_MainMenu(object):
         self.BorrowRequest = QtWidgets.QWidget()
         self.ui_borrow_request = Ui_BorrowRequest()
         self.ui_borrow_request.setupUi(
-            self.BorrowRequest, MainMenu, Ui_BookStatus, current_username)
+            self.BorrowRequest, MainMenu, current_username)
         self.BorrowRequest.show()
 
     def run_currently_borrowed_books(self, MainMenu):
@@ -371,14 +429,59 @@ class Ui_MainMenu(object):
         self.ui_search_history.setupUi(
             self.SearchHistory, MainMenu)
         self.SearchHistory.show()
-        pass
 
     def evaluate_overdue_books(self):
-        # * 1. Evaluate the Overdue Books on the Main Menu class
+        # * Goal #1. Evaluate the Overdue Books on the Main Menu class
         # *    so that it can be queried on the overdue_window.
-        # * 2. Check whether the Payment Price during the return
-        # *    process is the same as the Overdue Books query.
-        pass
+        # * Step 1: Query relevant data to the database.
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        query = """
+        SELECT Borrow_ID, Borrow_Date, Payment_ID
+        FROM BORROW
+        WHERE Borrow_Status = 'Borrowed';
+        """
+        result = [form[1] for form in list(enumerate(con.execute(query)))]
+        for each_data in result:
+            borrow_id = each_data[0]
+            borrow_date = datetime.datetime.strptime(
+                each_data[1], '%Y-%m-%d %H:%M:%S.%f')
+            borrow_return_date = datetime.datetime.now()
+            payment_id = each_data[2]
+            penalty_amount = self.compute_amount(
+                borrow_date, borrow_return_date)
+            days_passed = (borrow_return_date-borrow_date).days
+            if days_passed >= 7:
+                # * UPDATE PAYMENT data: Compute Amount, Status, and Issuer
+                payment_query = """
+                UPDATE PAYMENT
+                SET Payment_Amount = ?
+                WHERE Payment_ID = ?;
+                """
+                interpolate_data = [penalty_amount, payment_id]
+                cur.execute(payment_query, interpolate_data)
+                # * UPDATE BORROW Overdue_Status
+                borrow_query = """
+                UPDATE BORROW
+                SET Borrow_Overdue_Status = ?
+                WHERE Borrow_ID = ?;
+                """
+                interpolate_data = [1, borrow_id]
+                cur.execute(borrow_query, interpolate_data)
+        con.commit()
+        con.close()
+
+    def compute_amount(self, borrow_date, borrow_return_date):
+        penalty = 0.0
+        days_passed = (borrow_return_date-borrow_date).days
+        while days_passed >= 7:
+            if days_passed == 7:
+                penalty += 100.00
+                days_passed = 0
+            else:
+                penalty += (0.05 * 100.00)
+                days_passed -= 1
+        return penalty
 
     def retranslateUi(self, MainMenu):
         _translate = QtCore.QCoreApplication.translate

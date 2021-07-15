@@ -112,6 +112,11 @@ class Ui_Login(object):
                                         "QPushButton:hover{\n"
                                         "    background-color: #842a2d;\n"
                                         "    color: #CBB1A0;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:pressed{\n"
+                                        "    background-color: #b34044;\n"
+                                        "    border: 5px solid #b34044;\n"
                                         "}")
         self.login_button.setAutoDefault(False)
         self.login_button.setDefault(False)
@@ -163,6 +168,10 @@ class Ui_Login(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.signup_button.setAutoDefault(False)
         self.signup_button.setDefault(False)
@@ -200,6 +209,10 @@ class Ui_Login(object):
                                            "QPushButton:hover{\n"
                                            "    background-color: #842a2d;\n"
                                            "    color: #CBB1A0;\n"
+                                           "}\n"
+                                           "QPushButton:pressed{\n"
+                                           "    background-color: #b34044;\n"
+                                           "    border: 5px solid #b34044;\n"
                                            "}")
         self.forgot_password.setAutoDefault(False)
         self.forgot_password.setDefault(False)

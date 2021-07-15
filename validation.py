@@ -104,6 +104,10 @@ class Ui_Validation(object):
                                            "QPushButton:hover{\n"
                                            "    background-color: #842a2d;\n"
                                            "    color: #CBB1A0;\n"
+                                           "}\n"
+                                           "QPushButton:pressed{\n"
+                                           "    background-color: #b34044;\n"
+                                           "    border: 5px solid #b34044;\n"
                                            "}")
         self.validate_button.setObjectName("validate_button")
         self.validate_button.clicked.connect(
@@ -124,6 +128,10 @@ class Ui_Validation(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
