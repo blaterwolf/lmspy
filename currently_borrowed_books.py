@@ -67,6 +67,10 @@ class Ui_CurrentlyBorrowedBooks(object):
                                        "QPushButton:hover{\n"
                                        "    background-color: #842a2d;\n"
                                        "    color: #CBB1A0;\n"
+                                       "}\n"
+                                       "QPushButton:pressed{\n"
+                                       "    background-color: #b34044;\n"
+                                       "    border: 5px solid #b34044;\n"
                                        "}")
         self.back_button.setObjectName("back_button")
         self.back_button.clicked.connect(

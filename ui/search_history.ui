@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>666</height>
+    <width>1200</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,7 +74,7 @@
                <string>STUDENT</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
               </property>
              </widget>
             </item>
@@ -86,7 +86,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Student ID:</string>
+               <string>Search Student data:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -133,38 +133,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="student_search_button">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-	color: #842a2d;
-	font: 12pt &quot;Franklin Gothic Book&quot; bold;
-	border: 2px solid #842a2d;
-	padding: 2px 53px;
-	border-radius: 10px;
-	opacity: 100;
-}
-
-QPushButton:hover{
-    background-color: #842a2d;
-	color: #CBB1A0;
-}</string>
-              </property>
-              <property name="text">
-               <string>SEARCH</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QPushButton" name="student_reset_button">
               <property name="font">
                <font>
@@ -189,6 +157,11 @@ QPushButton:hover{
 QPushButton:hover{
     background-color: #842a2d;
 	color: #CBB1A0;
+}
+
+QPushButton:pressed{
+background-color: #b34044;
+border: 5px solid #b34044;
 }</string>
               </property>
               <property name="text">
@@ -249,7 +222,7 @@ QPushButton:hover{
                <string>BOOK</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
               </property>
              </widget>
             </item>
@@ -261,7 +234,7 @@ QPushButton:hover{
                </font>
               </property>
               <property name="text">
-               <string>Book ID:</string>
+               <string>Search Book data:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -293,7 +266,7 @@ QPushButton:hover{
                <string/>
               </property>
               <property name="text">
-               <string>BOOK-</string>
+               <string/>
               </property>
               <property name="maxLength">
                <number>10</number>
@@ -310,38 +283,6 @@ QPushButton:hover{
               </property>
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="book_search_button">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-	color: #842a2d;
-	font: 12pt &quot;Franklin Gothic Book&quot; bold;
-	border: 2px solid #842a2d;
-	padding: 2px 53px;
-	border-radius: 10px;
-	opacity: 100;
-}
-
-QPushButton:hover{
-    background-color: #842a2d;
-	color: #CBB1A0;
-}</string>
-              </property>
-              <property name="text">
-               <string>SEARCH</string>
               </property>
              </widget>
             </item>
@@ -370,10 +311,15 @@ QPushButton:hover{
 QPushButton:hover{
     background-color: #842a2d;
 	color: #CBB1A0;
+}
+
+QPushButton:pressed{
+background-color: #b34044;
+border: 5px solid #b34044;
 }</string>
               </property>
               <property name="text">
-               <string>RESET BOOK TABLE</string>
+               <string>   RESET BOOK TABLE   </string>
               </property>
              </widget>
             </item>
@@ -434,7 +380,7 @@ QPushButton:hover{
                <string>BORROW</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
               </property>
              </widget>
             </item>
@@ -446,7 +392,7 @@ QPushButton:hover{
                </font>
               </property>
               <property name="text">
-               <string>Borrow ID:</string>
+               <string>Search Borrow data:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -477,9 +423,6 @@ QPushButton:hover{
               <property name="inputMask">
                <string/>
               </property>
-              <property name="text">
-               <string>BORROW-</string>
-              </property>
               <property name="maxLength">
                <number>12</number>
               </property>
@@ -495,38 +438,6 @@ QPushButton:hover{
               </property>
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="borrow_search_button">
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton{
-	color: #842a2d;
-	font: 12pt &quot;Franklin Gothic Book&quot; bold;
-	border: 2px solid #842a2d;
-	padding: 2px 53px;
-	border-radius: 10px;
-	opacity: 100;
-}
-
-QPushButton:hover{
-    background-color: #842a2d;
-	color: #CBB1A0;
-}</string>
-              </property>
-              <property name="text">
-               <string>SEARCH</string>
               </property>
              </widget>
             </item>
@@ -555,6 +466,11 @@ QPushButton:hover{
 QPushButton:hover{
     background-color: #842a2d;
 	color: #CBB1A0;
+}
+
+QPushButton:pressed{
+background-color: #b34044;
+border: 5px solid #b34044;
 }</string>
               </property>
               <property name="text">
@@ -671,6 +587,11 @@ color: red;</string>
 QPushButton:hover{
     background-color: #842a2d;
 	color: #CBB1A0;
+}
+
+QPushButton:pressed{
+background-color: #b34044;
+border: 5px solid #b34044;
 }</string>
           </property>
           <property name="text">

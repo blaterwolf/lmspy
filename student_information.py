@@ -136,6 +136,10 @@ class Ui_StudentInformation(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.search_button.setObjectName("search_button")
         self.search_button.clicked.connect(self.search_student)
@@ -167,6 +171,10 @@ class Ui_StudentInformation(object):
                                           "QPushButton:hover{\n"
                                           "    background-color: #842a2d;\n"
                                           "    color: #CBB1A0;\n"
+                                          "}\n"
+                                          "QPushButton:pressed{\n"
+                                          "    background-color: #b34044;\n"
+                                          "    border: 5px solid #b34044;\n"
                                           "}")
         self.confirm_button.setObjectName("confirm_button")
         self.confirm_button.clicked.connect(lambda: self.validate_rb_state(
@@ -195,6 +203,10 @@ class Ui_StudentInformation(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
@@ -647,15 +659,8 @@ class Ui_StudentInformation(object):
             "StudentInformation", "Section: "))
         self.label_gradeLevel.setText(_translate(
             "StudentInformation", "Grade Level: "))
-        self.input_cb_grade_level.setItemText(
-            0, _translate("StudentInformation", "Grade 7"))
-        self.input_cb_grade_level.setItemText(
-            1, _translate("StudentInformation", "Grade 8"))
-        self.input_cb_grade_level.setItemText(
-            2, _translate("StudentInformation", "Grade 9"))
-        self.input_cb_grade_level.setItemText(
-            3, _translate("StudentInformation", "Grade 10"))
-        self.input_cb_grade_level.setItemText(
-            4, _translate("StudentInformation", "Grade 11"))
-        self.input_cb_grade_level.setItemText(
-            5, _translate("StudentInformation", "Grade 12"))
+        self.cb_values = ['Grade 7', 'Grade 8',
+                          'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
+        for index in range(6):
+            self.input_cb_grade_level.setItemText(
+                index, _translate("StudentInformation", self.cb_values[index]))

@@ -4,7 +4,6 @@ import sqlite3
 
 class Ui_SearchHistory(object):
     def setupUi(self, SearchHistory, MainMenu):
-        MainMenu.close()
         SearchHistory.setObjectName("SearchHistory")
         SearchHistory.resize(1200, 700)
         SearchHistory.setStyleSheet(
@@ -42,7 +41,8 @@ class Ui_SearchHistory(object):
         font.setPointSize(14)
         font.setBold(True)
         self.student_label.setFont(font)
-        self.student_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.student_label.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.student_label.setObjectName("student_label")
         self.student_VerticalLayout.addWidget(self.student_label)
         self.student_id_label = QtWidgets.QLabel(self.border)
@@ -53,57 +53,32 @@ class Ui_SearchHistory(object):
                                            QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.student_id_label.setObjectName("student_id_label")
         self.student_VerticalLayout.addWidget(self.student_id_label)
-        self.input_student_id = QtWidgets.QLineEdit(self.border)
+        self.input_search_student = QtWidgets.QLineEdit(self.border)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(False)
         font.setItalic(False)
-        self.input_student_id.setFont(font)
-        self.input_student_id.setStyleSheet("QLineEdit {\n"
-                                            "      color: #000000;\n"
-                                            "      font: 11pt \"Verdana\";\n"
-                                            "      border: None;\n"
-                                            "      border-bottom-color: white;\n"
-                                            "      border-radius: 10px;\n"
-                                            "      padding: 0 8px;\n"
-                                            "      background: #CBB1A0;\n"
-                                            "      selection-background-color: darkgray;\n"
-                                            "}")
-        self.input_student_id.setMaxLength(12)
-        self.input_student_id.setClearButtonEnabled(True)
-        self.input_student_id.setObjectName("input_student_id")
-        self.student_VerticalLayout.addWidget(self.input_student_id)
+        self.input_search_student.setFont(font)
+        self.input_search_student.setStyleSheet("QLineEdit {\n"
+                                                "      color: #000000;\n"
+                                                "      font: 11pt \"Verdana\";\n"
+                                                "      border: None;\n"
+                                                "      border-bottom-color: white;\n"
+                                                "      border-radius: 10px;\n"
+                                                "      padding: 0 8px;\n"
+                                                "      background: #CBB1A0;\n"
+                                                "      selection-background-color: darkgray;\n"
+                                                "}")
+        self.input_search_student.setMaxLength(50)
+        self.input_search_student.setClearButtonEnabled(True)
+        self.input_search_student.setObjectName("input_search_student")
+        self.student_VerticalLayout.addWidget(self.input_search_student)
         self.line = QtWidgets.QFrame(self.border)
         self.line.setStyleSheet("border: 2px solid #842a2d;")
         self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
         self.student_VerticalLayout.addWidget(self.line)
-        self.student_search_button = QtWidgets.QPushButton(self.border)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setItalic(False)
-        self.student_search_button.setFont(font)
-        self.student_search_button.setCursor(
-            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.student_search_button.setStyleSheet("QPushButton{\n"
-                                                 "    color: #842a2d;\n"
-                                                 "    font: 12pt \"Franklin Gothic Book\" bold;\n"
-                                                 "    border: 2px solid #842a2d;\n"
-                                                 "    padding: 2px 53px;\n"
-                                                 "    border-radius: 10px;\n"
-                                                 "    opacity: 100;\n"
-                                                 "}\n"
-                                                 "\n"
-                                                 "QPushButton:hover{\n"
-                                                 "    background-color: #842a2d;\n"
-                                                 "    color: #CBB1A0;\n"
-                                                 "}")
-        self.student_search_button.setObjectName("student_search_button")
-        self.student_search_button.clicked.connect(
-            lambda: self.search_func(what_to_query="Student"))
-        self.student_VerticalLayout.addWidget(self.student_search_button)
         self.student_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -124,25 +99,24 @@ class Ui_SearchHistory(object):
                                                 "QPushButton:hover{\n"
                                                 "    background-color: #842a2d;\n"
                                                 "    color: #CBB1A0;\n"
+                                                "}\n"
+                                                "\n"
+                                                "QPushButton:pressed{\n"
+                                                "background-color: #b34044;\n"
+                                                "border: 5px solid #b34044;\n"
                                                 "}")
         self.student_reset_button.setObjectName("student_reset_button")
-        self.student_reset_button.clicked.connect(
-            lambda: self.reset_func("Student"))
         self.student_VerticalLayout.addWidget(self.student_reset_button)
         self.student_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.student_VerticalLayout)
         self.student_tableWidget = QtWidgets.QTableWidget(self.border)
         self.student_tableWidget.setObjectName("student_tableWidget")
-        self.student_tableWidget.setColumnCount(4)
+        self.student_column_count = 4
+        self.student_tableWidget.setColumnCount(self.student_column_count)
         self.student_tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(3, item)
+        for index in range(self.student_column_count):
+            item = QtWidgets.QTableWidgetItem()
+            self.student_tableWidget.setHorizontalHeaderItem(index, item)
         self.student_tableWidget.horizontalHeader().setDefaultSectionSize(185)
         self.student_form.setWidget(
             0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.student_tableWidget)
@@ -157,7 +131,8 @@ class Ui_SearchHistory(object):
         font.setPointSize(14)
         font.setBold(True)
         self.book_label.setFont(font)
-        self.book_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.book_label.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.book_label.setObjectName("book_label")
         self.book_verticalLayout.addWidget(self.book_label)
         self.book_id_label = QtWidgets.QLabel(self.border)
@@ -168,58 +143,34 @@ class Ui_SearchHistory(object):
                                         QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.book_id_label.setObjectName("book_id_label")
         self.book_verticalLayout.addWidget(self.book_id_label)
-        self.input_book_id = QtWidgets.QLineEdit(self.border)
+        self.input_search_book = QtWidgets.QLineEdit(self.border)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(False)
         font.setItalic(False)
-        self.input_book_id.setFont(font)
-        self.input_book_id.setStyleSheet("QLineEdit {\n"
-                                         "      color: #000000;\n"
-                                         "      font: 11pt \"Verdana\";\n"
-                                         "      border: None;\n"
-                                         "      border-bottom-color: white;\n"
-                                         "      border-radius: 10px;\n"
-                                         "      padding: 0 8px;\n"
-                                         "      background: #CBB1A0;\n"
-                                         "      selection-background-color: darkgray;\n"
-                                         "}")
-        self.input_book_id.setInputMask("")
-        self.input_book_id.setMaxLength(10)
-        self.input_book_id.setClearButtonEnabled(True)
-        self.input_book_id.setObjectName("input_book_id")
-        self.book_verticalLayout.addWidget(self.input_book_id)
+        self.input_search_book.setFont(font)
+        self.input_search_book.setStyleSheet("QLineEdit {\n"
+                                             "      color: #000000;\n"
+                                             "      font: 11pt \"Verdana\";\n"
+                                             "      border: None;\n"
+                                             "      border-bottom-color: white;\n"
+                                             "      border-radius: 10px;\n"
+                                             "      padding: 0 8px;\n"
+                                             "      background: #CBB1A0;\n"
+                                             "      selection-background-color: darkgray;\n"
+                                             "}")
+        self.input_search_book.setInputMask("")
+        self.input_search_book.setText("")
+        self.input_search_book.setMaxLength(100)
+        self.input_search_book.setClearButtonEnabled(True)
+        self.input_search_book.setObjectName("input_search_book")
+        self.book_verticalLayout.addWidget(self.input_search_book)
         self.line_2 = QtWidgets.QFrame(self.border)
         self.line_2.setStyleSheet("border: 2px solid #842a2d;")
         self.line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_2.setObjectName("line_2")
         self.book_verticalLayout.addWidget(self.line_2)
-        self.book_search_button = QtWidgets.QPushButton(self.border)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setItalic(False)
-        self.book_search_button.setFont(font)
-        self.book_search_button.setCursor(QtGui.QCursor(
-            QtCore.Qt.CursorShape.PointingHandCursor))
-        self.book_search_button.setStyleSheet("QPushButton{\n"
-                                              "    color: #842a2d;\n"
-                                              "    font: 12pt \"Franklin Gothic Book\" bold;\n"
-                                              "    border: 2px solid #842a2d;\n"
-                                              "    padding: 2px 53px;\n"
-                                              "    border-radius: 10px;\n"
-                                              "    opacity: 100;\n"
-                                              "}\n"
-                                              "\n"
-                                              "QPushButton:hover{\n"
-                                              "    background-color: #842a2d;\n"
-                                              "    color: #CBB1A0;\n"
-                                              "}")
-        self.book_search_button.setObjectName("book_search_button")
-        self.book_search_button.clicked.connect(
-            lambda: self.search_func(what_to_query="Book"))
-        self.book_verticalLayout.addWidget(self.book_search_button)
         self.book_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -240,28 +191,24 @@ class Ui_SearchHistory(object):
                                              "QPushButton:hover{\n"
                                              "    background-color: #842a2d;\n"
                                              "    color: #CBB1A0;\n"
+                                             "}\n"
+                                             "\n"
+                                             "QPushButton:pressed{\n"
+                                             "background-color: #b34044;\n"
+                                             "border: 5px solid #b34044;\n"
                                              "}")
         self.book_reset_button.setObjectName("book_reset_button")
-        self.book_reset_button.clicked.connect(lambda: self.reset_func("Book"))
         self.book_verticalLayout.addWidget(self.book_reset_button)
         self.book_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.book_verticalLayout)
         self.book_tableWidget = QtWidgets.QTableWidget(self.border)
         self.book_tableWidget.setObjectName("book_tableWidget")
-        self.book_tableWidget.setColumnCount(6)
+        self.book_column_count = 6
+        self.book_tableWidget.setColumnCount(self.book_column_count)
         self.book_tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(5, item)
+        for index in range(self.book_column_count):
+            item = QtWidgets.QTableWidgetItem()
+            self.book_tableWidget.setHorizontalHeaderItem(index, item)
         self.book_tableWidget.horizontalHeader().setDefaultSectionSize(185)
         self.book_form.setWidget(
             0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.book_tableWidget)
@@ -275,7 +222,8 @@ class Ui_SearchHistory(object):
         font.setPointSize(14)
         font.setBold(True)
         self.borrow_label.setFont(font)
-        self.borrow_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.borrow_label.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.borrow_label.setObjectName("borrow_label")
         self.borrow_verticalLayout.addWidget(self.borrow_label)
         self.borrow_id_label = QtWidgets.QLabel(self.border)
@@ -286,58 +234,33 @@ class Ui_SearchHistory(object):
                                           QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.borrow_id_label.setObjectName("borrow_id_label")
         self.borrow_verticalLayout.addWidget(self.borrow_id_label)
-        self.input_borrow_id = QtWidgets.QLineEdit(self.border)
+        self.input_search_borrow = QtWidgets.QLineEdit(self.border)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(False)
         font.setItalic(False)
-        self.input_borrow_id.setFont(font)
-        self.input_borrow_id.setStyleSheet("QLineEdit {\n"
-                                           "      color: #000000;\n"
-                                           "      font: 11pt \"Verdana\";\n"
-                                           "      border: None;\n"
-                                           "      border-bottom-color: white;\n"
-                                           "      border-radius: 10px;\n"
-                                           "      padding: 0 8px;\n"
-                                           "      background: #CBB1A0;\n"
-                                           "      selection-background-color: darkgray;\n"
-                                           "}")
-        self.input_borrow_id.setInputMask("")
-        self.input_borrow_id.setMaxLength(12)
-        self.input_borrow_id.setClearButtonEnabled(True)
-        self.input_borrow_id.setObjectName("input_borrow_id")
-        self.borrow_verticalLayout.addWidget(self.input_borrow_id)
+        self.input_search_borrow.setFont(font)
+        self.input_search_borrow.setStyleSheet("QLineEdit {\n"
+                                               "      color: #000000;\n"
+                                               "      font: 11pt \"Verdana\";\n"
+                                               "      border: None;\n"
+                                               "      border-bottom-color: white;\n"
+                                               "      border-radius: 10px;\n"
+                                               "      padding: 0 8px;\n"
+                                               "      background: #CBB1A0;\n"
+                                               "      selection-background-color: darkgray;\n"
+                                               "}")
+        self.input_search_borrow.setInputMask("")
+        self.input_search_borrow.setMaxLength(20)
+        self.input_search_borrow.setClearButtonEnabled(True)
+        self.input_search_borrow.setObjectName("input_search_borrow")
+        self.borrow_verticalLayout.addWidget(self.input_search_borrow)
         self.line_3 = QtWidgets.QFrame(self.border)
         self.line_3.setStyleSheet("border: 2px solid #842a2d;")
         self.line_3.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_3.setObjectName("line_3")
         self.borrow_verticalLayout.addWidget(self.line_3)
-        self.borrow_search_button = QtWidgets.QPushButton(self.border)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setItalic(False)
-        self.borrow_search_button.setFont(font)
-        self.borrow_search_button.setCursor(
-            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.borrow_search_button.setStyleSheet("QPushButton{\n"
-                                                "    color: #842a2d;\n"
-                                                "    font: 12pt \"Franklin Gothic Book\" bold;\n"
-                                                "    border: 2px solid #842a2d;\n"
-                                                "    padding: 2px 53px;\n"
-                                                "    border-radius: 10px;\n"
-                                                "    opacity: 100;\n"
-                                                "}\n"
-                                                "\n"
-                                                "QPushButton:hover{\n"
-                                                "    background-color: #842a2d;\n"
-                                                "    color: #CBB1A0;\n"
-                                                "}")
-        self.borrow_search_button.setObjectName("borrow_search_button")
-        self.borrow_search_button.clicked.connect(
-            lambda: self.search_func(what_to_query="Borrow"))
-        self.borrow_verticalLayout.addWidget(self.borrow_search_button)
         self.borrow_reset_button = QtWidgets.QPushButton(self.border)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -358,35 +281,24 @@ class Ui_SearchHistory(object):
                                                "QPushButton:hover{\n"
                                                "    background-color: #842a2d;\n"
                                                "    color: #CBB1A0;\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:pressed{\n"
+                                               "background-color: #b34044;\n"
+                                               "border: 5px solid #b34044;\n"
                                                "}")
         self.borrow_reset_button.setObjectName("borrow_reset_button")
-        self.borrow_reset_button.clicked.connect(
-            lambda: self.reset_func("Borrow"))
         self.borrow_verticalLayout.addWidget(self.borrow_reset_button)
         self.borrow_form.setLayout(
             0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.borrow_verticalLayout)
         self.borrow_tableWidget = QtWidgets.QTableWidget(self.border)
         self.borrow_tableWidget.setObjectName("borrow_tableWidget")
-        self.borrow_tableWidget.setColumnCount(9)
+        self.borrow_column_count = 9
+        self.borrow_tableWidget.setColumnCount(self.borrow_column_count)
         self.borrow_tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.borrow_tableWidget.setHorizontalHeaderItem(8, item)
+        for index in range(self.borrow_column_count):
+            item = QtWidgets.QTableWidgetItem()
+            self.borrow_tableWidget.setHorizontalHeaderItem(index, item)
         self.borrow_form.setWidget(
             0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.borrow_tableWidget)
         self.tables.addLayout(self.borrow_form, 2, 0, 1, 1)
@@ -424,6 +336,11 @@ class Ui_SearchHistory(object):
                                        "QPushButton:hover{\n"
                                        "    background-color: #842a2d;\n"
                                        "    color: #CBB1A0;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:pressed{\n"
+                                       "background-color: #b34044;\n"
+                                       "border: 5px solid #b34044;\n"
                                        "}")
         self.back_button.setObjectName("back_button")
         self.back_button.clicked.connect(
@@ -433,7 +350,22 @@ class Ui_SearchHistory(object):
         self.verticalLayout_2.addWidget(self.border)
         self.retranslateUi(SearchHistory)
         QtCore.QMetaObject.connectSlotsByName(SearchHistory)
+        # * initial query
         self.load_initial_data()
+        # * functions
+        self.student_reset_button.clicked.connect(
+            lambda: self.reset_func("Student"))
+        self.book_reset_button.clicked.connect(
+            lambda: self.reset_func("Book"))
+        self.borrow_reset_button.clicked.connect(
+            lambda: self.reset_func("Borrow"))
+        # * ever-changing-query
+        self.input_search_student.textChanged.connect(
+            lambda: self.query_func(action_to_do="Student"))
+        self.input_search_book.textChanged.connect(
+            lambda: self.query_func(action_to_do="Book"))
+        self.input_search_borrow.textChanged.connect(
+            lambda: self.query_func(action_to_do="Borrow"))
 
     def return_action(self, SearchHistory, MainMenu):
         SearchHistory.close()
@@ -492,169 +424,224 @@ class Ui_SearchHistory(object):
     def reset_func(self, action_to_do):
         if (action_to_do == "Student"):
             self.load_student_data()
-            self.input_student_id.clear()
+            self.input_search_student.clear()
         if (action_to_do == "Book"):
             self.load_book_data()
-            self.input_book_id.setText("BOOK-")
+            self.input_search_book.clear()
         if (action_to_do == "Borrow"):
             self.load_borrow_data()
-            self.input_borrow_id.setText("BORROW-")
+            self.input_search_borrow.clear()
         self.status_label.clear()
 
-    def search_func(self, what_to_query):
-        if (what_to_query == "Student"):
-            search_value = self.input_student_id.text()
-        if (what_to_query == "Book"):
-            search_value = self.input_book_id.text()
-        if (what_to_query == "Borrow"):
-            search_value = self.input_borrow_id.text()
+    def query_func(self, action_to_do):
+        if (action_to_do == "Student"):
+            search_value = self.input_search_student.text()
+            if (search_value == ""):
+                self.load_student_data()
+                self.status_label.setText("")
+            else:
+                pass
+                self.bruteforce_search_students(search_value)
+        if (action_to_do == "Book"):
+            search_value = self.input_search_book.text()
+            if (search_value == ""):
+                self.load_book_data()
+                self.status_label.setText("")
+            else:
+                pass
+                self.bruteforce_search_books(search_value)
+        if (action_to_do == "Borrow"):
+            search_value = self.input_search_borrow.text()
+            if (search_value == ""):
+                self.load_borrow_data()
+                self.status_label.setText("")
+            else:
+                self.bruteforce_search_borrow(search_value)
+
+    def student_data_to_query(self, i, like_query):
+        data_query = [
+            {
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_ID LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_LastName LIKE '{like_query}' OR Student_FirstName LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_Section LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_YearLevel LIKE '{like_query}';"
+            },
+        ]
+        return data_query[i]["query"]
+
+    def book_data_to_query(self, i, like_query):
+        data_query = [
+            {
+                "query": "SELECT * FROM BOOK WHERE Book_ID = ?;"
+            },
+            {
+                "query": "SELECT * FROM BOOK WHERE Book_ISBN = ?;"
+            },
+            {
+                "query": "SELECT * FROM BOOK WHERE Book_Condition = ?;"
+            },
+            {
+                "query": f"SELECT * FROM BOOK WHERE Book_Title LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT * FROM BOOK WHERE Book_Author LIKE '{like_query}';"
+            },
+            {
+                "query": "SELECT * FROM BOOK WHERE Book_Status = ?;"
+            }
+        ]
+        return data_query[i]["query"]
+
+    def borrow_data_to_query(self, i, like_query):
+        data_query = [
+            {
+                "query": f"SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount FROM BORROW LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID WHERE Borrow_ID LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount FROM BORROW LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID WHERE Borrow_Status LIKE '{like_query}';"
+            },
+            {
+                "query": f"SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount FROM BORROW LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID WHERE Borrow_Date LIKE '{like_query}';"
+            }
+        ]
+        return data_query[i]["query"]
+
+    def bruteforce_search_students(self, search_value):
         con = sqlite3.connect('./db/test.db')
         cur = con.cursor()
-        query = self.evaluate_query(what_to_query)
-        interpolate_data = [search_value]
-        result = cur.execute(query, interpolate_data)
-        data = [form[1] for form in list(enumerate(result))]
-        if data:
-            data = data[0]
-            self.status_label.setText("")
-            if (what_to_query == "Student"):
-                self.load_specific_student_data(search_value)
-            if (what_to_query == "Book"):
-                self.load_specific_book_data(search_value)
-            if (what_to_query == "Borrow"):
-                self.load_specific_borrow_data(search_value)
-        else:
-            self.status_label.setText("This data does not exist!")
-            if (what_to_query == "Student"):
+        iteration = 0
+        lever = True
+        while iteration <= 3:
+            # * iteration id
+            # * 0: student_id
+            # * 1: name
+            # * 2: section
+            # * 3: year level
+            query = self.student_data_to_query(
+                iteration, like_query=f'%{search_value}%')
+            result = cur.execute(query)
+            data = cur.fetchall()
+            if data:
+                self.status_label.setText("")
                 self.student_tableWidget.setRowCount(0)
-            if (what_to_query == "Book"):
+                for row in range(len(data)):
+                    self.student_tableWidget.insertRow(row)
+                    for column, item in enumerate(data[row]):
+                        self.student_tableWidget.setItem(
+                            row, column, QtWidgets.QTableWidgetItem(str(item)))
+                break
+            else:
+                self.student_tableWidget.setRowCount(0)
+                self.status_label.setText(
+                    "Your search result does not exist!")
+            iteration += 1
+
+    def bruteforce_search_books(self, search_value):
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        iteration = 0
+        while iteration <= 5:
+            # * iteration id
+            # * 0: book_id
+            # * 1: isbn
+            # * 2: condition
+            # * 3: title
+            # * 4: author
+            # * 5: status
+            query = self.book_data_to_query(
+                iteration, like_query=f'%{search_value}%')
+            if iteration == 3 or iteration == 4:
+                result = cur.execute(query)
+            else:
+                interpolate_data = [search_value]
+                result = cur.execute(query, interpolate_data)
+            data = cur.fetchall()
+            if data:
+                self.status_label.setText("")
                 self.book_tableWidget.setRowCount(0)
-            if (what_to_query == "Borrow"):
+                for row in range(len(data)):
+                    self.book_tableWidget.insertRow(row)
+                    for column, item in enumerate(data[row]):
+                        self.book_tableWidget.setItem(
+                            row, column, QtWidgets.QTableWidgetItem(str(item)))
+                break
+            else:
+                self.book_tableWidget.setRowCount(0)
+                self.status_label.setText(
+                    "Your search result does not exist!")
+            iteration += 1
+
+    def bruteforce_search_borrow(self, search_value):
+        con = sqlite3.connect('./db/test.db')
+        cur = con.cursor()
+        iteration = 0
+        while iteration <= 2:
+            # * iteration id
+            # * 0: borrow_id
+            # * 1: borrow_status
+            # * 2: borrow_date
+            query = self.borrow_data_to_query(
+                iteration, like_query=f'%{search_value}%')
+            result = cur.execute(query)
+            data = cur.fetchall()
+            if data:
+                self.status_label.setText("")
                 self.borrow_tableWidget.setRowCount(0)
-
-    def load_specific_student_data(self, student_id):
-        con = sqlite3.connect('./db/test.db')
-        cur = con.cursor()
-        student_query = self.evaluate_query("Student")
-        interpolate_data = [student_id]
-        student_result = cur.execute(student_query, interpolate_data)
-        self.student_tableWidget.setRowCount(0)
-        for row, form in enumerate(student_result):
-            self.student_tableWidget.insertRow(row)
-            for column, item in enumerate(form):
-                self.student_tableWidget.setItem(
-                    row, column, QtWidgets.QTableWidgetItem(str(item)))
-
-    def load_specific_book_data(self, book_id):
-        con = sqlite3.connect('./db/test.db')
-        cur = con.cursor()
-        book_query = self.evaluate_query("Book")
-        interpolate_data = [book_id]
-        book_result = cur.execute(book_query, interpolate_data)
-        self.book_tableWidget.setRowCount(0)
-        for row, form in enumerate(book_result):
-            self.book_tableWidget.insertRow(row)
-            for column, item in enumerate(form):
-                self.book_tableWidget.setItem(
-                    row, column, QtWidgets.QTableWidgetItem(str(item)))
-
-    def load_specific_borrow_data(self, borrow_id):
-        con = sqlite3.connect('./db/test.db')
-        cur = con.cursor()
-        borrow_query = self.evaluate_query("Borrow")
-        interpolate_data = [borrow_id]
-        borrow_result = cur.execute(borrow_query, interpolate_data)
-        self.borrow_tableWidget.setRowCount(0)
-        for row, form in enumerate(borrow_result):
-            self.borrow_tableWidget.insertRow(row)
-            for column, item in enumerate(form):
-                self.borrow_tableWidget.setItem(
-                    row, column, QtWidgets.QTableWidgetItem(str(item)))
-
-    def evaluate_query(self, query):
-        if (query == "Student"):
-            return """
-                    SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
-                    FROM STUDENT
-                    WHERE Student_ID = ?;
-                    """
-        if (query == "Book"):
-            return """
-                    SELECT *
-                    FROM BOOK
-                    WHERE Book_ID = ?;
-                    """
-        if (query == "Borrow"):
-            return """
-                    SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
-                    FROM BORROW
-                    LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
-                    LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
-                    LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer 
-                    LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID
-                    WHERE Borrow_ID = ?;
-                    """
+                for row in range(len(data)):
+                    self.borrow_tableWidget.insertRow(row)
+                    for column, item in enumerate(data[row]):
+                        self.borrow_tableWidget.setItem(
+                            row, column, QtWidgets.QTableWidgetItem(str(item)))
+                break
+            else:
+                self.borrow_tableWidget.setRowCount(0)
+                self.status_label.setText(
+                    "Your search result does not exist!")
+            iteration += 1
 
     def retranslateUi(self, SearchHistory):
         _translate = QtCore.QCoreApplication.translate
-        SearchHistory.setWindowTitle(_translate("SearchHistory", "Form"))
+        SearchHistory.setWindowTitle(
+            _translate("SearchHistory", "Search History"))
         self.title_name.setText(_translate("SearchHistory", "SEARCH HISTORY"))
         self.student_label.setText(_translate("SearchHistory", "STUDENT"))
-        self.student_id_label.setText(
-            _translate("SearchHistory", "Student ID:"))
-        self.student_search_button.setText(
-            _translate("SearchHistory", "SEARCH"))
+        self.student_id_label.setText(_translate(
+            "SearchHistory", "Search Student data:"))
         self.student_reset_button.setText(
             _translate("SearchHistory", "RESET STUDENT TABLE"))
-        item = self.student_tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("SearchHistory", "Student ID"))
-        item = self.student_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("SearchHistory", "Student Name"))
-        item = self.student_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("SearchHistory", "Section"))
-        item = self.student_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("SearchHistory", "Year Level"))
+        self.column_student_text = ["Student ID",
+                                    "Student Name", "Section", "Year Level"]
+        for index in range(self.student_column_count):
+            item = self.student_tableWidget.horizontalHeaderItem(index)
+            item.setText(_translate("SearchHistory",
+                         self.column_student_text[index]))
         self.book_label.setText(_translate("SearchHistory", "BOOK"))
-        self.book_id_label.setText(_translate("SearchHistory", "Book ID:"))
-        self.input_book_id.setText(_translate("SearchHistory", "BOOK-"))
-        self.book_search_button.setText(_translate("SearchHistory", "SEARCH"))
-        self.book_reset_button.setText(
-            _translate("SearchHistory", "RESET BOOK TABLE"))
-        item = self.book_tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("SearchHistory", "Book ID"))
-        item = self.book_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("SearchHistory", "ISBN"))
-        item = self.book_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("SearchHistory", "Title"))
-        item = self.book_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("SearchHistory", "Author"))
-        item = self.book_tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("SearchHistory", "Condition"))
-        item = self.book_tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("SearchHistory", "Status"))
+        self.book_id_label.setText(_translate(
+            "SearchHistory", "Search Book data:"))
+        self.book_reset_button.setText(_translate(
+            "SearchHistory", "   RESET BOOK TABLE   "))
+
+        self.column_book_text = ["Book ID", "ISBN",
+                                 "Title", "Author", "Condition", "Status"]
+        for index in range(self.book_column_count):
+            item = self.book_tableWidget.horizontalHeaderItem(index)
+            item.setText(_translate("SearchHistory",
+                         self.column_book_text[index]))
         self.borrow_label.setText(_translate("SearchHistory", "BORROW"))
-        self.borrow_id_label.setText(_translate("SearchHistory", "Borrow ID:"))
-        self.input_borrow_id.setText(_translate("SearchHistory", "BORROW-"))
-        self.borrow_search_button.setText(
-            _translate("SearchHistory", "SEARCH"))
+        self.borrow_id_label.setText(_translate(
+            "SearchHistory", "Search Borrow data:\n(ID, Borrow Date, Status)"))
         self.borrow_reset_button.setText(
             _translate("SearchHistory", "RESET BORROW TABLE"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("SearchHistory", "Borrow ID"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("SearchHistory", "Student Name"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("SearchHistory", "Book Title"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("SearchHistory", "Borrow Date"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("SearchHistory", "Return Date"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("SearchHistory", "Status"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("SearchHistory", "Overdue Status"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("SearchHistory", "Issuer"))
-        item = self.borrow_tableWidget.horizontalHeaderItem(8)
-        item.setText(_translate("SearchHistory", "Payment Amount"))
+        self.column_borrow_text = ["Borrow ID", "Student Name",
+                                   "Book Title", "Borrow Date", "Return Date", "Status", "Overdue Status", "Issuer", "Payment Amount"]
+        for index in range(self.borrow_column_count):
+            item = self.borrow_tableWidget.horizontalHeaderItem(index)
+            item.setText(_translate("SearchHistory",
+                         self.column_borrow_text[index]))
         self.back_button.setText(_translate("SearchHistory", "BACK"))

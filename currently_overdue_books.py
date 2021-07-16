@@ -67,6 +67,10 @@ class Ui_CurrentlyOverdueBooks(object):
                                        "QPushButton:hover{\n"
                                        "    background-color: #842a2d;\n"
                                        "    color: #CBB1A0;\n"
+                                       "}\n"
+                                       "QPushButton:pressed{\n"
+                                       "    background-color: #b34044;\n"
+                                       "    border: 5px solid #b34044;\n"
                                        "}")
         self.back_button.setObjectName("back_button")
         self.back_button.clicked.connect(
@@ -120,13 +124,3 @@ class Ui_CurrentlyOverdueBooks(object):
         item = self.tableWidget.horizontalHeaderItem(5)
         item.setText(_translate("CurrentlyOverdueBooks", "Payment Amount"))
         self.back_button.setText(_translate("CurrentlyOverdueBooks", "BACK"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    CurrentlyOverdueBooks = QtWidgets.QWidget()
-    ui = Ui_CurrentlyOverdueBooks()
-    ui.setupUi(CurrentlyOverdueBooks)
-    CurrentlyOverdueBooks.show()
-    sys.exit(app.exec())

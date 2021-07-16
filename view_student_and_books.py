@@ -223,6 +223,10 @@ class Ui_ViewStudentAndBooks(object):
                                        "QPushButton:hover{\n"
                                        "    background-color: #842a2d;\n"
                                        "    color: #CBB1A0;\n"
+                                       "}\n"
+                                       "QPushButton:pressed{\n"
+                                       "    background-color: #b34044;\n"
+                                       "    border: 5px solid #b34044;\n"
                                        "}")
         self.back_button.setObjectName("back_button")
         self.back_button.clicked.connect(
@@ -285,43 +289,25 @@ class Ui_ViewStudentAndBooks(object):
         else:
             self.bruteforce_search_book(search_value)
 
-    def book_data_to_query(self, i):
+    def book_data_to_query(self, i, like_query):
         data_query = [
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_ID = ? AND Book_Status = 'Available';
-                        """
+                "query": "SELECT * FROM BOOK WHERE Book_ID = ? AND Book_Status = 'Available';"
             },
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_ISBN = ? AND Book_Status = 'Available';
-                        """
+                "query": "SELECT * FROM BOOK WHERE Book_ISBN = ? AND Book_Status = 'Available';"
             },
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_Title = ? AND Book_Status = 'Available';
-                        """
+                "query": "SELECT * FROM BOOK WHERE Book_Condition = ? AND Book_Status = 'Available';"
             },
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_Author = ? AND Book_Status = 'Available';
-                        """
+                "query": f"SELECT * FROM BOOK WHERE Book_Title LIKE '{like_query}' AND Book_Status = 'Available';"
             },
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_Condition = ? AND Book_Status = 'Available';
-                        """
+                "query": f"SELECT * FROM BOOK WHERE Book_Author LIKE '{like_query}' AND Book_Status = 'Available';"
             },
             {
-                "query": """
-                        SELECT * FROM BOOK
-                        WHERE Book_Status = ? AND Book_Status = 'Available';
-                        """
+                "query": "SELECT * FROM BOOK WHERE Book_Status = ? AND Book_Status = 'Available';"
             }
         ]
         return data_query[i]["query"]
@@ -329,32 +315,16 @@ class Ui_ViewStudentAndBooks(object):
     def student_data_to_query(self, i):
         data_query = [
             {
-                "query": """
-                        SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
-                        FROM STUDENT
-                        WHERE Student_ID = ?;
-                        """
+                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_ID = ?;"
             },
             {
-                "query": """
-                        SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
-                        FROM STUDENT
-                        WHERE Student_LastName = ? OR Student_FirstName = ?;
-                        """
+                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_LastName = ? OR Student_FirstName = ?;"
             },
             {
-                "query": """
-                        SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
-                        FROM STUDENT
-                        WHERE Student_Section = ?;
-                        """
+                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_Section = ?;"
             },
             {
-                "query": """
-                        SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
-                        FROM STUDENT
-                        WHERE Student_YearLevel = ?;
-                        """
+                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_YearLevel = ?;"
             },
         ]
         return data_query[i]["query"]
@@ -403,9 +373,14 @@ class Ui_ViewStudentAndBooks(object):
             # * 3: author
             # * 4: condition
             # * 5: status
-            query = self.book_data_to_query(iteration)
-            interpolate_data = [search_value]
-            result = cur.execute(query, interpolate_data)
+            query = self.book_data_to_query(
+                iteration, like_query=f'%{search_value}%')
+            print(query)
+            if iteration == 3 or iteration == 4:
+                result = cur.execute(query)
+            else:
+                interpolate_data = [search_value]
+                result = cur.execute(query, interpolate_data)
             data = cur.fetchall()
             if data:
                 self.status_label_book.setText("")
@@ -462,13 +437,3 @@ class Ui_ViewStudentAndBooks(object):
         self.status_label_book.setText(_translate(
             "ViewStudentAndBooks", ""))
         self.back_button.setText(_translate("ViewStudentAndBooks", "BACK"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ViewStudentAndBooks = QtWidgets.QWidget()
-    ui = Ui_ViewStudentAndBooks()
-    ui.setupUi(ViewStudentAndBooks)
-    ViewStudentAndBooks.show()
-    sys.exit(app.exec())

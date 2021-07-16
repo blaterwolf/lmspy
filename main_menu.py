@@ -452,7 +452,7 @@ class Ui_MainMenu(object):
                 borrow_date, borrow_return_date)
             days_passed = (borrow_return_date-borrow_date).days
             if days_passed >= 7:
-                # * UPDATE PAYMENT data: Compute Amount, Status, and Issuer
+                # * UPDATE PAYMENT data: Compute Amount
                 payment_query = """
                 UPDATE PAYMENT
                 SET Payment_Amount = ?

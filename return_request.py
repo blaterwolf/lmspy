@@ -120,6 +120,10 @@ class Ui_ReturnRequest(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.return_button.setObjectName("return_button")
         self.return_button.clicked.connect(
@@ -142,6 +146,10 @@ class Ui_ReturnRequest(object):
                                                       "QPushButton:hover{\n"
                                                       "    background-color: #842a2d;\n"
                                                       "    color: #CBB1A0;\n"
+                                                      "}\n"
+                                                      "QPushButton:pressed{\n"
+                                                      "    background-color: #b34044;\n"
+                                                      "    border: 5px solid #b34044;\n"
                                                       "}")
         self.view_borrowed_books_button.setObjectName(
             "view_borrowed_books_button")
@@ -163,6 +171,10 @@ class Ui_ReturnRequest(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
@@ -244,7 +256,7 @@ class Ui_ReturnRequest(object):
         result = cur.execute(book_query, interpolate_data)
         book_title = [form[1][0] for form in list(enumerate(result))][0]
 
-        # * STEP 5: Ask the user whether you would sure return the book.
+        # * STEP 5: Ask the user whether they sure of returning the book.
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
         msg.setText(
@@ -288,18 +300,6 @@ class Ui_ReturnRequest(object):
                 window_title="Returned Successfully",
                 icon_type="information"
             )
-
-    def compute_amount(self, borrow_date, borrow_return_date):
-        penalty = 0.0
-        days_passed = (borrow_return_date-borrow_date).days
-        while days_passed >= 7:
-            if days_passed == 7:
-                penalty += 100.00
-                days_passed = 0
-            else:
-                penalty += (0.05 * 100.00)
-                days_passed -= 1
-        return penalty
 
     def informative_message(self, text, subtext, window_title, icon_type="critical"):
         msg = QtWidgets.QMessageBox()

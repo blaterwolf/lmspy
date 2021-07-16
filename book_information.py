@@ -142,6 +142,10 @@ class Ui_BookInformation(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.search_button.setObjectName("search_button")
         self.search_button.clicked.connect(self.search_button_clicked)
@@ -361,6 +365,10 @@ class Ui_BookInformation(object):
                                           "QPushButton:hover{\n"
                                           "    background-color: #842a2d;\n"
                                           "    color: #CBB1A0;\n"
+                                          "}\n"
+                                          "QPushButton:pressed{\n"
+                                          "    background-color: #b34044;\n"
+                                          "    border: 5px solid #b34044;\n"
                                           "}")
         self.confirm_button.setObjectName("confirm_button")
         self.confirm_button.clicked.connect(lambda: self.validate_rb_state(
@@ -389,6 +397,10 @@ class Ui_BookInformation(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
@@ -480,7 +492,7 @@ class Ui_BookInformation(object):
         else:
             self.clear_data_on_inputs()
             self.status_label.setText(
-                "This student does not exist in the database!")
+                "This book does not exist in the database!")
             self.disable_inputs()
             self.input_search.setText("BOOK-")
 

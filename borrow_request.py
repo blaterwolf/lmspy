@@ -153,6 +153,10 @@ class Ui_BorrowRequest(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.borrow_button.setObjectName("borrow_button")
         self.borrow_button.clicked.connect(
@@ -175,6 +179,10 @@ class Ui_BorrowRequest(object):
                                                       "QPushButton:hover{\n"
                                                       "    background-color: #842a2d;\n"
                                                       "    color: #CBB1A0;\n"
+                                                      "}\n"
+                                                      "QPushButton:pressed{\n"
+                                                      "    background-color: #b34044;\n"
+                                                      "    border: 5px solid #b34044;\n"
                                                       "}")
         self.view_borrowed_books_button.setObjectName(
             "view_borrowed_books_button")
@@ -196,6 +204,10 @@ class Ui_BorrowRequest(object):
                                          "QPushButton:hover{\n"
                                          "    background-color: #842a2d;\n"
                                          "    color: #CBB1A0;\n"
+                                         "}\n"
+                                         "QPushButton:pressed{\n"
+                                         "    background-color: #b34044;\n"
+                                         "    border: 5px solid #b34044;\n"
                                          "}")
         self.cancel_button.setObjectName("cancel_button")
         self.cancel_button.clicked.connect(
