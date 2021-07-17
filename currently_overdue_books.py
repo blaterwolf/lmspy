@@ -87,7 +87,7 @@ class Ui_CurrentlyOverdueBooks(object):
         MainMenu.show()
 
     def load_currently_overdue_books(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = """
         SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Librarian_Name, Payment_Amount 
         FROM BORROW

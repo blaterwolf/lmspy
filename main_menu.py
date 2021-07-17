@@ -360,7 +360,7 @@ class Ui_MainMenu(object):
         Login.show()
 
     def get_name(self, username):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = "SELECT Librarian_Name FROM LIBRARIAN WHERE Librarian_Username = (?);"
         params = [username]
         result = list(enumerate(con.execute(query, params)))[0][1][0]
@@ -434,7 +434,7 @@ class Ui_MainMenu(object):
         # * Goal #1. Evaluate the Overdue Books on the Main Menu class
         # *    so that it can be queried on the overdue_window.
         # * Step 1: Query relevant data to the database.
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         query = """
         SELECT Borrow_ID, Borrow_Date, Payment_ID

@@ -267,7 +267,7 @@ class Ui_AddLibrarian(object):
         elif (len(init_password) < 8 or len(chck_password) < 8):
             self.label.setText("Passwords must be at least 8 characters!")
         else:
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             # * check if the username exists already in the database.
             query = "SELECT Librarian_Username FROM LIBRARIAN;"
             result = [form[1][0]
@@ -291,7 +291,7 @@ class Ui_AddLibrarian(object):
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
             # * Step 1: Connect to the database.
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             cur = con.cursor()
             # * Step 2: Put the query inside the string.
             query = "INSERT INTO LIBRARIAN VALUES (?,?,?);"  # * what to query

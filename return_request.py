@@ -202,7 +202,7 @@ class Ui_ReturnRequest(object):
     def validate_return_books(self, ReturnRequest, current_username):
         borrow_id = self.input_borrow_id.text()
         # * initialize sqlite
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         # * check if borrow_id exists
         check_id_query = "SELECT Borrow_ID FROM BORROW;"
@@ -235,7 +235,7 @@ class Ui_ReturnRequest(object):
         payment_status = 'Paid'
 
         # * Step 2: Initialize Database
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
 
         # * STEP 3: QUERY the PAYMENT table and its Payment_Amount

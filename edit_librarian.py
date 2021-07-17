@@ -330,7 +330,7 @@ class Ui_EditLibrarian(object):
     def search_for_username(self):
         username_to_search = self.input_search_username.text()
     # * query if that username exists in the database
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = "SELECT Librarian_Username, Librarian_Name FROM LIBRARIAN;"
         result = [form[1] for form in list(enumerate(con.execute(query)))]
         usernames = [each_data[0] for each_data in result]
@@ -380,7 +380,7 @@ class Ui_EditLibrarian(object):
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
             # * Step 1: Connect to the database.
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             cur = con.cursor()
             # * Step 2: Put the query inside the string.
             query = """

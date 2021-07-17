@@ -469,7 +469,7 @@ class Ui_StudentInformation(object):
     def search_student(self):
         search_value = self.input_search.text()
         # * initialize sqlite
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         # * check if student_id exists
         check_id_query = "SELECT * FROM STUDENT WHERE Student_ID = ?;"
@@ -519,7 +519,7 @@ class Ui_StudentInformation(object):
             self.status_label.setText("Invalid field/s are empty! ")
         else:
             # * check if this student ID already exists in the database.
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             query = "SELECT Student_ID FROM STUDENT;"
             result = [form[1][0]
                       for form in list(enumerate(con.execute(query)))]
@@ -542,7 +542,7 @@ class Ui_StudentInformation(object):
         msg.setWindowTitle("Confirmation Check")
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             query = "INSERT INTO STUDENT VALUES (?,?,?,?,?);"
             cur = con.cursor()
             interpolate_data = [student_id, lastname,
@@ -576,7 +576,7 @@ class Ui_StudentInformation(object):
             msg.setWindowTitle("Edited Student Information Confirmation")
             result = msg.exec()
             if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-                con = sqlite3.connect('./db/test.db')
+                con = sqlite3.connect('./db/library.db')
                 query_update = """
                 UPDATE STUDENT 
                 SET Student_LastName = ?, Student_FirstName = ?, Student_Section = ?, Student_YearLevel = ?
@@ -601,7 +601,7 @@ class Ui_StudentInformation(object):
 
     def delete_student_data(self, student_id):
         # * Step 1: Initialize Database
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         # * Step 2: Query the data to be deleted
         query_delete = """

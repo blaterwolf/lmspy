@@ -472,7 +472,7 @@ class Ui_BookInformation(object):
     def search_button_clicked(self):
         search_value = self.input_search.text()
         # * initialize sqlite
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         # * check if book_id exists
         check_id_query = "SELECT * FROM BOOK WHERE Book_ID = ?;"
@@ -523,7 +523,7 @@ class Ui_BookInformation(object):
             self.status_label.setText("Invalid field/s are empty! ")
         else:
             # * check if this book ID already exists in the database.
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             query = "SELECT Book_ID FROM BOOK;"
             result = [form[1][0]
                       for form in list(enumerate(con.execute(query)))]
@@ -546,7 +546,7 @@ class Ui_BookInformation(object):
         msg.setWindowTitle("Confirmation Check")
         result = msg.exec()
         if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-            con = sqlite3.connect('./db/test.db')
+            con = sqlite3.connect('./db/library.db')
             query = "INSERT INTO BOOK VALUES (?,?,?,?,?,?);"
             cur = con.cursor()
             interpolate_data = [book_id, isbn,
@@ -579,7 +579,7 @@ class Ui_BookInformation(object):
                 QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
             result = msg.exec()
             if (result == QtWidgets.QMessageBox.StandardButton.Yes):
-                con = sqlite3.connect('./db/test.db')
+                con = sqlite3.connect('./db/library.db')
                 query = """
                     UPDATE BOOK
                     SET Book_ISBN = ?, Book_Title = ?, Book_Author = ?, Book_Condition = ?
@@ -599,7 +599,7 @@ class Ui_BookInformation(object):
                 self.clear_data_on_inputs()
 
     def delete_data_values(self, book_ID):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = "DELETE FROM BOOK WHERE Book_ID = ?;"
         cur = con.cursor()
         interpolate_data = [book_ID]

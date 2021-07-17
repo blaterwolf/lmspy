@@ -283,7 +283,7 @@ class Ui_Login(object):
         username = self.input_username.text()  # * admin
         password = self.input_password.text()  # * admintest
         compare_data = (username, password)  # * ('admin', 'admintest')
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = "SELECT Librarian_Username, Librarian_Password FROM LIBRARIAN;"
         result = [form[1] for form in list(enumerate(con.execute(query)))]
         if (len(username) == 0 or len(password) == 0):

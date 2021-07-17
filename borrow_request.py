@@ -237,7 +237,7 @@ class Ui_BorrowRequest(object):
 
         # * verify if book and student IDs exist in the database.
         # * Step 1: Connect to the database.
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         # * Step 2: Query Student/Book ID on the database.
         query_student = "SELECT Student_ID FROM STUDENT;"
@@ -283,7 +283,7 @@ class Ui_BorrowRequest(object):
         book_status = "Borrowed"
 
         # * STEP 2: Initialize Database
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
 
         # * STEP 3: QUERY Book Title to borrow.

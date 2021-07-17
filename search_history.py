@@ -4,6 +4,7 @@ import sqlite3
 
 class Ui_SearchHistory(object):
     def setupUi(self, SearchHistory, MainMenu):
+        MainMenu.close()
         SearchHistory.setObjectName("SearchHistory")
         SearchHistory.resize(1200, 700)
         SearchHistory.setStyleSheet(
@@ -372,7 +373,7 @@ class Ui_SearchHistory(object):
         MainMenu.show()
 
     def load_student_data(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         student_query = """
         SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
         FROM STUDENT;
@@ -386,7 +387,7 @@ class Ui_SearchHistory(object):
                     row, column, QtWidgets.QTableWidgetItem(str(item)))
 
     def load_book_data(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         book_query = """
         SELECT * FROM BOOK;
         """
@@ -399,7 +400,7 @@ class Ui_SearchHistory(object):
                     row, column, QtWidgets.QTableWidgetItem(str(item)))
 
     def load_borrow_data(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         borrow_query = """
         SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
         FROM BORROW
@@ -513,7 +514,7 @@ class Ui_SearchHistory(object):
         return data_query[i]["query"]
 
     def bruteforce_search_students(self, search_value):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         iteration = 0
         lever = True
@@ -543,7 +544,7 @@ class Ui_SearchHistory(object):
             iteration += 1
 
     def bruteforce_search_books(self, search_value):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         iteration = 0
         while iteration <= 5:
@@ -578,7 +579,7 @@ class Ui_SearchHistory(object):
             iteration += 1
 
     def bruteforce_search_borrow(self, search_value):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         iteration = 0
         while iteration <= 2:
@@ -626,7 +627,6 @@ class Ui_SearchHistory(object):
             "SearchHistory", "Search Book data:"))
         self.book_reset_button.setText(_translate(
             "SearchHistory", "   RESET BOOK TABLE   "))
-
         self.column_book_text = ["Book ID", "ISBN",
                                  "Title", "Author", "Condition", "Status"]
         for index in range(self.book_column_count):

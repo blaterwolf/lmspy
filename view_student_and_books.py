@@ -86,16 +86,12 @@ class Ui_ViewStudentAndBooks(object):
         self.verticalLayout_3.addLayout(self.verticalLayout)
         self.student_tableWidget = QtWidgets.QTableWidget(self.border)
         self.student_tableWidget.setObjectName("student_tableWidget")
-        self.student_tableWidget.setColumnCount(4)
+        self.student_column_count = 4
+        self.student_tableWidget.setColumnCount(self.student_column_count)
         self.student_tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.student_tableWidget.setHorizontalHeaderItem(3, item)
+        for index in range(self.student_column_count):
+            item = QtWidgets.QTableWidgetItem()
+            self.student_tableWidget.setHorizontalHeaderItem(index, item)
         self.student_tableWidget.horizontalHeader().setDefaultSectionSize(100)
         self.verticalLayout_3.addWidget(self.student_tableWidget)
         self.status_label_student = QtWidgets.QLabel(self.border)
@@ -178,20 +174,12 @@ class Ui_ViewStudentAndBooks(object):
         self.verticalLayout_4.addLayout(self.verticalLayout_2)
         self.book_tableWidget = QtWidgets.QTableWidget(self.border)
         self.book_tableWidget.setObjectName("book_tableWidget")
-        self.book_tableWidget.setColumnCount(6)
+        self.book_column_count = 6
+        self.book_tableWidget.setColumnCount(self.book_column_count)
         self.book_tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.book_tableWidget.setHorizontalHeaderItem(5, item)
+        for index in range(self.book_column_count):
+            item = QtWidgets.QTableWidgetItem()
+            self.book_tableWidget.setHorizontalHeaderItem(index, item)
         self.book_tableWidget.horizontalHeader().setDefaultSectionSize(100)
         self.verticalLayout_4.addWidget(self.book_tableWidget)
         self.status_label_book = QtWidgets.QLabel(self.border)
@@ -246,7 +234,7 @@ class Ui_ViewStudentAndBooks(object):
         BorrowRequest.show()
 
     def load_students(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         student_query = """
         SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel
         FROM STUDENT;
@@ -260,7 +248,7 @@ class Ui_ViewStudentAndBooks(object):
                     row, column, QtWidgets.QTableWidgetItem(str(item)))
 
     def load_book(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         book_query = """
         SELECT * FROM BOOK
         WHERE Book_Status = 'Available';
@@ -330,7 +318,7 @@ class Ui_ViewStudentAndBooks(object):
         return data_query[i]["query"]
 
     def bruteforce_search_students(self, search_value):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         iteration = 0
         lever = True
@@ -362,7 +350,7 @@ class Ui_ViewStudentAndBooks(object):
             iteration += 1
 
     def bruteforce_search_book(self, search_value):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
         iteration = 0
         while iteration <= 5:
@@ -375,7 +363,6 @@ class Ui_ViewStudentAndBooks(object):
             # * 5: status
             query = self.book_data_to_query(
                 iteration, like_query=f'%{search_value}%')
-            print(query)
             if iteration == 3 or iteration == 4:
                 result = cur.execute(query)
             else:
@@ -407,14 +394,12 @@ class Ui_ViewStudentAndBooks(object):
             "ViewStudentAndBooks", "STUDENT"))
         self.search_student_label.setText(_translate(
             "ViewStudentAndBooks", "Search Student:"))
-        item = self.student_tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("ViewStudentAndBooks", "Student ID"))
-        item = self.student_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("ViewStudentAndBooks", "Student Name"))
-        item = self.student_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("ViewStudentAndBooks", "Section"))
-        item = self.student_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("ViewStudentAndBooks", "Year Level"))
+        self.column_student_text = ["Student ID",
+                                    "Student Name", "Section", "Year Level"]
+        for index in range(self.student_column_count):
+            item = self.student_tableWidget.horizontalHeaderItem(index)
+            item.setText(_translate("SearchHistory",
+                         self.column_student_text[index]))
         self.status_label_student.setText(_translate(
             "ViewStudentAndBooks", ""))
         self.book_label.setText(_translate("ViewStudentAndBooks", "BOOK"))
@@ -422,18 +407,12 @@ class Ui_ViewStudentAndBooks(object):
             "ViewStudentAndBooks", "(available books)"))
         self.search_book_label.setText(_translate(
             "ViewStudentAndBooks", "Search Book:"))
-        item = self.book_tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("ViewStudentAndBooks", "Book ID"))
-        item = self.book_tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("ViewStudentAndBooks", "ISBN"))
-        item = self.book_tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("ViewStudentAndBooks", "Title"))
-        item = self.book_tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("ViewStudentAndBooks", "Author"))
-        item = self.book_tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("ViewStudentAndBooks", "Condition"))
-        item = self.book_tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("ViewStudentAndBooks", "Status"))
+        self.column_book_text = ["Book ID", "ISBN",
+                                 "Title", "Author", "Condition", "Status"]
+        for index in range(self.book_column_count):
+            item = self.book_tableWidget.horizontalHeaderItem(index)
+            item.setText(_translate("SearchHistory",
+                         self.column_book_text[index]))
         self.status_label_book.setText(_translate(
             "ViewStudentAndBooks", ""))
         self.back_button.setText(_translate("ViewStudentAndBooks", "BACK"))

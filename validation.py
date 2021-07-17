@@ -3,6 +3,7 @@ from add_librarian import Ui_AddLibrarian
 from edit_librarian import Ui_EditLibrarian
 import pyotp
 import qrcode
+import os
 
 
 class Ui_Validation(object):
@@ -175,10 +176,11 @@ class Ui_Validation(object):
                 self.run_add_librarian(Validation, Login)
             elif form_to_run == "edit":
                 self.run_edit_librarian(Validation, Login)
+            os.remove("./icons/qr.png")
         else:
             self.informative_message(
                 text="The OTP is incorrect.",
-                subtext="You may have also typed the incorrect Base32 command and if this problem kept happening, press cancel button and open the sign up page again.",
+                subtext="You have typed the incorrect OTP. If this problem kept happening, press cancel button and try again.",
                 window_title="Incorrect Validation!",
             )
 

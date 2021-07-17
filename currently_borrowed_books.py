@@ -86,7 +86,7 @@ class Ui_CurrentlyBorrowedBooks(object):
         current_class.show()
 
     def load_currently_borrowed_books(self):
-        con = sqlite3.connect('./db/test.db')
+        con = sqlite3.connect('./db/library.db')
         query = """
         SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Librarian_Name, Payment_ID 
         FROM BORROW
