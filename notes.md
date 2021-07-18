@@ -21,25 +21,6 @@ self.pushButton.clicked.connect(<Object>.close)
 #CBB1A0 - Background
 #842a2d - Main Color
 ```
-### readable_base32()
-This function is used to convert unspaced base32s to 4 digits. (example: `5SVUG6NV2W2KQMUKK2OXOMDVSVZNDWA6` to `5SVU G6NV 2W2K QMUK K2OX OMDV SVZN DWA6`)
-```python
-def readable_base32(self, base32):
-    str = ""
-    counter = 0
-    while counter != 32:
-        if counter % 4 == 0:
-            str += f" {base32[counter]}"
-        else:
-            str += base32[counter]
-        counter += 1
-    return " ".join(str.split(" ")[1:])
-```
-To print it out in the GUI, use a label.
-```py
-self.<label>.setText(_translate(
-            "Validation", f"{self.readable_base32(self.current_base32)}"))
-```
 ### Instructions
 Instructions for the OTP Validation using Google Authenticator.
 ```

@@ -35,6 +35,7 @@ You must have at least Python 3.9.x or above to work. When we are building this,
 | Pillow       | pip install Pillow      | To generate an image for our QR Code, we will be using the Pillow package.                                                      | [![Pillow: 8.3.1](https://img.shields.io/badge/Pillow-8.3.1-blue)](https://pypi.org/project/Pillow/)                            |
 | qrcode       | pip install qrcode      | This generates a QRCode for the Google Authentication which stores the generated provisioning URI.                              | [![qrcode: 7.1](https://img.shields.io/badge/qrcode-7.1-black)](https://pypi.org/project/qrcode/)                               |
 | pyotp        | pip install pyotp       | This helps us to generate a base32 which will be used to generate a provisioning URI so that Google Authentication can scan it. | [![pyotp: 2.6.0](https://img.shields.io/badge/pyotp-2.6.0-black)](https://pypi.org/project/pyotp/)                              |
+
 When everything is installed, run `login.py`. 
 ___
 | Screenshots                 | File                |

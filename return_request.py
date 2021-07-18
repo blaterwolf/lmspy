@@ -247,6 +247,12 @@ class Ui_ReturnRequest(object):
         result = cur.execute(payment_query, interpolate_data)
         payment_amount = [form[1][0] for form in list(enumerate(result))][0]
 
+        # * STEP 3.5: If the payment_amount is 0.0, just update it to 'NO FEES CHARGED.'
+        if payment_amount == 0.0:
+            payment_amount = 'NO FEES CHARGED'
+        else:
+            payment_amount = f'PHP {payment_amount}'
+
         # * STEP 4: QUERY the BOOK to be returned.
         book_query = """
         SELECT Book_Title FROM BOOK
@@ -261,8 +267,12 @@ class Ui_ReturnRequest(object):
         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
         msg.setText(
             "You'll be returning this book and this is the payment amount below: ")
-        msg.setInformativeText(
-            f"Book Title:\t\t{book_title}\nPayment Amount:\tPHP {payment_amount}\n\nDoes the student paid the overdue fee?")
+        if payment_amount == 'NO FEES CHARGED':
+            msg.setInformativeText(
+                f"Book Title:\t\t{book_title}\nPayment Amount:\t{payment_amount}\n\nDo you want to return the book?")
+        else:
+            msg.setInformativeText(
+                f"Book Title:\t\t{book_title}\nPayment Amount:\t{payment_amount}\n\nDoes the student paid the overdue fee?")
         msg.setStandardButtons(
             QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
         msg.setWindowTitle("Payment Verfication")

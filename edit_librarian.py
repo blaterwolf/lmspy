@@ -338,6 +338,7 @@ class Ui_EditLibrarian(object):
             data_to_populate = [
                 each_data for each_data in result if each_data[0] == username_to_search][0]
             self.enable_inputs()
+            self.input_username.setDisabled(True)
             self.populate_data(
                 username=data_to_populate[0], fullname=data_to_populate[1])
         else:
@@ -360,8 +361,6 @@ class Ui_EditLibrarian(object):
             self.label.setText("Passwords do not match!")
         elif (len(init_password) < 8 or len(chck_password) < 8):
             self.label.setText("Passwords must be at least 8 characters!")
-        elif username_search != username:
-            self.label.setText("Don't edit other people's data!")
         else:
             self.label.setText("")
             self.update_data(fullname=fullname, username=username, password=init_password,
@@ -385,11 +384,11 @@ class Ui_EditLibrarian(object):
             # * Step 2: Put the query inside the string.
             query = """
                 UPDATE LIBRARIAN
-                SET Librarian_Username = ?, Librarian_Name = ?, Librarian_Password = ?
+                SET Librarian_Name = ?, Librarian_Password = ?
                 WHERE Librarian_Username = ?;
             """
             # * Step 3: Put all the data to be interpolated inside a list.
-            interpolate_data = [username, fullname, password, username_search]
+            interpolate_data = [fullname, password, username]
             # * Step 4: Execute, Commit, Close
             cur.execute(query, interpolate_data)
             con.commit()

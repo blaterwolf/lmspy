@@ -160,7 +160,7 @@ class Ui_BookStatus(object):
     def load_available_books_data(self):
         self.viewing_status.setText("AVAILABLE BOOKS")
         con = sqlite3.connect('./db/library.db')
-        query = "SELECT Book_Title, Book_Author, Book_Condition FROM BOOK WHERE Book_Status = \"Available\";"
+        query = "SELECT Book_Title, Book_Author, Book_Condition FROM BOOK WHERE Book_Status = 'Available';"
         result = con.execute(query)
         self.tableWidget.setRowCount(0)
         for row, form in enumerate(result):

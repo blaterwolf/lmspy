@@ -432,7 +432,7 @@ class Ui_MainMenu(object):
 
     def evaluate_overdue_books(self):
         # * Goal #1. Evaluate the Overdue Books on the Main Menu class
-        # *    so that it can be queried on the overdue_window.
+        # *    to check whether the borrowed books are past 7 days already.
         # * Step 1: Query relevant data to the database.
         con = sqlite3.connect('./db/library.db')
         cur = con.cursor()
@@ -451,7 +451,7 @@ class Ui_MainMenu(object):
             penalty_amount = self.compute_amount(
                 borrow_date, borrow_return_date)
             days_passed = (borrow_return_date-borrow_date).days
-            if days_passed >= 7:
+            if days_passed > 7:
                 # * UPDATE PAYMENT data: Compute Amount
                 payment_query = """
                 UPDATE PAYMENT

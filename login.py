@@ -271,18 +271,20 @@ class Ui_Login(object):
         self.Validation = QtWidgets.QWidget()
         self.ui_validate = Ui_Validation()
         self.ui_validate.setupUi(self.Validation, Login, use_form="add")
+        self.reset_input()
         self.Validation.show()
 
     def run_forgot_password(self):
         self.Validation = QtWidgets.QWidget()
         self.ui_validate = Ui_Validation()
         self.ui_validate.setupUi(self.Validation, Login, use_form="edit")
+        self.reset_input()
         self.Validation.show()
 
     def attempt_login(self):
-        username = self.input_username.text()  # * admin
-        password = self.input_password.text()  # * admintest
-        compare_data = (username, password)  # * ('admin', 'admintest')
+        username = self.input_username.text()
+        password = self.input_password.text()
+        compare_data = (username, password)
         con = sqlite3.connect('./db/library.db')
         query = "SELECT Librarian_Username, Librarian_Password FROM LIBRARIAN;"
         result = [form[1] for form in list(enumerate(con.execute(query)))]
@@ -311,10 +313,13 @@ class Ui_Login(object):
         self.ui_menu = Ui_MainMenu()
         self.ui_menu.setupUi(self.MainMenu, Login, username)
         self.MainMenu.show()
+        self.reset_input()
+        Login.close()
+
+    def reset_input(self):
         self.input_username.setText("")
         self.input_password.setText("")
         self.status_label.setText("")
-        Login.close()
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate

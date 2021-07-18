@@ -488,7 +488,7 @@ class Ui_BookInformation(object):
             if (self.rb_deletebook.isChecked()):
                 self.disable_inputs()
                 self.status_label.setText(
-                    "NOTE: Clicking the Delete Student button deletes the data immediately.")
+                    "NOTE: Clicking the Delete Book button deletes the data immediately.")
         else:
             self.clear_data_on_inputs()
             self.status_label.setText(

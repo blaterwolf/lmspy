@@ -145,6 +145,7 @@ class Ui_Validation(object):
         QtCore.QMetaObject.connectSlotsByName(Validation)
 
     def return_action(self, Validation, Login):
+        os.remove("./icons/qr.png")
         Validation.close()
         Login.show()
 
