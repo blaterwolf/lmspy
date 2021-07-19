@@ -600,27 +600,32 @@ class Ui_StudentInformation(object):
                 pass
 
     def delete_student_data(self, student_id):
-        # * Step 1: Initialize Database
-        con = sqlite3.connect('./db/library.db')
-        cur = con.cursor()
-        # * Step 2: Query the data to be deleted
-        query_delete = """
-        DELETE FROM STUDENT
-        WHERE Student_ID = ?;
-        """
-        interpolate_data = [student_id]
-        # * Step 3: Execute, Commit, Close
-        cur.execute(query_delete, interpolate_data)
-        con.commit()
-        con.close()
-        self.informative_message(
-            text="Data Deleted Successfully!",
-            subtext="You can still delete data after this message.",
-            window_title="Deleted Successfully",
-            icon_type="information"
-        )
-        self.disable_inputs()
-        self.clear_data_on_inputs()
+        print(len(self.input_student_id.text()))
+        if (len(self.input_student_id.text()) == 0):
+            self.status_label.setText(
+                "You did not searched a student to delete!")
+        else:
+            # * Step 1: Initialize Database
+            con = sqlite3.connect('./db/library.db')
+            cur = con.cursor()
+            # * Step 2: Query the data to be deleted
+            query_delete = """
+            DELETE FROM STUDENT
+            WHERE Student_ID = ?;
+            """
+            interpolate_data = [student_id]
+            # * Step 3: Execute, Commit, Close
+            cur.execute(query_delete, interpolate_data)
+            con.commit()
+            con.close()
+            self.informative_message(
+                text="Data Deleted Successfully!",
+                subtext="You can still delete data after this message.",
+                window_title="Deleted Successfully",
+                icon_type="information"
+            )
+            self.disable_inputs()
+            self.clear_data_on_inputs()
 
     def informative_message(self, text, subtext, window_title, icon_type="critical"):
         msg = QtWidgets.QMessageBox()

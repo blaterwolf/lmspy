@@ -33,8 +33,8 @@ You must have at least Python 3.9.x or above to work. When we are building this,
 | PyQt6        | pip install PyQt6       | This is a GUI Library that we will be using in this project.                                                                    | [![PyQt: 6.1.1](https://img.shields.io/badge/pyqt-6.1.1-darkgreen)](https://pypi.org/project/PyQt6)                             |
 | pyqt6-tools  | pip install pyqt6-tools | This package includes the PyQt Designer which is a GUI that makes a GUI for the project.                                        | [![PyQt6 Tools: 6.1.0.3.2](https://img.shields.io/badge/pyqt6tools-6.1.0.3.2-darkgreen)](https://pypi.org/project/pyqt6-tools/) |
 | Pillow       | pip install Pillow      | To generate an image for our QR Code, we will be using the Pillow package.                                                      | [![Pillow: 8.3.1](https://img.shields.io/badge/Pillow-8.3.1-blue)](https://pypi.org/project/Pillow/)                            |
-| qrcode       | pip install qrcode      | This generates a QRCode for the Google Authentication which stores the generated provisioning URI.                              | [![qrcode: 7.1](https://img.shields.io/badge/qrcode-7.1-black)](https://pypi.org/project/qrcode/)                               |
-| pyotp        | pip install pyotp       | This helps us to generate a base32 which will be used to generate a provisioning URI so that Google Authentication can scan it. | [![pyotp: 2.6.0](https://img.shields.io/badge/pyotp-2.6.0-black)](https://pypi.org/project/pyotp/)                              |
+| qrcode       | pip install qrcode      | This generates a QRCode for the Google Authenticator which stores the generated provisioning URI.                              | [![qrcode: 7.1](https://img.shields.io/badge/qrcode-7.1-black)](https://pypi.org/project/qrcode/)                               |
+| pyotp        | pip install pyotp       | This helps us to generate a base32 which will be used to generate a provisioning URI so that Google Authenticator can scan it. | [![pyotp: 2.6.0](https://img.shields.io/badge/pyotp-2.6.0-black)](https://pypi.org/project/pyotp/)                              |
 
 When everything is installed, run `login.py`. 
 ___
@@ -43,7 +43,7 @@ ___
 | [![login][4]][4]            | `login.py`            |
 | [![main_menu][5]][5]        | `main_menu.py`        |
 | [![book_information][6]][6] | `book_information.py` |
-| [![search_history][7]][7]   | `main_menu.py`        |
+| [![search_history][7]][7]   | `search_history.py`        |
 
 [1]: https://raw.githubusercontent.com/blaterwolf/lmspy/main/img/erd_library.png
 [2]: https://raw.githubusercontent.com/blaterwolf/lmspy/main/img/relational_schema.png

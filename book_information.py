@@ -599,20 +599,24 @@ class Ui_BookInformation(object):
                 self.clear_data_on_inputs()
 
     def delete_data_values(self, book_ID):
-        con = sqlite3.connect('./db/library.db')
-        query = "DELETE FROM BOOK WHERE Book_ID = ?;"
-        cur = con.cursor()
-        interpolate_data = [book_ID]
-        cur.execute(query, interpolate_data)
-        con.commit()
-        con.close()
-        self.informative_message(
-            text="Information has been deleted.",
-            subtext="""Be wise today so you don't cry tomorrow”  - E.A. Bucchianeri""",
-            window_title="Deletion Completed"
-        )
-        self.disable_inputs()
-        self.clear_data_on_inputs()
+        if (self.input_bookid.text() == 'BOOK-XXXXX'):
+            self.status_label.setText(
+                "You did not searched a book to delete!")
+        else:
+            con = sqlite3.connect('./db/library.db')
+            query = "DELETE FROM BOOK WHERE Book_ID = ?;"
+            cur = con.cursor()
+            interpolate_data = [book_ID]
+            cur.execute(query, interpolate_data)
+            con.commit()
+            con.close()
+            self.informative_message(
+                text="Information has been deleted.",
+                subtext="""Be wise today so you don't cry tomorrow”  - E.A. Bucchianeri""",
+                window_title="Deletion Completed"
+            )
+            self.disable_inputs()
+            self.clear_data_on_inputs()
 
     def informative_message(self, text, subtext, window_title):
         msg = QtWidgets.QMessageBox()

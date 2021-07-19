@@ -218,7 +218,7 @@ LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
 LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer
 LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID;
 -- >> 40. SECTION 10.1: QUERIES ON BORROW WITH VARYING REQUESTS
--- >> 40.1. Query Borrow_ID
+-- 40.1. Query Borrow_ID
 SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
 FROM BORROW
 LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
@@ -226,7 +226,7 @@ LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
 LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer
 LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID
 WHERE Borrow_ID LIKE '{like_query}';
--- >> 40.2. Query Borrow_Status (when Returned or Borrowed is typed)
+-- 40.2. Query Borrow_Status (when Returned or Borrowed is typed)
 SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
 FROM BORROW
 LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
@@ -234,7 +234,7 @@ LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
 LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer
 LEFT JOIN PAYMENT ON PAYMENT.Payment_ID = BORROW.Payment_ID
 WHERE Borrow_Status LIKE '{like_query}';
--- >> 40.3. Query Borrow_Date
+-- 40.3. Query Borrow_Date
 SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Borrow_Return_Date, Borrow_Status, Borrow_Overdue_Status, Librarian_Name AS Borrow_Issuer, Payment_Amount
 FROM BORROW
 LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID
