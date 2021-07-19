@@ -300,19 +300,19 @@ class Ui_ViewStudentAndBooks(object):
         ]
         return data_query[i]["query"]
 
-    def student_data_to_query(self, i):
+    def student_data_to_query(self, i, like_query):
         data_query = [
             {
-                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_ID = ?;"
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_ID LIKE '{like_query}';"
             },
             {
-                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_LastName = ? OR Student_FirstName = ?;"
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_LastName LIKE '{like_query}' OR Student_FirstName LIKE '{like_query}';"
             },
             {
-                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_Section = ?;"
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_Section LIKE '{like_query}';"
             },
             {
-                "query": "SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_YearLevel = ?;"
+                "query": f"SELECT Student_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Student_Section, Student_YearLevel FROM STUDENT WHERE Student_YearLevel LIKE '{like_query}';"
             },
         ]
         return data_query[i]["query"]
@@ -328,11 +328,12 @@ class Ui_ViewStudentAndBooks(object):
             # * 1: name
             # * 2: section
             # * 3: year level
-            query = self.student_data_to_query(iteration)
+            query = self.student_data_to_query(
+                iteration, like_query=f'%{search_value}%')
             interpolate_data = [search_value]
             if iteration == 1:
                 interpolate_data = [search_value, search_value]
-            result = cur.execute(query, interpolate_data)
+            result = cur.execute(query)
             data = cur.fetchall()
             if data:
                 self.status_label_student.setText("")

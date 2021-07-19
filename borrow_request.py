@@ -305,7 +305,7 @@ class Ui_BorrowRequest(object):
         student_name = [form[1] for form in list(enumerate(result))][0]
         student_name = f"{student_name[0][0]}. {student_name[1]}".upper()
         # ! -----------
-        # * STEP 5: Ask the user whether you would sure return the book.
+        # * STEP 5: Ask the user whether you are sure of borrowing the book.
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
         msg.setText(

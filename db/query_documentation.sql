@@ -198,7 +198,7 @@ LEFT JOIN BOOK ON BOOK.Book_ID = BORROW.Book_ID
 LEFT JOIN LIBRARIAN ON LIBRARIAN.Librarian_Username = BORROW.Borrow_Issuer
 WHERE Borrow_Status = 'Borrowed';
 
--- * SECTION 9: CURRENTLY AVAILABLE BOOKS
+-- * SECTION 9: CURRENTLY OVERDUE BOOKS
 SELECT Borrow_ID, (Student_FirstName || ' ' || Student_LastName) AS Full_Name, Book_Title, Borrow_Date, Librarian_Name, Payment_Amount
 FROM BORROW
 LEFT JOIN STUDENT ON STUDENT.Student_ID = BORROW.Student_ID

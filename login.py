@@ -122,7 +122,6 @@ class Ui_Login(object):
         self.login_button.setDefault(False)
         self.login_button.setFlat(False)
         self.login_button.setObjectName("login_button")
-        self.login_button.clicked.connect(self.attempt_login)
         self.gridLayout_2.addWidget(self.login_button, 6, 0, 1, 2)
         self.line_2 = QtWidgets.QFrame(self.widget)
         self.line_2.setStyleSheet("border: 2px solid #842a2d;")
@@ -177,7 +176,6 @@ class Ui_Login(object):
         self.signup_button.setDefault(False)
         self.signup_button.setFlat(False)
         self.signup_button.setObjectName("signup_button")
-        self.signup_button.clicked.connect(self.run_signup)
         self.horizontalLayout.addWidget(self.signup_button)
         self.forgot_password = QtWidgets.QPushButton(self.widget)
         self.forgot_password.setEnabled(True)
@@ -218,7 +216,6 @@ class Ui_Login(object):
         self.forgot_password.setDefault(False)
         self.forgot_password.setFlat(False)
         self.forgot_password.setObjectName("forgot_password")
-        self.forgot_password.clicked.connect(self.run_forgot_password)
         self.horizontalLayout.addWidget(self.forgot_password)
         self.gridLayout_2.addLayout(self.horizontalLayout, 7, 0, 1, 2)
         self.status_label = QtWidgets.QLabel(self.widget)
@@ -263,20 +260,34 @@ class Ui_Login(object):
         self.gridLayout_3.addLayout(self.gridLayout_2, 2, 0, 1, 2)
         self.horizontalLayout_3.addWidget(self.widget)
         self.verticalLayout_3.addWidget(self.border)
-
         self.retranslateUi(Login)
         QtCore.QMetaObject.connectSlotsByName(Login)
+        # * These are the functions:
+        # * self.<name>_button is the variable for our buttons.
+        self.login_button.clicked.connect(self.attempt_login)
+        self.signup_button.clicked.connect(self.run_signup)
+        self.forgot_password.clicked.connect(self.run_forgot_password)
 
     def run_signup(self):
+        # * Creates an instance of the object Validation wherein this is the
+        # * window to run our validation.py
         self.Validation = QtWidgets.QWidget()
         self.ui_validate = Ui_Validation()
+        # * self.Validation - instance of QWidget to run our validation window.
+        # * Login -> component of Login window.
+        # * use_form -> variable to determine where to go later on add or edit librarian.
         self.ui_validate.setupUi(self.Validation, Login, use_form="add")
         self.reset_input()
         self.Validation.show()
 
     def run_forgot_password(self):
+        # * Creates an instance of the object Validation wherein this is the
+        # * window to run our validation.py
         self.Validation = QtWidgets.QWidget()
         self.ui_validate = Ui_Validation()
+        # * self.Validation - instance of QWidget to run our validation window.
+        # * Login -> component of Login window.
+        # * use_form -> variable to determine where to go later on add or edit librarian.
         self.ui_validate.setupUi(self.Validation, Login, use_form="edit")
         self.reset_input()
         self.Validation.show()
@@ -338,11 +349,25 @@ class Ui_Login(object):
         self.forgot_password.setText(_translate("Login", "FORGOT PASSWORD"))
 
 
+# * Why this code is only present in the login.py?
+# * Because the login.py is the center of opening our Application.
+# * So, login.py is responsible for opening the validation.py and
+# * the main_menu.py which holds the other functions to open
+# * other windows.
 if __name__ == "__main__":
     import sys
+    # * Creating an instance of QApplication to use the QWidgets app.
     app = QtWidgets.QApplication(sys.argv)
+    # * Create a QWidget Class
+    # * The QWidget Class helps us to create a QWidget Application
     Login = QtWidgets.QWidget()
+    # * We need to store the Ui_Login() class into a variable named ui.
     ui = Ui_Login()
+    # * Run the setupui() function where setupUi() is responsible for
+    # * creating the components for our application.
     ui.setupUi(Login)
+    # * Login.show() is the code in order to show the application to the user.
     Login.show()
+    # * if the user has exited the application (clicked the button)
+    # * the sys.exit(app.exec()) will destroy the program.
     sys.exit(app.exec())

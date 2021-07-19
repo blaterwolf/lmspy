@@ -169,7 +169,7 @@ class Ui_Validation(object):
         if answer == totp.now():
             self.informative_message(
                 text="That is the correct OTP!",
-                subtext="You'll be redirected now to the Add Librarian Window...",
+                subtext="You'll be redirected now to the next Window...",
                 window_title="Validated Successfully!",
                 icon_type="information"
             )
