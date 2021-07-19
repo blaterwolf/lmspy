@@ -489,7 +489,7 @@ class Ui_StudentInformation(object):
         else:
             self.clear_data_on_inputs()
             self.status_label.setText(
-                "This student does not exist in the database!")
+                f"Student ID does not exist.")
             self.disable_inputs()
 
     def populate_data(self, data):
@@ -561,7 +561,9 @@ class Ui_StudentInformation(object):
             pass
 
     def update_student_data(self, student_id, firstname, lastname, section, grade_level):
-        if (len(firstname) == 0 or len(lastname) == 0 or len(section) == 0):
+        if (len(self.input_student_id.text()) == 0):
+            self.status_label.setText("Student ID does not exist!")
+        elif (len(firstname) == 0 or len(lastname) == 0 or len(section) == 0):
             self.status_label.setText(
                 "There are remaining empty input field/s!")
         else:
@@ -600,10 +602,8 @@ class Ui_StudentInformation(object):
                 pass
 
     def delete_student_data(self, student_id):
-        print(len(self.input_student_id.text()))
         if (len(self.input_student_id.text()) == 0):
-            self.status_label.setText(
-                "You did not searched a student to delete!")
+            self.status_label.setText("Student ID does not exist!")
         else:
             # * Step 1: Initialize Database
             con = sqlite3.connect('./db/library.db')

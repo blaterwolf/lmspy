@@ -491,10 +491,9 @@ class Ui_BookInformation(object):
                     "NOTE: Clicking the Delete Book button deletes the data immediately.")
         else:
             self.clear_data_on_inputs()
-            self.status_label.setText(
-                "This book does not exist in the database!")
             self.disable_inputs()
             self.input_search.setText("BOOK-")
+            self.status_label.setText("Book ID does not exist.")
 
     def populate_data(self, data):
         book_id = data[0]
@@ -565,7 +564,9 @@ class Ui_BookInformation(object):
             pass
 
     def update_data_values(self, book_id, isbn, title, author, condition):
-        if (len(isbn) == 0 or len(title) == 0 or len(author) == 0):
+        if (self.input_bookid.text() == 'BOOK-XXXXX'):
+            self.status_label.setText("Book ID does not exist.")
+        elif (len(isbn) == 0 or len(title) == 0 or len(author) == 0):
             self.status_label.setText(
                 "There are remaining empty input field/s!")
         else:
@@ -600,8 +601,7 @@ class Ui_BookInformation(object):
 
     def delete_data_values(self, book_ID):
         if (self.input_bookid.text() == 'BOOK-XXXXX'):
-            self.status_label.setText(
-                "You did not searched a book to delete!")
+            self.status_label.setText("Book ID does not exist.")
         else:
             con = sqlite3.connect('./db/library.db')
             query = "DELETE FROM BOOK WHERE Book_ID = ?;"
